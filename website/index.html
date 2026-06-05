@@ -555,24 +555,193 @@
         Whether you're an established brand or scaling fast, we find the formula that works for you.
       </p>
 
-      <form class="max-w-xl mx-auto" onsubmit="handleSubmit(event)">
-        <div class="grid gap-4 mb-6">
-          <input type="text" placeholder="Nom / Name" required
-            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors" />
-          <input type="email" placeholder="Courriel / Email" required
-            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors" />
-          <textarea rows="4" placeholder="Votre projet... / Your project..."
-            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors resize-none"></textarea>
-        </div>
-        <button type="submit" class="btn-primary w-full bg-white text-royal font-bold py-5 rounded-xl text-base">
-          <span data-lang="fr">Envoyer le message →</span>
-          <span data-lang="en">Send message →</span>
+      <div class="flex justify-center">
+        <button onclick="openWizard()" class="btn-primary bg-white text-royal font-bold px-12 py-5 rounded-full text-lg">
+          <span data-lang="fr">Démarrer un projet →</span>
+          <span data-lang="en">Start a project →</span>
         </button>
-        <p id="form-success" class="hidden text-green-300 text-sm mt-4 font-medium" data-lang="fr">✓ Message envoyé ! On vous répond sous 24h.</p>
-        <p id="form-success-en" class="hidden text-green-300 text-sm mt-4 font-medium" data-lang="en">✓ Message sent! We'll reply within 24h.</p>
-      </form>
+      </div>
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════════
+       WIZARD MODAL
+  ═══════════════════════════════════════════ -->
+  <div id="wizard-overlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden" style="background: rgba(10,15,46,0.85); backdrop-filter: blur(8px);">
+    <div id="wizard-box" class="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl" style="transform: scale(0.92); opacity: 0; transition: all 0.3s cubic-bezier(.34,1.56,.64,1);">
+
+      <!-- Progress bar -->
+      <div class="h-1 bg-gray-100">
+        <div id="wizard-progress" class="h-1 bg-royal transition-all duration-500" style="width: 0%"></div>
+      </div>
+
+      <!-- Close -->
+      <button onclick="closeWizard()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-500 text-sm font-bold z-10">✕</button>
+
+      <!-- Steps container -->
+      <div id="wizard-steps" class="p-8 md:p-10">
+
+        <!-- STEP 1 — Type de projet -->
+        <div class="wizard-step" data-step="1">
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 1 sur 3</div>
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 1 of 3</div>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">QUEL TYPE DE PROJET ?</h3>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">WHAT TYPE OF PROJECT?</h3>
+          <p class="text-gray-mid text-sm mb-8" data-lang="fr">Dites-nous dans quelle catégorie vous vous situez.</p>
+          <p class="text-gray-mid text-sm mb-8" data-lang="en">Tell us which category fits you best.</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="marque">
+              <div class="text-2xl mb-2">🏢</div>
+              <div class="font-bold text-sm text-ink" data-lang="fr">Marque / Entreprise</div>
+              <div class="font-bold text-sm text-ink" data-lang="en">Brand / Business</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="personal">
+              <div class="text-2xl mb-2">🙋</div>
+              <div class="font-bold text-sm text-ink" data-lang="fr">Personal brand</div>
+              <div class="font-bold text-sm text-ink" data-lang="en">Personal brand</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="evenement">
+              <div class="text-2xl mb-2">🎤</div>
+              <div class="font-bold text-sm text-ink" data-lang="fr">Événement / Tournage</div>
+              <div class="font-bold text-sm text-ink" data-lang="en">Event / Shoot</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="autre">
+              <div class="text-2xl mb-2">💡</div>
+              <div class="font-bold text-sm text-ink" data-lang="fr">Autre</div>
+              <div class="font-bold text-sm text-ink" data-lang="en">Other</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2 — Volume vidéos -->
+        <div class="wizard-step hidden" data-step="2">
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 2 sur 3</div>
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 2 of 3</div>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">COMBIEN DE VIDÉOS PAR MOIS ?</h3>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">HOW MANY VIDEOS PER MONTH?</h3>
+          <p class="text-gray-mid text-sm mb-8" data-lang="fr">On veut s'assurer de pouvoir bien vous servir.</p>
+          <p class="text-gray-mid text-sm mb-8" data-lang="en">We want to make sure we can serve you well.</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="1-3" data-qualified="false">
+              <div class="font-display font-black text-3xl text-royal mb-1">1–3</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="4-8" data-qualified="maybe">
+              <div class="font-display font-black text-3xl text-royal mb-1">4–8</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="8+" data-qualified="true">
+              <div class="font-display font-black text-3xl text-royal mb-1">8+</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="unknown" data-qualified="maybe">
+              <div class="text-2xl mb-1">🤷</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">Je ne sais pas encore</div>
+              <div class="text-sm text-gray-mid" data-lang="en">Not sure yet</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 — Budget -->
+        <div class="wizard-step hidden" data-step="3">
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 3 sur 3</div>
+          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 3 of 3</div>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">QUEL EST VOTRE BUDGET MENSUEL ?</h3>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">WHAT'S YOUR MONTHLY BUDGET?</h3>
+          <p class="text-gray-mid text-sm mb-8" data-lang="fr">Soyez honnête — ça nous aide à vous proposer la bonne formule.</p>
+          <p class="text-gray-mid text-sm mb-8" data-lang="en">Be honest — it helps us recommend the right package.</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="<500" data-qualified="false">
+              <div class="font-display font-black text-2xl text-royal mb-1">-500$</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="500-1500" data-qualified="maybe">
+              <div class="font-display font-black text-2xl text-royal mb-1">500–1500$</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="1500+" data-qualified="true">
+              <div class="font-display font-black text-2xl text-royal mb-1">1500$+</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
+              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="discuss" data-qualified="true">
+              <div class="text-2xl mb-1">💬</div>
+              <div class="text-sm text-gray-mid" data-lang="fr">À discuter</div>
+              <div class="text-sm text-gray-mid" data-lang="en">Let's discuss</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4 — Coordonnées (qualifié) -->
+        <div class="wizard-step hidden" data-step="4">
+          <div class="text-xs font-semibold uppercase tracking-widest text-green-600 mb-2" data-lang="fr">✓ Vous êtes qualifié !</div>
+          <div class="text-xs font-semibold uppercase tracking-widest text-green-600 mb-2" data-lang="en">✓ You're a great fit!</div>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
+          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">LET'S GET IN TOUCH</h3>
+          <p class="text-gray-mid text-sm mb-8" data-lang="fr">On vous contacte dans les 24h pour planifier un appel.</p>
+          <p class="text-gray-mid text-sm mb-8" data-lang="en">We'll reach out within 24h to schedule a call.</p>
+          <form id="contact-form" onsubmit="submitContact(event)" class="grid gap-4">
+            <input type="text" id="c-name" placeholder="Nom complet / Full name" required
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
+            <input type="email" id="c-email" placeholder="Courriel / Email" required
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
+            <input type="tel" id="c-phone" placeholder="Téléphone / Phone"
+              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
+            <button type="submit" class="btn-primary w-full bg-royal text-white font-bold py-4 rounded-xl text-base mt-2">
+              <span data-lang="fr">Envoyer →</span>
+              <span data-lang="en">Submit →</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- STEP 5 — Non qualifié -->
+        <div class="wizard-step hidden" data-step="5">
+          <div class="text-center py-4">
+            <div class="text-5xl mb-6">🙏</div>
+            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="fr">MERCI DE VOTRE INTÉRÊT !</h3>
+            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="en">THANKS FOR YOUR INTEREST!</h3>
+            <p class="text-gray-mid text-sm leading-relaxed mb-4" data-lang="fr">
+              Nos forfaits sont conçus pour des projets avec un minimum de 4 vidéos par mois et un budget mensuel de 1 500$ et plus.<br><br>
+              Si votre situation évolue, on sera là. N'hésitez pas à revenir nous voir !
+            </p>
+            <p class="text-gray-mid text-sm leading-relaxed mb-4" data-lang="en">
+              Our packages are designed for projects with at least 4 videos per month and a monthly budget of $1,500+.<br><br>
+              If your situation changes, we'd love to hear from you. Don't hesitate to come back!
+            </p>
+            <button onclick="closeWizard()" class="mt-4 text-royal font-semibold text-sm hover:underline">
+              <span data-lang="fr">Fermer</span>
+              <span data-lang="en">Close</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 6 — Confirmation envoi -->
+        <div class="wizard-step hidden" data-step="6">
+          <div class="text-center py-4">
+            <div class="text-5xl mb-6">🚀</div>
+            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="fr">C'EST PARTI !</h3>
+            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="en">YOU'RE IN!</h3>
+            <p class="text-gray-mid text-sm leading-relaxed mb-6" data-lang="fr">
+              On a bien reçu vos informations. Justin vous contacte dans les prochaines 24h pour planifier un appel.
+            </p>
+            <p class="text-gray-mid text-sm leading-relaxed mb-6" data-lang="en">
+              We received your info. Justin will reach out within 24h to schedule a call.
+            </p>
+            <button onclick="closeWizard()" class="btn-primary bg-royal text-white font-bold px-8 py-3 rounded-full text-sm">
+              <span data-lang="fr">Parfait, merci !</span>
+              <span data-lang="en">Awesome, thanks!</span>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /wizard-steps -->
+    </div><!-- /wizard-box -->
+  </div><!-- /wizard-overlay -->
 
   <!-- ══════════════════════════════════════════
        FOOTER
@@ -612,12 +781,95 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Form
-    function handleSubmit(e) {
+    // ── WIZARD ──────────────────────────────────
+    const overlay = document.getElementById('wizard-overlay');
+    const box     = document.getElementById('wizard-box');
+    const progress = document.getElementById('wizard-progress');
+
+    let wizardData = { type: null, volume: null, volumeQualified: null, budget: null, budgetQualified: null };
+    let currentStep = 1;
+
+    function openWizard() {
+      wizardData = { type: null, volume: null, volumeQualified: null, budget: null, budgetQualified: null };
+      showStep(1);
+      overlay.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        box.style.transform = 'scale(1)';
+        box.style.opacity   = '1';
+      });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeWizard() {
+      box.style.transform = 'scale(0.92)';
+      box.style.opacity   = '0';
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+        // reset form
+        const f = document.getElementById('contact-form');
+        if (f) f.reset();
+      }, 280);
+    }
+
+    // Close on overlay click
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeWizard(); });
+
+    function showStep(n) {
+      currentStep = n;
+      document.querySelectorAll('.wizard-step').forEach(s => s.classList.add('hidden'));
+      const target = document.querySelector(`.wizard-step[data-step="${n}"]`);
+      if (target) {
+        target.classList.remove('hidden');
+        target.style.animation = 'fadeUp 0.35s ease forwards';
+      }
+      // Progress: steps 1-3 = qualification, step 4 = form
+      const pct = { 1: 10, 2: 40, 3: 70, 4: 90, 5: 100, 6: 100 };
+      progress.style.width = (pct[n] || 0) + '%';
+    }
+
+    // Choice buttons
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.wizard-choice');
+      if (!btn) return;
+      const step = parseInt(btn.closest('.wizard-step').dataset.step);
+      const val  = btn.dataset.value;
+      const qual = btn.dataset.qualified;
+
+      // Highlight selected
+      btn.closest('.wizard-step').querySelectorAll('.wizard-choice').forEach(b => {
+        b.classList.remove('border-royal', 'bg-royal-pale');
+        b.classList.add('border-gray-200');
+      });
+      btn.classList.add('border-royal', 'bg-royal-pale');
+      btn.classList.remove('border-gray-200');
+
+      setTimeout(() => {
+        if (step === 1) {
+          wizardData.type = val;
+          showStep(2);
+        } else if (step === 2) {
+          wizardData.volume = val;
+          wizardData.volumeQualified = qual; // 'true', 'maybe', 'false'
+          showStep(3);
+        } else if (step === 3) {
+          wizardData.budget = val;
+          wizardData.budgetQualified = qual;
+          // Qualification logic
+          const vq = wizardData.volumeQualified;
+          const bq = wizardData.budgetQualified;
+          const qualified =
+            (vq === 'true' || vq === 'maybe') && (bq === 'true') ||
+            (vq === 'true') && (bq === 'maybe');
+          showStep(qualified ? 4 : 5);
+        }
+      }, 200);
+    });
+
+    function submitContact(e) {
       e.preventDefault();
-      document.getElementById('form-success').classList.remove('hidden');
-      document.getElementById('form-success-en').classList.remove('hidden');
-      e.target.reset();
+      // Here you'd send to a backend / Formspree / etc.
+      showStep(6);
     }
 
     // Navbar scroll shadow
