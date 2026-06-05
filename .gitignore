@@ -1,0 +1,5 @@
+.DS_Store
+.env
+api plaky.txt
+*.pyc
+__pycache__/
