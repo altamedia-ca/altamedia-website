@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -19,8 +19,8 @@
             'royal-light': '#2F57E8',
             'royal-pale': '#EEF2FF',
             ink: '#111111',
-            'ink-soft': '#1F1F1F',
-            mist: '#F8F9FF',
+            'ink-soft': '#1A1A1A',
+            mist: '#F7F8FF',
             'gray-mid': '#6B7280',
           },
           fontFamily: {
@@ -32,161 +32,359 @@
     }
   </script>
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* Lang toggle */
+    /* ─── Lang toggle ─── */
     [data-lang="en"] { display: none; }
     body.en [data-lang="fr"] { display: none; }
     body.en [data-lang="en"] { display: revert; }
 
-    /* Animations */
+    /* ─── Base text rendering ─── */
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+    /* ─── Animations ─── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(32px); }
+      from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
     @keyframes slideRight {
-      from { opacity: 0; transform: translateX(-24px); }
+      from { opacity: 0; transform: translateX(-20px); }
       to   { opacity: 1; transform: translateX(0); }
     }
-    .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
-    .animate-slide-right { animation: slideRight 0.6s ease forwards; }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
+    @keyframes borderGlow {
+      0%, 100% { border-color: rgba(26,63,204,0.3); }
+      50%      { border-color: rgba(47,87,232,0.7); }
+    }
 
-    /* Reveal on scroll */
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .animate-fade-up   { animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
+    .animate-fade-in   { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+    .animate-scale-in  { animation: scaleIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
+    .d-100 { animation-delay: 0.1s; }
+    .d-200 { animation-delay: 0.2s; }
+    .d-300 { animation-delay: 0.3s; }
+    .d-400 { animation-delay: 0.4s; }
+    .d-500 { animation-delay: 0.5s; }
+    .d-600 { animation-delay: 0.6s; }
+
+    /* ─── Scroll reveal ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1), transform 0.85s cubic-bezier(0.16,1,0.3,1);
+    }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* Noise texture overlay */
+    /* ─── Noise overlay ─── */
     .noise::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Video card hover */
-    .video-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .video-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(26,63,204,0.18); }
+    /* ─── Navbar ─── */
+    .nav-link {
+      position: relative;
+      color: #6B7280;
+      transition: color 200ms ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1.5px;
+      background: #1A3FCC;
+      transition: width 200ms ease;
+    }
+    .nav-link:hover { color: #111; }
+    .nav-link:hover::after { width: 100%; }
 
-    /* Service card */
-    .service-card { transition: all 0.3s ease; border: 1px solid #E5E7EB; }
-    .service-card:hover { border-color: #1A3FCC; background: #F0F4FF; transform: translateY(-4px); }
+    /* ─── CTA button ─── */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: transform 150ms ease, box-shadow 200ms ease;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(26,63,204,0.38); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); }
 
-    /* Marquee */
+    .btn-ghost {
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* ─── Marquee ─── */
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 18s linear infinite; }
+    .marquee-track { animation: marquee 22s linear infinite; }
     .marquee-track:hover { animation-play-state: paused; }
 
-    /* CTA glow */
-    .btn-primary { position: relative; overflow: hidden; transition: all 0.3s ease; }
-    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
-    .btn-primary:hover::after { opacity: 1; }
-    .btn-primary:hover { box-shadow: 0 8px 32px rgba(26,63,204,0.4); transform: translateY(-2px); }
+    /* ─── Cards ─── */
+    .video-card {
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 56px rgba(26,63,204,0.22);
+    }
 
-    /* Number counter */
-    .stat-num { font-variant-numeric: tabular-nums; }
+    .service-card {
+      transition: border-color 200ms ease, background 200ms ease, transform 250ms cubic-bezier(0.16,1,0.3,1), box-shadow 250ms ease;
+      border: 1.5px solid #E5E7EB;
+    }
+    .service-card:hover {
+      border-color: #1A3FCC;
+      background: #F0F4FF;
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(26,63,204,0.12);
+    }
+
+    .client-card {
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+    }
+    .client-card:hover { transform: translateY(-6px); box-shadow: 0 24px 52px rgba(0,0,0,0.3); }
+
+    .pillar-card {
+      transition: border-color 200ms ease, background 200ms ease, transform 250ms cubic-bezier(0.16,1,0.3,1);
+      border: 1.5px solid rgba(255,255,255,0.08);
+    }
+    .pillar-card:hover {
+      border-color: rgba(47,87,232,0.5);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-3px);
+    }
+
+    /* ─── Accent line ─── */
+    .accent-line {
+      width: 40px; height: 3px;
+      background: #1A3FCC;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── Stat card ─── */
+    .stat-card {
+      border: 1.5px solid #E5E7EB;
+      transition: border-color 200ms ease, transform 250ms cubic-bezier(0.16,1,0.3,1), box-shadow 250ms ease;
+    }
+    .stat-card:hover {
+      border-color: #1A3FCC;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26,63,204,0.1);
+    }
+
+    /* ─── Tag chip ─── */
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ─── Scroll indicator ─── */
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+    .scroll-indicator { animation: scrollBounce 2s ease-in-out infinite; }
+
+    /* ─── Hero grid lines ─── */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    /* ─── Wizard ─── */
+    .wizard-choice {
+      transition: border-color 150ms ease, background 150ms ease, transform 120ms ease;
+      border: 2px solid #E5E7EB;
+    }
+    .wizard-choice:hover {
+      border-color: #1A3FCC;
+      background: #EEF2FF;
+      transform: translateY(-2px);
+    }
+    .wizard-choice:active { transform: scale(0.98); }
+    .wizard-choice.selected { border-color: #1A3FCC; background: #EEF2FF; }
+
+    /* ─── Reduce motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ─── Horizontal rule accent ─── */
+    .hr-royal { border: none; height: 1.5px; background: linear-gradient(90deg, #1A3FCC 0%, transparent 100%); }
   </style>
 </head>
 <body class="font-body bg-white text-ink">
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        NAVBAR
-  ═══════════════════════════════════════════ -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <!-- Logo text -->
-      <a href="#" class="flex items-center gap-2">
-        <span class="font-display font-black text-2xl tracking-tight text-ink">ALTA<span class="text-royal">MEDIA</span></span>
+  ═══════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent;">
+    <div class="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+
+      <a href="#" class="flex items-center gap-2 group">
+        <span class="font-display font-black text-[1.6rem] tracking-tight leading-none text-ink group-hover:opacity-90 transition-opacity">ALTA<span class="text-royal">MEDIA</span></span>
       </a>
 
-      <!-- Nav links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-mid">
-        <a href="#services" class="hover:text-ink transition-colors" data-lang="fr">Services</a>
-        <a href="#services" class="hover:text-ink transition-colors" data-lang="en">Services</a>
-        <a href="#clients" class="hover:text-ink transition-colors" data-lang="fr">Clients</a>
-        <a href="#clients" class="hover:text-ink transition-colors" data-lang="en">Clients</a>
-        <a href="#approche" class="hover:text-ink transition-colors" data-lang="fr">Approche</a>
-        <a href="#approche" class="hover:text-ink transition-colors" data-lang="en">Approach</a>
-        <a href="#resultats" class="hover:text-ink transition-colors" data-lang="fr">Résultats</a>
-        <a href="#resultats" class="hover:text-ink transition-colors" data-lang="en">Results</a>
+      <div class="hidden md:flex items-center gap-8 text-[13px] font-medium">
+        <a href="#services" class="nav-link" data-lang="fr">Services</a>
+        <a href="#services" class="nav-link" data-lang="en">Services</a>
+        <a href="#clients"  class="nav-link" data-lang="fr">Clients</a>
+        <a href="#clients"  class="nav-link" data-lang="en">Clients</a>
+        <a href="#approche" class="nav-link" data-lang="fr">Approche</a>
+        <a href="#approche" class="nav-link" data-lang="en">Approach</a>
+        <a href="#resultats" class="nav-link" data-lang="fr">Résultats</a>
+        <a href="#resultats" class="nav-link" data-lang="en">Results</a>
       </div>
 
-      <div class="flex items-center gap-4">
-        <!-- Lang toggle -->
-        <button id="langToggle" class="text-xs font-semibold px-3 py-1.5 rounded-full border border-gray-200 hover:border-royal hover:text-royal transition-all">
+      <div class="flex items-center gap-3">
+        <button id="langToggle" class="text-[11px] font-bold tracking-widest px-3.5 py-1.5 rounded-full border border-gray-200 hover:border-royal hover:text-royal text-gray-500 transition-all duration-150">
           <span data-lang="fr">EN</span>
           <span data-lang="en">FR</span>
         </button>
-        <!-- CTA -->
-        <a href="#contact" class="hidden md:inline-flex btn-primary bg-royal text-white text-sm font-semibold px-5 py-2.5 rounded-full" data-lang="fr">Parlons-en</a>
-        <a href="#contact" class="hidden md:inline-flex btn-primary bg-royal text-white text-sm font-semibold px-5 py-2.5 rounded-full" data-lang="en">Let's talk</a>
+        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-lang="fr">
+          Parlons-en <span class="opacity-70">→</span>
+        </button>
+        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-lang="en">
+          Let's talk <span class="opacity-70">→</span>
+        </button>
       </div>
     </div>
   </nav>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        HERO
-  ═══════════════════════════════════════════ -->
-  <section class="relative min-h-screen flex items-center pt-16 overflow-hidden noise" style="background: linear-gradient(135deg, #0A0F2E 0%, #111827 45%, #1A3FCC 100%);">
-    <!-- Background grid -->
-    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 64px 64px;"></div>
+  ═══════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center pt-[68px] overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1535 40%, #162260 75%, #1A3FCC 100%);">
 
-    <!-- Glow orb -->
-    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 rounded-full opacity-20 blur-3xl" style="background: radial-gradient(circle, #2F57E8, transparent 70%);"></div>
+    <div class="absolute inset-0 hero-grid opacity-100"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
-      <!-- Left -->
+    <!-- Ambient glows -->
+    <div class="absolute top-1/3 right-1/3 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] pointer-events-none" style="background: #1A3FCC;"></div>
+    <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-8 blur-[100px] pointer-events-none" style="background: #2F57E8;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-[1fr_420px] gap-20 items-center w-full">
+
+      <!-- Left copy -->
       <div>
+        <!-- Badge -->
         <div class="animate-fade-up">
-          <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/20 border border-royal/30 px-4 py-2 rounded-full mb-6" data-lang="fr">Agence de contenu short-form</span>
-          <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/20 border border-royal/30 px-4 py-2 rounded-full mb-6" data-lang="en">Short-form content agency</span>
+          <span class="tag-chip text-royal-light border border-royal/30" style="background: rgba(26,63,204,0.15);" data-lang="fr">
+            <span style="width:6px;height:6px;border-radius:50%;background:#2F57E8;display:inline-block;"></span>
+            Agence de contenu short-form
+          </span>
+          <span class="tag-chip text-royal-light border border-royal/30" style="background: rgba(26,63,204,0.15);" data-lang="en">
+            <span style="width:6px;height:6px;border-radius:50%;background:#2F57E8;display:inline-block;"></span>
+            Short-form content agency
+          </span>
         </div>
-        <h1 class="font-display font-black text-white leading-none mb-6 animate-fade-up delay-100" style="font-size: clamp(3.5rem, 9vw, 7rem);">
-          <span data-lang="fr">DES<br>HISTOIRES<br><span class="text-royal-light">QUI VENDENT</span></span>
-          <span data-lang="en">STORIES<br>THAT<br><span class="text-royal-light">CONVERT</span></span>
+
+        <!-- Headline -->
+        <h1 class="font-display font-black text-white leading-[0.92] mt-7 mb-7 animate-fade-up d-100" style="font-size: clamp(4rem, 10vw, 7.5rem); letter-spacing: -0.01em;">
+          <span data-lang="fr">DES<br>HISTOIRES<br><em class="not-italic" style="color: #5B82FF;">QUI VENDENT</em></span>
+          <span data-lang="en">STORIES<br>THAT<br><em class="not-italic" style="color: #5B82FF;">CONVERT</em></span>
         </h1>
-        <p class="text-gray-300 text-lg leading-relaxed max-w-md mb-10 animate-fade-up delay-200" data-lang="fr">
-          On crée du contenu organique short-form qui reflète la vraie identité de vos marques. Pas de script fake. Juste des histoires authentiques qui connectent.
+
+        <!-- Body -->
+        <p class="text-white/65 text-lg leading-[1.7] max-w-[430px] mb-10 animate-fade-up d-200 font-light" data-lang="fr">
+          On crée du contenu organique short-form qui reflète la vraie identité de vos marques. Pas de script fake — juste des histoires authentiques qui connectent et qui convertissent.
         </p>
-        <p class="text-gray-300 text-lg leading-relaxed max-w-md mb-10 animate-fade-up delay-200" data-lang="en">
-          We create organic short-form content that reflects the true identity of your brands. No fake scripts. Just authentic stories that connect.
+        <p class="text-white/65 text-lg leading-[1.7] max-w-[430px] mb-10 animate-fade-up d-200 font-light" data-lang="en">
+          We create organic short-form content that reflects the true identity of your brands. No fake scripts — just authentic stories that connect and convert.
         </p>
-        <div class="flex flex-wrap gap-4 animate-fade-up delay-300">
-          <a href="#contact" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="fr">Démarrer un projet</a>
-          <a href="#contact" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="en">Start a project</a>
-          <a href="#resultats" class="flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 hover:border-white/50 transition-all text-base" data-lang="fr">
-            Voir nos résultats <span>→</span>
-          </a>
-          <a href="#resultats" class="flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 hover:border-white/50 transition-all text-base" data-lang="en">
-            See our results <span>→</span>
-          </a>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-3 animate-fade-up d-300">
+          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="fr">Démarrer un projet →</button>
+          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="en">Start a project →</button>
+          <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" data-lang="fr">Voir nos résultats</a>
+          <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" data-lang="en">See our results</a>
+        </div>
+
+        <!-- Social proof strip -->
+        <div class="flex items-center gap-6 mt-12 animate-fade-up d-400">
+          <div class="flex -space-x-2">
+            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #1A3FCC;">⚡</div>
+            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #2D1A0A;">🌶️</div>
+            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #0A1020;">🦸</div>
+            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #0A1A10;">💊</div>
+          </div>
+          <p class="text-white/50 text-sm" data-lang="fr">4 marques nous font confiance · 36 vidéos/mois</p>
+          <p class="text-white/50 text-sm" data-lang="en">4 brands trust us · 36 videos/month</p>
         </div>
       </div>
 
-      <!-- Right — Video mosaic placeholder -->
-      <div class="hidden md:grid grid-cols-2 gap-3 animate-fade-up delay-400">
-        <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-royal/40 to-ink-soft flex items-end p-4 cursor-pointer col-span-1">
-          <div class="text-white">
-            <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">⚡ Spark Energy</div>
-            <div class="text-sm font-semibold">23h la veille du match</div>
+      <!-- Right — Video mosaic -->
+      <div class="hidden md:flex flex-col gap-3 animate-fade-up d-300">
+        <!-- Tall card -->
+        <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #0D1540 0%, #1A3FCC 100%); height: 240px;">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute top-4 left-4">
+            <span class="tag-chip text-white/80" style="background: rgba(255,255,255,0.12); font-size: 0.65rem;">⚡ Spark Energy</span>
           </div>
-        </div>
-        <div class="grid gap-3">
-          <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-gray-800 to-royal/30 flex items-end p-4 cursor-pointer">
-            <div class="text-white">
-              <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">🌶️ Fit Cook</div>
-              <div class="text-sm font-semibold">Sauce sriracha launch</div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+            <div class="font-display font-black text-xl leading-tight mb-1">23h la veille du match</div>
+            <div class="text-white/55 text-xs">Storytelling athlète · Lewis vs Primeau</div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <span class="text-white text-lg ml-0.5">▶</span>
             </div>
           </div>
-          <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-royal/50 to-gray-900 flex items-end p-4 cursor-pointer">
-            <div class="text-white">
-              <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">🦸 Marc Ouellette</div>
-              <div class="text-sm font-semibold">Champion DMCC 2025</div>
+        </div>
+
+        <!-- Two small cards -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #1A0808, #8B1A00); height: 160px;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <div class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-1">🌶️ Fit Cook</div>
+              <div class="font-display font-bold text-sm leading-tight">Lancement Sriracha</div>
+            </div>
+          </div>
+          <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #0A1020, #1A3FCC88); height: 160px;">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+              <div class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-1">🦸 Marc Ouellette</div>
+              <div class="font-display font-bold text-sm leading-tight">Champion DMCC 2025</div>
             </div>
           </div>
         </div>
@@ -194,450 +392,559 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 animate-bounce">
-      <span class="text-xs font-medium uppercase tracking-widest">Scroll</span>
-      <div class="w-px h-8 bg-white/20"></div>
+    <div class="scroll-indicator absolute bottom-8 left-1/2 flex flex-col items-center gap-2 text-white/30 pointer-events-none">
+      <span class="text-[10px] font-semibold uppercase tracking-[0.2em]">Scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="1" width="4" height="8" rx="2" fill="currentColor" opacity="0.5"/>
+        <path d="M8 14L4 19H12L8 14Z" fill="currentColor" opacity="0.3"/>
+      </svg>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       MARQUEE — Clients
-  ═══════════════════════════════════════════ -->
-  <div class="bg-royal py-5 overflow-hidden">
+  <!-- ══════════════════════════════════════
+       MARQUEE
+  ═══════════════════════════════════════ -->
+  <div style="background: #1A3FCC;" class="py-4 overflow-hidden">
     <div class="flex">
-      <div class="marquee-track flex gap-16 items-center whitespace-nowrap">
-        <span class="text-white font-display font-bold text-xl tracking-widest">⚡ SPARK ENERGY DRINK</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">💊 NOVA PHARMA</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">🌶️ FIT COOK FOODZ</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">🦸 MARC OUELLETTE</span>
-        <span class="text-white/40">✦</span>
-        <!-- Duplicate for seamless loop -->
-        <span class="text-white font-display font-bold text-xl tracking-widest">⚡ SPARK ENERGY DRINK</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">💊 NOVA PHARMA</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">🌶️ FIT COOK FOODZ</span>
-        <span class="text-white/40">✦</span>
-        <span class="text-white font-display font-bold text-xl tracking-widest">🦸 MARC OUELLETTE</span>
-        <span class="text-white/40">✦</span>
+      <div class="marquee-track flex gap-14 items-center whitespace-nowrap">
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">⚡ SPARK ENERGY DRINK</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">💊 NOVA PHARMA</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🌶️ FIT COOK FOODZ</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🦸 MARC OUELLETTE</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">⚡ SPARK ENERGY DRINK</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">💊 NOVA PHARMA</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🌶️ FIT COOK FOODZ</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
+        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🦸 MARC OUELLETTE</span>
+        <span class="text-white/30 text-xl font-thin">✦</span>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        STATS
-  ═══════════════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
-        <div class="text-center">
-          <div class="font-display font-black text-6xl text-royal stat-num">36</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">vidéos / mois</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">videos / month</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+
+        <div class="stat-card rounded-2xl p-8 text-center bg-white">
+          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">36</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">vidéos / mois</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">videos / month</div>
         </div>
-        <div class="text-center">
-          <div class="font-display font-black text-6xl text-royal stat-num">4</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">comptes actifs</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">active accounts</div>
+
+        <div class="stat-card rounded-2xl p-8 text-center bg-white">
+          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">4</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">comptes actifs</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">active accounts</div>
         </div>
-        <div class="text-center">
-          <div class="font-display font-black text-6xl text-royal stat-num">3</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">tournages / mois</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">shoots / month</div>
+
+        <div class="stat-card rounded-2xl p-8 text-center bg-white">
+          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">3</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">tournages / mois</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">shoots / month</div>
         </div>
-        <div class="text-center">
-          <div class="font-display font-black text-6xl text-royal stat-num">1+</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">an d'expérience</div>
-          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">year of experience</div>
+
+        <div class="stat-card rounded-2xl p-8 text-center bg-white">
+          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">1+</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">an d'expérience</div>
+          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">year of experience</div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        SERVICES
-  ═══════════════════════════════════════════ -->
-  <section id="services" class="py-24 bg-mist">
+  ═══════════════════════════════════════ -->
+  <section id="services" class="py-28" style="background: #F7F8FF;">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="mb-16 reveal">
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Ce qu'on fait</span>
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">What we do</span>
-        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+
+      <!-- Header -->
+      <div class="mb-20 reveal">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Ce qu'on fait</span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">What we do</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-[0.92]" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); letter-spacing: -0.01em;">
           <span data-lang="fr">NOS SERVICES</span>
           <span data-lang="en">OUR SERVICES</span>
         </h2>
       </div>
 
-      <!-- Main service — highlighted -->
-      <div class="reveal mb-6 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #0A0F2E 0%, #1A3FCC 100%);">
-        <div class="p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          <div class="flex-1">
-            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/30 px-3 py-1.5 rounded-full mb-4" data-lang="fr">Service principal</span>
-            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/30 px-3 py-1.5 rounded-full mb-4" data-lang="en">Core service</span>
-            <h3 class="font-display font-black text-white text-5xl md:text-6xl leading-none mb-4" data-lang="fr">CONTENU<br>SHORT-FORM<br>ORGANIQUE</h3>
-            <h3 class="font-display font-black text-white text-5xl md:text-6xl leading-none mb-4" data-lang="en">ORGANIC<br>SHORT-FORM<br>CONTENT</h3>
-            <p class="text-gray-300 text-base max-w-lg" data-lang="fr">Stratégie, tournage, montage et publication de vidéos short-form pour Instagram, TikTok, YouTube. On gère tout — vous, vous vivez votre business.</p>
-            <p class="text-gray-300 text-base max-w-lg" data-lang="en">Strategy, shooting, editing and publishing short-form videos for Instagram, TikTok, YouTube. We handle everything — you focus on your business.</p>
+      <!-- Hero service card -->
+      <div class="reveal mb-5 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
+        <div class="p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-10 items-center">
+          <div>
+            <span class="tag-chip text-royal-light border border-royal/30 mb-5 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="fr">Service principal</span>
+            <span class="tag-chip text-royal-light border border-royal/30 mb-5 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="en">Core service</span>
+            <h3 class="font-display font-black text-white leading-[0.9] mb-5" style="font-size: clamp(2.8rem,6vw,5rem); letter-spacing:-0.01em;" data-lang="fr">CONTENU<br>SHORT-FORM<br><span style="color:#5B82FF;">ORGANIQUE</span></h3>
+            <h3 class="font-display font-black text-white leading-[0.9] mb-5" style="font-size: clamp(2.8rem,6vw,5rem); letter-spacing:-0.01em;" data-lang="en">ORGANIC<br>SHORT-FORM<br><span style="color:#5B82FF;">CONTENT</span></h3>
+            <p class="text-white/60 text-base leading-[1.7] max-w-md font-light" data-lang="fr">Stratégie, tournage, montage et publication de vidéos short-form pour Instagram, TikTok, YouTube. On gère tout — vous, vous vivez votre business.</p>
+            <p class="text-white/60 text-base leading-[1.7] max-w-md font-light" data-lang="en">Strategy, shooting, editing and publishing short-form videos for Instagram, TikTok, YouTube. We handle everything — you focus on your business.</p>
           </div>
-          <div class="flex flex-col gap-3 text-white/80 text-sm font-medium min-w-[200px]">
-            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Stratégie de contenu</span><span data-lang="en">Content strategy</span></div>
-            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Tournage & production</span><span data-lang="en">Shooting & production</span></div>
-            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Montage & édition</span><span data-lang="en">Editing & post</span></div>
-            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Publication & gestion</span><span data-lang="en">Publishing & management</span></div>
+          <div class="flex flex-col gap-3 min-w-[220px]">
+            <div class="flex items-center gap-3 text-white/75 text-sm">
+              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span data-lang="fr">Stratégie de contenu</span><span data-lang="en">Content strategy</span>
+            </div>
+            <div class="flex items-center gap-3 text-white/75 text-sm">
+              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span data-lang="fr">Tournage & production</span><span data-lang="en">Shooting & production</span>
+            </div>
+            <div class="flex items-center gap-3 text-white/75 text-sm">
+              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span data-lang="fr">Montage & édition</span><span data-lang="en">Editing & post</span>
+            </div>
+            <div class="flex items-center gap-3 text-white/75 text-sm">
+              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span data-lang="fr">Publication & gestion</span><span data-lang="en">Publishing & management</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Other services grid -->
+      <!-- Secondary services grid -->
       <div class="grid md:grid-cols-3 gap-4 reveal">
+
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="text-3xl mb-4">📢</div>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">PUBLICITÉS PAYANTES</h4>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">PAID ADS</h4>
-          <p class="text-gray-mid text-sm" data-lang="fr">Gestion de campagnes Meta Ads et publicités vidéo pour amplifier votre reach.</p>
-          <p class="text-gray-mid text-sm" data-lang="en">Meta Ads campaigns and video ads to amplify your reach.</p>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+          <div class="w-12 h-12 rounded-xl bg-royal/8 flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">📢</div>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">PUBLICITÉS PAYANTES</h4>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">PAID ADS</h4>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Gestion de campagnes Meta Ads et publicités vidéo pour amplifier votre reach organique.</p>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Meta Ads campaigns and video ads to amplify your organic reach.</p>
+          <div class="mt-5 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
+          </div>
         </div>
+
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="text-3xl mb-4">🎬</div>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">BRAND FILMS</h4>
-          <p class="text-gray-mid text-sm" data-lang="fr">Productions long-form pour présenter votre équipe, vos valeurs, votre histoire.</p>
-          <p class="text-gray-mid text-sm" data-lang="en">Long-form productions to showcase your team, values, and story.</p>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">🎬</div>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND FILMS</h4>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Productions long-form pour présenter votre équipe, vos valeurs et votre histoire.</p>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Long-form productions to showcase your team, values, and story.</p>
+          <div class="mt-5 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
+          </div>
         </div>
+
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="text-3xl mb-4">🎨</div>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">DESIGN & PHOTO</h4>
-          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">DESIGN & PHOTO</h4>
-          <p class="text-gray-mid text-sm" data-lang="fr">Design graphique, photographie professionnelle et identité visuelle.</p>
-          <p class="text-gray-mid text-sm" data-lang="en">Graphic design, professional photography and visual identity.</p>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
-          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">🎨</div>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">DESIGN & PHOTO</h4>
+          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">DESIGN & PHOTO</h4>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Design graphique, photographie professionnelle et identité visuelle complète.</p>
+          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Graphic design, professional photography and complete visual identity.</p>
+          <div class="mt-5 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
+            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        CLIENTS
-  ═══════════════════════════════════════════ -->
-  <section id="clients" class="py-24 bg-white">
+  ═══════════════════════════════════════ -->
+  <section id="clients" class="py-28 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="mb-16 reveal">
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Avec qui on travaille</span>
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">Who we work with</span>
-        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+
+      <div class="mb-20 reveal">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Avec qui on travaille</span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Who we work with</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-[0.92]" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); letter-spacing: -0.01em;">
           <span data-lang="fr">NOS CLIENTS</span>
           <span data-lang="en">OUR CLIENTS</span>
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 reveal">
+      <div class="grid md:grid-cols-2 gap-5 reveal">
+
         <!-- Spark -->
-        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); min-height: 320px;">
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: linear-gradient(135deg, #1A3FCC22, #0A0F2E88);"></div>
+        <div class="client-card rounded-3xl overflow-hidden relative" style="background: linear-gradient(145deg, #0D0D0D 0%, #181818 100%); min-height: 320px;">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-royal to-royal-light opacity-60"></div>
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
-              <div class="text-4xl mb-4">⚡</div>
-              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">SPARK<br>ENERGY DRINK</h3>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque québécoise de boissons énergisantes. Pionnière dans le MMA au Québec. 16 vidéos/mois.</p>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec energy drink brand. MMA pioneer in Québec. 16 videos/month.</p>
+              <div class="flex items-start justify-between mb-5">
+                <div class="text-4xl">⚡</div>
+                <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">16 vidéos/mois</span>
+              </div>
+              <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">SPARK<br>ENERGY DRINK</h3>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="fr">Marque québécoise de boissons énergisantes. Pionnière dans le MMA au Québec.</p>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="en">Québec energy drink brand. MMA pioneer in Québec.</p>
             </div>
-            <div class="flex gap-3 mt-6">
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">YouTube</span>
+            <div class="flex gap-2 mt-6">
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">Instagram</span>
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">TikTok</span>
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">YouTube</span>
             </div>
           </div>
         </div>
 
         <!-- Fit Cook -->
-        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #1A1008 0%, #2D1A0A 100%); min-height: 320px;">
+        <div class="client-card rounded-3xl overflow-hidden relative" style="background: linear-gradient(145deg, #150B02 0%, #211005 100%); min-height: 320px;">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-700 to-red-600 opacity-60"></div>
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
-              <div class="text-4xl mb-4">🌶️</div>
-              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">FIT COOK<br>FOODZ</h3>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque food lifestyle québécoise. Application de recettes santé. Sauces artisanales. 8 vidéos/mois.</p>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec food lifestyle brand. Healthy recipe app. Artisan sauces. 8 videos/month.</p>
+              <div class="flex items-start justify-between mb-5">
+                <div class="text-4xl">🌶️</div>
+                <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">8 vidéos/mois</span>
+              </div>
+              <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">FIT COOK<br>FOODZ</h3>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="fr">Marque food lifestyle québécoise. Application de recettes santé. Sauces artisanales.</p>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="en">Québec food lifestyle brand. Healthy recipe app. Artisan sauces.</p>
             </div>
-            <div class="flex gap-3 mt-6">
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
+            <div class="flex gap-2 mt-6">
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">Instagram</span>
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">TikTok</span>
             </div>
           </div>
         </div>
 
         <!-- Marc -->
-        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #0A1020 0%, #1A3FCC22 100%); border: 1px solid #1A3FCC40; min-height: 280px;">
+        <div class="client-card rounded-3xl overflow-hidden relative" style="background: linear-gradient(145deg, #080E20 0%, #0F1830 100%); border: 1px solid rgba(26,63,204,0.2); min-height: 260px;">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-royal-light to-blue-400 opacity-50"></div>
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
-              <div class="text-4xl mb-4">🦸</div>
-              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">MARC<br>OUELLETTE</h3>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Personal brand. Champion DMCC 2025. Entrepreneur, fondateur Nova Pharma & Spark. 8 vidéos/mois.</p>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Personal brand. DMCC Champion 2025. Entrepreneur, co-founder Nova Pharma & Spark. 8 videos/month.</p>
+              <div class="flex items-start justify-between mb-5">
+                <div class="text-4xl">🦸</div>
+                <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">8 vidéos/mois</span>
+              </div>
+              <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">MARC<br>OUELLETTE</h3>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="fr">Personal brand. Champion DMCC 2025. Entrepreneur, fondateur Nova Pharma & Spark.</p>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="en">Personal brand. DMCC Champion 2025. Entrepreneur, co-founder Nova Pharma & Spark.</p>
             </div>
-            <div class="flex gap-3 mt-6">
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
+            <div class="flex gap-2 mt-6">
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">Instagram</span>
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">TikTok</span>
             </div>
           </div>
         </div>
 
         <!-- Nova Pharma -->
-        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #0A1A10 0%, #0D2B18 100%); min-height: 280px;">
+        <div class="client-card rounded-3xl overflow-hidden relative" style="background: linear-gradient(145deg, #050F0A 0%, #0A1A10 100%); min-height: 260px;">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-700 to-emerald-500 opacity-50"></div>
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
-              <div class="text-4xl mb-4">💊</div>
-              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">NOVA<br>PHARMA</h3>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque de suppléments et produits de santé naturelle québécois. Nutrition sportive & wellness. 4 vidéos/mois.</p>
-              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec natural health supplements brand. Sports nutrition & wellness. 4 videos/month.</p>
+              <div class="flex items-start justify-between mb-5">
+                <div class="text-4xl">💊</div>
+                <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">4 vidéos/mois</span>
+              </div>
+              <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">NOVA<br>PHARMA</h3>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="fr">Marque de suppléments et produits de santé naturelle québécois. Nutrition sportive & wellness.</p>
+              <p class="text-gray-500 text-[13px] leading-[1.7] max-w-xs" data-lang="en">Québec natural health supplements brand. Sports nutrition & wellness.</p>
             </div>
-            <div class="flex gap-3 mt-6">
-              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
+            <div class="flex gap-2 mt-6">
+              <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem; padding: 4px 10px;">Instagram</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        APPROCHE
-  ═══════════════════════════════════════════ -->
-  <section id="approche" class="py-24 bg-ink text-white">
+  ═══════════════════════════════════════ -->
+  <section id="approche" class="py-28 bg-ink text-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="grid md:grid-cols-[1fr_1fr] gap-20 items-start">
+
+        <!-- Left -->
         <div class="reveal">
-          <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="fr">Notre philosophie</span>
-          <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="en">Our philosophy</span>
-          <h2 class="font-display font-black leading-none mt-3 mb-8" style="font-size: clamp(2.5rem, 6vw, 5rem);">
-            <span data-lang="fr">L'AUTHENTICITÉ<br><span class="text-royal-light">AVANT TOUT</span></span>
-            <span data-lang="en">AUTHENTICITY<br><span class="text-royal-light">FIRST</span></span>
+          <div class="accent-line" style="background: #2F57E8;"></div>
+          <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal-light" data-lang="fr">Notre philosophie</span>
+          <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal-light" data-lang="en">Our philosophy</span>
+          <h2 class="font-display font-black leading-[0.9] mt-3 mb-8" style="font-size: clamp(2.8rem,6.5vw,5rem); letter-spacing:-0.01em;">
+            <span data-lang="fr">L'AUTHENTICITÉ<br><span style="color:#5B82FF;">AVANT TOUT</span></span>
+            <span data-lang="en">AUTHENTICITY<br><span style="color:#5B82FF;">FIRST</span></span>
           </h2>
-          <p class="text-gray-300 text-lg leading-relaxed mb-6" data-lang="fr">
+          <p class="text-white/55 text-lg leading-[1.8] mb-6 font-light" data-lang="fr">
             On ne croit pas au contenu scripté et fake. On croit aux histoires vraies — celles qui montrent les personnes derrière les marques, leurs moments réels, leurs victoires, leurs coulisses.
           </p>
-          <p class="text-gray-300 text-lg leading-relaxed mb-6" data-lang="en">
+          <p class="text-white/55 text-lg leading-[1.8] mb-6 font-light" data-lang="en">
             We don't believe in scripted, fake content. We believe in real stories — the ones that show the people behind the brands, their real moments, their wins, their behind-the-scenes.
           </p>
-          <p class="text-gray-300 text-lg leading-relaxed" data-lang="fr">
-            Chaque contenu qu'on crée a un but : <strong class="text-white">connecter</strong> votre audience à votre marque de façon humaine et mémorable.
+          <p class="text-white/55 text-lg leading-[1.8] font-light" data-lang="fr">
+            Chaque contenu qu'on crée a un but : <strong class="text-white font-semibold">connecter</strong> votre audience à votre marque de façon humaine et mémorable.
           </p>
-          <p class="text-gray-300 text-lg leading-relaxed" data-lang="en">
-            Every piece of content we create has one purpose: <strong class="text-white">connecting</strong> your audience to your brand in a human and memorable way.
+          <p class="text-white/55 text-lg leading-[1.8] font-light" data-lang="en">
+            Every piece of content we create has one purpose: <strong class="text-white font-semibold">connecting</strong> your audience to your brand in a human and memorable way.
           </p>
+
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-lang="fr">Démarrer maintenant →</button>
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-lang="en">Start now →</button>
         </div>
 
-        <!-- Pillars -->
-        <div class="grid gap-4 reveal">
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
-            <div class="font-display font-black text-royal-light text-3xl mb-2">01</div>
-            <h4 class="font-bold text-lg mb-2" data-lang="fr">Stratégie d'abord</h4>
-            <h4 class="font-bold text-lg mb-2" data-lang="en">Strategy first</h4>
-            <p class="text-gray-400 text-sm" data-lang="fr">Chaque projet commence par comprendre votre audience, vos objectifs et votre identité.</p>
-            <p class="text-gray-400 text-sm" data-lang="en">Every project starts with understanding your audience, your goals, and your identity.</p>
+        <!-- Right — Pillars -->
+        <div class="flex flex-col gap-4 reveal">
+          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">01</div>
+              <div class="flex-1 h-px bg-white/10"></div>
+            </div>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="fr">Stratégie d'abord</h4>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="en">Strategy first</h4>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="fr">Chaque projet commence par comprendre votre audience, vos objectifs et votre identité unique.</p>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="en">Every project starts with understanding your audience, your goals, and your unique identity.</p>
           </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
-            <div class="font-display font-black text-royal-light text-3xl mb-2">02</div>
-            <h4 class="font-bold text-lg mb-2" data-lang="fr">Histoires humaines</h4>
-            <h4 class="font-bold text-lg mb-2" data-lang="en">Human stories</h4>
-            <p class="text-gray-400 text-sm" data-lang="fr">On met en valeur les personnes et les moments vrais. L'émotion vend mieux que le pitch.</p>
-            <p class="text-gray-400 text-sm" data-lang="en">We highlight real people and genuine moments. Emotion sells better than a pitch.</p>
+
+          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">02</div>
+              <div class="flex-1 h-px bg-white/10"></div>
+            </div>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="fr">Histoires humaines</h4>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="en">Human stories</h4>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="fr">On met en valeur les personnes et les moments vrais. L'émotion vend mieux que le pitch.</p>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="en">We highlight real people and genuine moments. Emotion sells better than any pitch.</p>
           </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
-            <div class="font-display font-black text-royal-light text-3xl mb-2">03</div>
-            <h4 class="font-bold text-lg mb-2" data-lang="fr">Consistance & volume</h4>
-            <h4 class="font-bold text-lg mb-2" data-lang="en">Consistency & volume</h4>
-            <p class="text-gray-400 text-sm" data-lang="fr">Les algorithmes récompensent la régularité. On livre à la semaine, chaque semaine.</p>
-            <p class="text-gray-400 text-sm" data-lang="en">Algorithms reward consistency. We deliver weekly, every week.</p>
+
+          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">03</div>
+              <div class="flex-1 h-px bg-white/10"></div>
+            </div>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="fr">Consistance & volume</h4>
+            <h4 class="font-bold text-white text-lg mb-2" data-lang="en">Consistency & volume</h4>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="fr">Les algorithmes récompensent la régularité. On livre à la semaine, chaque semaine, sans exception.</p>
+            <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="en">Algorithms reward consistency. We deliver weekly, every week, without exception.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        RÉSULTATS / PORTFOLIO
-  ═══════════════════════════════════════════ -->
-  <section id="resultats" class="py-24 bg-white">
+  ═══════════════════════════════════════ -->
+  <section id="resultats" class="py-28 bg-white">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="mb-16 reveal">
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Ce qu'on a accompli</span>
-        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">What we've accomplished</span>
-        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+
+      <div class="mb-20 reveal">
+        <div class="accent-line"></div>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Ce qu'on a accompli</span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">What we've accomplished</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-[0.92]" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); letter-spacing: -0.01em;">
           <span data-lang="fr">RÉSULTATS<br>& PORTFOLIO</span>
           <span data-lang="en">RESULTS<br>& PORTFOLIO</span>
         </h2>
       </div>
 
-      <!-- Portfolio placeholder cards -->
-      <div class="grid md:grid-cols-3 gap-6 reveal">
-        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #0A0F2E, #1A3FCC);">
-          <div class="aspect-[9/16] flex flex-col justify-between p-6">
-            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">⚡ Spark Energy</div>
+      <!-- Portfolio cards — phone format -->
+      <div class="grid md:grid-cols-3 gap-5 reveal">
+
+        <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #080D28 0%, #1A3FCC 100%);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">⚡ Spark Energy</span>
+              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span class="text-white text-xs ml-0.5">▶</span>
+              </div>
+            </div>
             <div class="text-white">
               <div class="font-display font-black text-2xl leading-tight mb-2">23h la veille<br>du match</div>
-              <div class="text-white/60 text-sm" data-lang="fr">Storytelling athlète · Lewis vs Primeau</div>
-              <div class="text-white/60 text-sm" data-lang="en">Athlete storytelling · Lewis vs Primeau</div>
-              <div class="mt-3 flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-royal-light"></div>
-                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
-                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="fr">Storytelling athlète · Lewis vs Primeau</div>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="en">Athlete storytelling · Lewis vs Primeau</div>
+              <div class="mt-4 pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-royal-light"></span>
+                <span class="text-[11px] text-white/40" data-lang="fr">Résultats sur demande</span>
+                <span class="text-[11px] text-white/40" data-lang="en">Results on request</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #1A0808, #CC3300);">
-          <div class="aspect-[9/16] flex flex-col justify-between p-6">
-            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">🌶️ Fit Cook</div>
+        <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #180806 0%, #8B1A00 100%);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">🌶️ Fit Cook</span>
+              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span class="text-white text-xs ml-0.5">▶</span>
+              </div>
+            </div>
             <div class="text-white">
               <div class="font-display font-black text-2xl leading-tight mb-2">Lancement<br>Sauce Sriracha</div>
-              <div class="text-white/60 text-sm" data-lang="fr">Lifestyle produit · Tournage Montréal</div>
-              <div class="text-white/60 text-sm" data-lang="en">Product lifestyle · Montreal shoot</div>
-              <div class="mt-3 flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-orange-400"></div>
-                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
-                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="fr">Lifestyle produit · Tournage Montréal</div>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="en">Product lifestyle · Montreal shoot</div>
+              <div class="mt-4 pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                <span class="text-[11px] text-white/40" data-lang="fr">Résultats sur demande</span>
+                <span class="text-[11px] text-white/40" data-lang="en">Results on request</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #0A1020, #1A3FCC);">
-          <div class="aspect-[9/16] flex flex-col justify-between p-6">
-            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">🦸 Marc Ouellette</div>
+        <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #080E20 0%, #162260 100%);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
+            <div class="flex items-center justify-between">
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">🦸 Marc Ouellette</span>
+              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span class="text-white text-xs ml-0.5">▶</span>
+              </div>
+            </div>
             <div class="text-white">
               <div class="font-display font-black text-2xl leading-tight mb-2">Champion<br>DMCC 2025</div>
-              <div class="text-white/60 text-sm" data-lang="fr">Personal brand · Événement drift</div>
-              <div class="text-white/60 text-sm" data-lang="en">Personal brand · Drift event</div>
-              <div class="mt-3 flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-royal-light"></div>
-                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
-                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="fr">Personal brand · Événement drift</div>
+              <div class="text-white/50 text-[12px] leading-[1.6]" data-lang="en">Personal brand · Drift event</div>
+              <div class="mt-4 pt-4 border-t border-white/10 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-royal-light"></span>
+                <span class="text-[11px] text-white/40" data-lang="fr">Résultats sur demande</span>
+                <span class="text-[11px] text-white/40" data-lang="en">Results on request</span>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
-      <p class="text-center text-gray-mid text-sm mt-8 reveal" data-lang="fr">
-        Du contenu réel est disponible sur demande — contactez-nous pour accéder à notre portfolio complet.
+      <p class="text-center text-gray-400 text-sm mt-10 reveal" data-lang="fr">
+        Contenu réel disponible sur demande — <button onclick="openWizard()" class="text-royal font-semibold hover:underline">contactez-nous</button> pour accéder au portfolio complet.
       </p>
-      <p class="text-center text-gray-mid text-sm mt-8 reveal" data-lang="en">
-        Real content available on request — contact us to access our full portfolio.
+      <p class="text-center text-gray-400 text-sm mt-10 reveal" data-lang="en">
+        Real content available on request — <button onclick="openWizard()" class="text-royal font-semibold hover:underline">contact us</button> to access our full portfolio.
       </p>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        CTA / CONTACT
-  ═══════════════════════════════════════════ -->
-  <section id="contact" class="py-24 relative overflow-hidden noise" style="background: linear-gradient(135deg, #0A0F2E 0%, #1A3FCC 100%);">
-    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 64px 64px;"></div>
+  ═══════════════════════════════════════ -->
+  <section id="contact" class="py-32 relative overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
+    <div class="absolute inset-0 hero-grid"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-[100px]" style="background: #2F57E8;"></div>
+
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
-      <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="fr">Prêt à démarrer ?</span>
-      <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="en">Ready to start?</span>
-      <h2 class="font-display font-black text-white leading-none mt-4 mb-8" style="font-size: clamp(3rem, 8vw, 6.5rem);">
+      <span class="tag-chip text-royal-light border border-royal/30 mb-6 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="fr">
+        <span style="width:6px;height:6px;border-radius:50%;background:#5B82FF;display:inline-block;"></span>
+        Prêt à démarrer ?
+      </span>
+      <span class="tag-chip text-royal-light border border-royal/30 mb-6 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="en">
+        <span style="width:6px;height:6px;border-radius:50%;background:#5B82FF;display:inline-block;"></span>
+        Ready to start?
+      </span>
+
+      <h2 class="font-display font-black text-white leading-[0.88] mt-4 mb-8" style="font-size: clamp(3.5rem, 10vw, 8rem); letter-spacing: -0.01em;">
         <span data-lang="fr">PARLONS<br>DE VOTRE<br>PROJET</span>
         <span data-lang="en">LET'S TALK<br>ABOUT YOUR<br>PROJECT</span>
       </h2>
-      <p class="text-gray-300 text-lg mb-12 max-w-xl mx-auto" data-lang="fr">
+
+      <p class="text-white/55 text-lg mb-12 max-w-lg mx-auto font-light leading-[1.7]" data-lang="fr">
         Que vous soyez une marque établie ou en pleine croissance, on trouve la formule qui vous correspond.
       </p>
-      <p class="text-gray-300 text-lg mb-12 max-w-xl mx-auto" data-lang="en">
+      <p class="text-white/55 text-lg mb-12 max-w-lg mx-auto font-light leading-[1.7]" data-lang="en">
         Whether you're an established brand or scaling fast, we find the formula that works for you.
       </p>
 
-      <div class="flex justify-center">
-        <button onclick="openWizard()" class="btn-primary bg-white text-royal font-bold px-12 py-5 rounded-full text-lg">
-          <span data-lang="fr">Démarrer un projet →</span>
-          <span data-lang="en">Start a project →</span>
-        </button>
-      </div>
+      <button onclick="openWizard()" class="btn-primary bg-white text-royal font-bold px-14 py-5 rounded-full text-lg">
+        <span data-lang="fr">Démarrer un projet →</span>
+        <span data-lang="en">Start a project →</span>
+      </button>
+
+      <p class="text-white/30 text-sm mt-5" data-lang="fr">Réponse en moins de 24h · Aucun engagement</p>
+      <p class="text-white/30 text-sm mt-5" data-lang="en">Response within 24h · No commitment</p>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        WIZARD MODAL
-  ═══════════════════════════════════════════ -->
-  <div id="wizard-overlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden" style="background: rgba(10,15,46,0.85); backdrop-filter: blur(8px);">
-    <div id="wizard-box" class="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl" style="transform: scale(0.92); opacity: 0; transition: all 0.3s cubic-bezier(.34,1.56,.64,1);">
+  ═══════════════════════════════════════ -->
+  <div id="wizard-overlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden" style="background: rgba(8,13,40,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+    <div id="wizard-box" class="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl" style="transform: scale(0.94) translateY(8px); opacity: 0; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;">
 
       <!-- Progress bar -->
       <div class="h-1 bg-gray-100">
-        <div id="wizard-progress" class="h-1 bg-royal transition-all duration-500" style="width: 0%"></div>
+        <div id="wizard-progress" class="h-1 bg-royal transition-all duration-500 ease-out" style="width: 0%;"></div>
       </div>
 
-      <!-- Close -->
-      <button onclick="closeWizard()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-500 text-sm font-bold z-10">✕</button>
+      <!-- Close button -->
+      <button onclick="closeWizard()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-400 z-10" style="font-size: 12px;">✕</button>
 
-      <!-- Steps container -->
       <div id="wizard-steps" class="p-8 md:p-10">
 
-        <!-- STEP 1 — Type de projet -->
+        <!-- STEP 1 -->
         <div class="wizard-step" data-step="1">
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 1 sur 3</div>
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 1 of 3</div>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">QUEL TYPE DE PROJET ?</h3>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">WHAT TYPE OF PROJECT?</h3>
-          <p class="text-gray-mid text-sm mb-8" data-lang="fr">Dites-nous dans quelle catégorie vous vous situez.</p>
-          <p class="text-gray-mid text-sm mb-8" data-lang="en">Tell us which category fits you best.</p>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 1 sur 3</div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 1 of 3</div>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">QUEL TYPE DE PROJET ?</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">WHAT TYPE OF PROJECT?</h3>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Dites-nous dans quelle catégorie vous vous situez.</p>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">Tell us which category fits you best.</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="marque">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="marque">
               <div class="text-2xl mb-2">🏢</div>
-              <div class="font-bold text-sm text-ink" data-lang="fr">Marque / Entreprise</div>
-              <div class="font-bold text-sm text-ink" data-lang="en">Brand / Business</div>
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Marque / Entreprise</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Brand / Business</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="personal">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="personal">
               <div class="text-2xl mb-2">🙋</div>
-              <div class="font-bold text-sm text-ink" data-lang="fr">Personal brand</div>
-              <div class="font-bold text-sm text-ink" data-lang="en">Personal brand</div>
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Personal brand</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Personal brand</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="evenement">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="evenement">
               <div class="text-2xl mb-2">🎤</div>
-              <div class="font-bold text-sm text-ink" data-lang="fr">Événement / Tournage</div>
-              <div class="font-bold text-sm text-ink" data-lang="en">Event / Shoot</div>
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Événement / Tournage</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Event / Shoot</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="autre">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="autre">
               <div class="text-2xl mb-2">💡</div>
-              <div class="font-bold text-sm text-ink" data-lang="fr">Autre</div>
-              <div class="font-bold text-sm text-ink" data-lang="en">Other</div>
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Autre</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Other</div>
             </button>
           </div>
         </div>
 
-        <!-- STEP 2 — Volume vidéos -->
+        <!-- STEP 2 -->
         <div class="wizard-step hidden" data-step="2">
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 2 sur 3</div>
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 2 of 3</div>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">COMBIEN DE VIDÉOS PAR MOIS ?</h3>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">HOW MANY VIDEOS PER MONTH?</h3>
-          <p class="text-gray-mid text-sm mb-8" data-lang="fr">On veut s'assurer de pouvoir bien vous servir.</p>
-          <p class="text-gray-mid text-sm mb-8" data-lang="en">We want to make sure we can serve you well.</p>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 2 sur 3</div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 2 of 3</div>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">COMBIEN DE VIDÉOS PAR MOIS ?</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">HOW MANY VIDEOS PER MONTH?</h3>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On veut s'assurer de pouvoir bien vous servir.</p>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">We want to make sure we can serve you well.</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="1-3" data-qualified="false">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="1-3" data-qualified="false">
               <div class="font-display font-black text-3xl text-royal mb-1">1–3</div>
               <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="4-8" data-qualified="maybe">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="4-8" data-qualified="maybe">
               <div class="font-display font-black text-3xl text-royal mb-1">4–8</div>
               <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="8+" data-qualified="true">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="8+" data-qualified="true">
               <div class="font-display font-black text-3xl text-royal mb-1">8+</div>
               <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="unknown" data-qualified="maybe">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="unknown" data-qualified="maybe">
               <div class="text-2xl mb-1">🤷</div>
               <div class="text-sm text-gray-mid" data-lang="fr">Je ne sais pas encore</div>
               <div class="text-sm text-gray-mid" data-lang="en">Not sure yet</div>
@@ -645,31 +952,31 @@
           </div>
         </div>
 
-        <!-- STEP 3 — Budget -->
+        <!-- STEP 3 -->
         <div class="wizard-step hidden" data-step="3">
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="fr">Étape 3 sur 3</div>
-          <div class="text-xs font-semibold uppercase tracking-widest text-royal mb-2" data-lang="en">Step 3 of 3</div>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">QUEL EST VOTRE BUDGET MENSUEL ?</h3>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">WHAT'S YOUR MONTHLY BUDGET?</h3>
-          <p class="text-gray-mid text-sm mb-8" data-lang="fr">Soyez honnête — ça nous aide à vous proposer la bonne formule.</p>
-          <p class="text-gray-mid text-sm mb-8" data-lang="en">Be honest — it helps us recommend the right package.</p>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 3 sur 3</div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 3 of 3</div>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">QUEL EST VOTRE BUDGET MENSUEL ?</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">WHAT'S YOUR MONTHLY BUDGET?</h3>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Soyez honnête — ça nous aide à proposer la bonne formule.</p>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">Be honest — it helps us recommend the right package.</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="<500" data-qualified="false">
-              <div class="font-display font-black text-2xl text-royal mb-1">-500$</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="<500" data-qualified="false">
+              <div class="font-display font-black text-xl text-royal mb-1">-500$</div>
               <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">per month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="500-1500" data-qualified="maybe">
-              <div class="font-display font-black text-2xl text-royal mb-1">500–1500$</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="500-1500" data-qualified="maybe">
+              <div class="font-display font-black text-xl text-royal mb-1">500–1 500$</div>
               <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">per month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="1500+" data-qualified="true">
-              <div class="font-display font-black text-2xl text-royal mb-1">1500$+</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="1500+" data-qualified="true">
+              <div class="font-display font-black text-xl text-royal mb-1">1 500$+</div>
               <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
               <div class="text-sm text-gray-mid" data-lang="en">per month</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl border-2 border-gray-200 hover:border-royal hover:bg-royal-pale transition-all" data-value="discuss" data-qualified="true">
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="discuss" data-qualified="true">
               <div class="text-2xl mb-1">💬</div>
               <div class="text-sm text-gray-mid" data-lang="fr">À discuter</div>
               <div class="text-sm text-gray-mid" data-lang="en">Let's discuss</div>
@@ -677,143 +984,153 @@
           </div>
         </div>
 
-        <!-- STEP 4 — Coordonnées (qualifié) -->
+        <!-- STEP 4 — Contact form -->
         <div class="wizard-step hidden" data-step="4">
-          <div class="text-xs font-semibold uppercase tracking-widest text-green-600 mb-2" data-lang="fr">✓ Vous êtes qualifié !</div>
-          <div class="text-xs font-semibold uppercase tracking-widest text-green-600 mb-2" data-lang="en">✓ You're a great fit!</div>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
-          <h3 class="font-display font-black text-ink text-3xl leading-tight mb-2" data-lang="en">LET'S GET IN TOUCH</h3>
-          <p class="text-gray-mid text-sm mb-8" data-lang="fr">On vous contacte dans les 24h pour planifier un appel.</p>
-          <p class="text-gray-mid text-sm mb-8" data-lang="en">We'll reach out within 24h to schedule a call.</p>
-          <form id="contact-form" onsubmit="submitContact(event)" class="grid gap-4">
+          <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-600 mb-2">✓ <span data-lang="fr">Vous êtes qualifié !</span><span data-lang="en">You're a great fit!</span></div>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">LET'S GET IN TOUCH</h3>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On vous contacte dans les 24h pour planifier un appel.</p>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">We'll reach out within 24h to schedule a call.</p>
+          <form id="contact-form" onsubmit="submitContact(event)" class="grid gap-3">
             <input type="text" id="c-name" placeholder="Nom complet / Full name" required
-              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
             <input type="email" id="c-email" placeholder="Courriel / Email" required
-              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
-            <input type="tel" id="c-phone" placeholder="Téléphone / Phone"
-              class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal transition-colors text-sm font-medium" />
-            <button type="submit" class="btn-primary w-full bg-royal text-white font-bold py-4 rounded-xl text-base mt-2">
-              <span data-lang="fr">Envoyer →</span>
-              <span data-lang="en">Submit →</span>
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
+            <input type="tel" id="c-phone" placeholder="Téléphone / Phone (optionnel)"
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
+            <button type="submit" class="btn-primary w-full bg-royal text-white font-bold py-4 rounded-xl text-base mt-1">
+              <span data-lang="fr">Envoyer la demande →</span>
+              <span data-lang="en">Send request →</span>
             </button>
+            <p class="text-center text-gray-400 text-[11px]" data-lang="fr">Aucun spam · Réponse garantie en 24h</p>
+            <p class="text-center text-gray-400 text-[11px]" data-lang="en">No spam · Guaranteed reply within 24h</p>
           </form>
         </div>
 
         <!-- STEP 5 — Non qualifié -->
         <div class="wizard-step hidden" data-step="5">
           <div class="text-center py-4">
-            <div class="text-5xl mb-6">🙏</div>
-            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="fr">MERCI DE VOTRE INTÉRÊT !</h3>
-            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="en">THANKS FOR YOUR INTEREST!</h3>
-            <p class="text-gray-mid text-sm leading-relaxed mb-4" data-lang="fr">
-              Nos forfaits sont conçus pour des projets avec un minimum de 4 vidéos par mois et un budget mensuel de 1 500$ et plus.<br><br>
+            <div class="text-5xl mb-5">🙏</div>
+            <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="fr">MERCI DE VOTRE INTÉRÊT !</h3>
+            <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="en">THANKS FOR YOUR INTEREST!</h3>
+            <p class="text-gray-mid text-sm leading-[1.7] mb-4 max-w-sm mx-auto" data-lang="fr">
+              Nos forfaits sont conçus pour des projets avec un minimum de 4 vidéos par mois et un budget de 1 500$/mois et plus.<br><br>
               Si votre situation évolue, on sera là. N'hésitez pas à revenir nous voir !
             </p>
-            <p class="text-gray-mid text-sm leading-relaxed mb-4" data-lang="en">
-              Our packages are designed for projects with at least 4 videos per month and a monthly budget of $1,500+.<br><br>
+            <p class="text-gray-mid text-sm leading-[1.7] mb-4 max-w-sm mx-auto" data-lang="en">
+              Our packages are designed for projects with at least 4 videos/month and a $1,500+/month budget.<br><br>
               If your situation changes, we'd love to hear from you. Don't hesitate to come back!
             </p>
             <button onclick="closeWizard()" class="mt-4 text-royal font-semibold text-sm hover:underline">
-              <span data-lang="fr">Fermer</span>
-              <span data-lang="en">Close</span>
+              <span data-lang="fr">Fermer</span><span data-lang="en">Close</span>
             </button>
           </div>
         </div>
 
-        <!-- STEP 6 — Confirmation envoi -->
+        <!-- STEP 6 — Confirmation -->
         <div class="wizard-step hidden" data-step="6">
           <div class="text-center py-4">
-            <div class="text-5xl mb-6">🚀</div>
-            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="fr">C'EST PARTI !</h3>
-            <h3 class="font-display font-black text-ink text-3xl leading-tight mb-4" data-lang="en">YOU'RE IN!</h3>
-            <p class="text-gray-mid text-sm leading-relaxed mb-6" data-lang="fr">
+            <div class="text-5xl mb-5">🚀</div>
+            <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="fr">C'EST PARTI !</h3>
+            <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="en">YOU'RE IN!</h3>
+            <p class="text-gray-mid text-sm leading-[1.7] mb-6 max-w-sm mx-auto" data-lang="fr">
               On a bien reçu vos informations. Justin vous contacte dans les prochaines 24h pour planifier un appel.
             </p>
-            <p class="text-gray-mid text-sm leading-relaxed mb-6" data-lang="en">
+            <p class="text-gray-mid text-sm leading-[1.7] mb-6 max-w-sm mx-auto" data-lang="en">
               We received your info. Justin will reach out within 24h to schedule a call.
             </p>
             <button onclick="closeWizard()" class="btn-primary bg-royal text-white font-bold px-8 py-3 rounded-full text-sm">
-              <span data-lang="fr">Parfait, merci !</span>
-              <span data-lang="en">Awesome, thanks!</span>
+              <span data-lang="fr">Parfait, merci !</span><span data-lang="en">Awesome, thanks!</span>
             </button>
           </div>
         </div>
 
-      </div><!-- /wizard-steps -->
-    </div><!-- /wizard-box -->
-  </div><!-- /wizard-overlay -->
-
-  <!-- ══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════ -->
-  <footer class="bg-ink-soft text-white py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>
-        <div class="font-display font-black text-2xl tracking-tight mb-1">ALTA<span class="text-royal-light">MEDIA</span></div>
-        <p class="text-gray-500 text-sm" data-lang="fr">Agence de contenu short-form · Montréal, QC</p>
-        <p class="text-gray-500 text-sm" data-lang="en">Short-form content agency · Montréal, QC</p>
       </div>
-      <div class="text-gray-600 text-xs">
-        © 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="bg-ink text-white py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div>
+          <div class="font-display font-black text-2xl tracking-tight leading-none mb-2">ALTA<span class="text-royal-light">MEDIA</span></div>
+          <p class="text-gray-600 text-sm" data-lang="fr">Agence de contenu short-form · Montréal, QC</p>
+          <p class="text-gray-600 text-sm" data-lang="en">Short-form content agency · Montréal, QC</p>
+        </div>
+        <div class="flex flex-col md:items-end gap-2">
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-lang="fr">Démarrer un projet →</button>
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-lang="en">Start a project →</button>
+          <p class="text-gray-700 text-xs mt-1">© 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span></p>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        JS
-  ═══════════════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <script>
-    // Lang toggle
-    const langBtn = document.getElementById('langToggle');
-    langBtn.addEventListener('click', () => {
+    // ── Lang toggle ──────────────────────────
+    document.getElementById('langToggle').addEventListener('click', () => {
       document.body.classList.toggle('en');
       document.documentElement.lang = document.body.classList.contains('en') ? 'en' : 'fr';
     });
 
-    // Scroll reveal
+    // ── Navbar scroll effect ─────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 24;
+      navbar.style.borderBottomColor = scrolled ? 'rgba(0,0,0,0.06)' : 'transparent';
+      navbar.style.boxShadow = scrolled ? '0 4px 24px rgba(0,0,0,0.06)' : 'none';
+    }, { passive: true });
+
+    // ── Scroll reveal ────────────────────────
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── WIZARD ──────────────────────────────────
-    const overlay = document.getElementById('wizard-overlay');
-    const box     = document.getElementById('wizard-box');
+    // ── Wizard ──────────────────────────────
+    const overlay  = document.getElementById('wizard-overlay');
+    const box      = document.getElementById('wizard-box');
     const progress = document.getElementById('wizard-progress');
 
-    let wizardData = { type: null, volume: null, volumeQualified: null, budget: null, budgetQualified: null };
+    let wizardData = {};
     let currentStep = 1;
 
     function openWizard() {
-      wizardData = { type: null, volume: null, volumeQualified: null, budget: null, budgetQualified: null };
+      wizardData = {};
       showStep(1);
       overlay.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        box.style.transform = 'scale(1)';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        box.style.transform = 'scale(1) translateY(0)';
         box.style.opacity   = '1';
-      });
+      }));
       document.body.style.overflow = 'hidden';
     }
 
     function closeWizard() {
-      box.style.transform = 'scale(0.92)';
+      box.style.transform = 'scale(0.94) translateY(8px)';
       box.style.opacity   = '0';
       setTimeout(() => {
         overlay.classList.add('hidden');
         document.body.style.overflow = '';
-        // reset form
         const f = document.getElementById('contact-form');
         if (f) f.reset();
-      }, 280);
+      }, 300);
     }
 
-    // Close on overlay click
     overlay.addEventListener('click', e => { if (e.target === overlay) closeWizard(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWizard(); });
 
     function showStep(n) {
       currentStep = n;
@@ -821,14 +1138,12 @@
       const target = document.querySelector(`.wizard-step[data-step="${n}"]`);
       if (target) {
         target.classList.remove('hidden');
-        target.style.animation = 'fadeUp 0.35s ease forwards';
+        target.style.animation = 'fadeUp 0.32s cubic-bezier(0.16,1,0.3,1) forwards';
       }
-      // Progress: steps 1-3 = qualification, step 4 = form
       const pct = { 1: 10, 2: 40, 3: 70, 4: 90, 5: 100, 6: 100 };
       progress.style.width = (pct[n] || 0) + '%';
     }
 
-    // Choice buttons
     document.addEventListener('click', e => {
       const btn = e.target.closest('.wizard-choice');
       if (!btn) return;
@@ -836,13 +1151,8 @@
       const val  = btn.dataset.value;
       const qual = btn.dataset.qualified;
 
-      // Highlight selected
-      btn.closest('.wizard-step').querySelectorAll('.wizard-choice').forEach(b => {
-        b.classList.remove('border-royal', 'bg-royal-pale');
-        b.classList.add('border-gray-200');
-      });
-      btn.classList.add('border-royal', 'bg-royal-pale');
-      btn.classList.remove('border-gray-200');
+      btn.closest('.wizard-step').querySelectorAll('.wizard-choice').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
 
       setTimeout(() => {
         if (step === 1) {
@@ -850,17 +1160,16 @@
           showStep(2);
         } else if (step === 2) {
           wizardData.volume = val;
-          wizardData.volumeQualified = qual; // 'true', 'maybe', 'false'
+          wizardData.volumeQualified = qual;
           showStep(3);
         } else if (step === 3) {
           wizardData.budget = val;
           wizardData.budgetQualified = qual;
-          // Qualification logic
           const vq = wizardData.volumeQualified;
           const bq = wizardData.budgetQualified;
           const qualified =
-            (vq === 'true' || vq === 'maybe') && (bq === 'true') ||
-            (vq === 'true') && (bq === 'maybe');
+            ((vq === 'true' || vq === 'maybe') && bq === 'true') ||
+            (vq === 'true' && bq === 'maybe');
           showStep(qualified ? 4 : 5);
         }
       }, 200);
@@ -868,15 +1177,8 @@
 
     function submitContact(e) {
       e.preventDefault();
-      // Here you'd send to a backend / Formspree / etc.
       showStep(6);
     }
-
-    // Navbar scroll shadow
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('shadow-lg', window.scrollY > 20);
-    });
   </script>
 </body>
 </html>
