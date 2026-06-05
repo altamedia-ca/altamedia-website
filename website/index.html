@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AltaMedia — Contenu Short-Form Authentique</title>
+  <meta name="description" content="Agence de création de contenu vidéo short-form organique. On raconte vos histoires, on fait croître vos audiences." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: '#1A3FCC',
+            'royal-dark': '#1230A8',
+            'royal-light': '#2F57E8',
+            'royal-pale': '#EEF2FF',
+            ink: '#111111',
+            'ink-soft': '#1F1F1F',
+            mist: '#F8F9FF',
+            'gray-mid': '#6B7280',
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Lang toggle */
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="fr"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
+    .animate-slide-right { animation: slideRight 0.6s ease forwards; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Noise texture overlay */
+    .noise::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Video card hover */
+    .video-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .video-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(26,63,204,0.18); }
+
+    /* Service card */
+    .service-card { transition: all 0.3s ease; border: 1px solid #E5E7EB; }
+    .service-card:hover { border-color: #1A3FCC; background: #F0F4FF; transform: translateY(-4px); }
+
+    /* Marquee */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 18s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* CTA glow */
+    .btn-primary { position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(26,63,204,0.4); transform: translateY(-2px); }
+
+    /* Number counter */
+    .stat-num { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="font-body bg-white text-ink">
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- Logo text -->
+      <a href="#" class="flex items-center gap-2">
+        <span class="font-display font-black text-2xl tracking-tight text-ink">ALTA<span class="text-royal">MEDIA</span></span>
+      </a>
+
+      <!-- Nav links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-mid">
+        <a href="#services" class="hover:text-ink transition-colors" data-lang="fr">Services</a>
+        <a href="#services" class="hover:text-ink transition-colors" data-lang="en">Services</a>
+        <a href="#clients" class="hover:text-ink transition-colors" data-lang="fr">Clients</a>
+        <a href="#clients" class="hover:text-ink transition-colors" data-lang="en">Clients</a>
+        <a href="#approche" class="hover:text-ink transition-colors" data-lang="fr">Approche</a>
+        <a href="#approche" class="hover:text-ink transition-colors" data-lang="en">Approach</a>
+        <a href="#resultats" class="hover:text-ink transition-colors" data-lang="fr">Résultats</a>
+        <a href="#resultats" class="hover:text-ink transition-colors" data-lang="en">Results</a>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Lang toggle -->
+        <button id="langToggle" class="text-xs font-semibold px-3 py-1.5 rounded-full border border-gray-200 hover:border-royal hover:text-royal transition-all">
+          <span data-lang="fr">EN</span>
+          <span data-lang="en">FR</span>
+        </button>
+        <!-- CTA -->
+        <a href="#contact" class="hidden md:inline-flex btn-primary bg-royal text-white text-sm font-semibold px-5 py-2.5 rounded-full" data-lang="fr">Parlons-en</a>
+        <a href="#contact" class="hidden md:inline-flex btn-primary bg-royal text-white text-sm font-semibold px-5 py-2.5 rounded-full" data-lang="en">Let's talk</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center pt-16 overflow-hidden noise" style="background: linear-gradient(135deg, #0A0F2E 0%, #111827 45%, #1A3FCC 100%);">
+    <!-- Background grid -->
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 64px 64px;"></div>
+
+    <!-- Glow orb -->
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 rounded-full opacity-20 blur-3xl" style="background: radial-gradient(circle, #2F57E8, transparent 70%);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+      <!-- Left -->
+      <div>
+        <div class="animate-fade-up">
+          <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/20 border border-royal/30 px-4 py-2 rounded-full mb-6" data-lang="fr">Agence de contenu short-form</span>
+          <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/20 border border-royal/30 px-4 py-2 rounded-full mb-6" data-lang="en">Short-form content agency</span>
+        </div>
+        <h1 class="font-display font-black text-white leading-none mb-6 animate-fade-up delay-100" style="font-size: clamp(3.5rem, 9vw, 7rem);">
+          <span data-lang="fr">DES<br>HISTOIRES<br><span class="text-royal-light">QUI VENDENT</span></span>
+          <span data-lang="en">STORIES<br>THAT<br><span class="text-royal-light">CONVERT</span></span>
+        </h1>
+        <p class="text-gray-300 text-lg leading-relaxed max-w-md mb-10 animate-fade-up delay-200" data-lang="fr">
+          On crée du contenu organique short-form qui reflète la vraie identité de vos marques. Pas de script fake. Juste des histoires authentiques qui connectent.
+        </p>
+        <p class="text-gray-300 text-lg leading-relaxed max-w-md mb-10 animate-fade-up delay-200" data-lang="en">
+          We create organic short-form content that reflects the true identity of your brands. No fake scripts. Just authentic stories that connect.
+        </p>
+        <div class="flex flex-wrap gap-4 animate-fade-up delay-300">
+          <a href="#contact" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="fr">Démarrer un projet</a>
+          <a href="#contact" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="en">Start a project</a>
+          <a href="#resultats" class="flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 hover:border-white/50 transition-all text-base" data-lang="fr">
+            Voir nos résultats <span>→</span>
+          </a>
+          <a href="#resultats" class="flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 hover:border-white/50 transition-all text-base" data-lang="en">
+            See our results <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right — Video mosaic placeholder -->
+      <div class="hidden md:grid grid-cols-2 gap-3 animate-fade-up delay-400">
+        <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-royal/40 to-ink-soft flex items-end p-4 cursor-pointer col-span-1">
+          <div class="text-white">
+            <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">⚡ Spark Energy</div>
+            <div class="text-sm font-semibold">23h la veille du match</div>
+          </div>
+        </div>
+        <div class="grid gap-3">
+          <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-gray-800 to-royal/30 flex items-end p-4 cursor-pointer">
+            <div class="text-white">
+              <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">🌶️ Fit Cook</div>
+              <div class="text-sm font-semibold">Sauce sriracha launch</div>
+            </div>
+          </div>
+          <div class="video-card rounded-2xl overflow-hidden aspect-[9/16] bg-gradient-to-br from-royal/50 to-gray-900 flex items-end p-4 cursor-pointer">
+            <div class="text-white">
+              <div class="text-xs font-semibold uppercase tracking-wider text-royal-light mb-1">🦸 Marc Ouellette</div>
+              <div class="text-sm font-semibold">Champion DMCC 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 animate-bounce">
+      <span class="text-xs font-medium uppercase tracking-widest">Scroll</span>
+      <div class="w-px h-8 bg-white/20"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MARQUEE — Clients
+  ═══════════════════════════════════════════ -->
+  <div class="bg-royal py-5 overflow-hidden">
+    <div class="flex">
+      <div class="marquee-track flex gap-16 items-center whitespace-nowrap">
+        <span class="text-white font-display font-bold text-xl tracking-widest">⚡ SPARK ENERGY DRINK</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">💊 NOVA PHARMA</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">🌶️ FIT COOK FOODZ</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">🦸 MARC OUELLETTE</span>
+        <span class="text-white/40">✦</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="text-white font-display font-bold text-xl tracking-widest">⚡ SPARK ENERGY DRINK</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">💊 NOVA PHARMA</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">🌶️ FIT COOK FOODZ</span>
+        <span class="text-white/40">✦</span>
+        <span class="text-white font-display font-bold text-xl tracking-widest">🦸 MARC OUELLETTE</span>
+        <span class="text-white/40">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       STATS
+  ═══════════════════════════════════════════ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 reveal">
+        <div class="text-center">
+          <div class="font-display font-black text-6xl text-royal stat-num">36</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">vidéos / mois</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">videos / month</div>
+        </div>
+        <div class="text-center">
+          <div class="font-display font-black text-6xl text-royal stat-num">4</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">comptes actifs</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">active accounts</div>
+        </div>
+        <div class="text-center">
+          <div class="font-display font-black text-6xl text-royal stat-num">3</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">tournages / mois</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">shoots / month</div>
+        </div>
+        <div class="text-center">
+          <div class="font-display font-black text-6xl text-royal stat-num">1+</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="fr">an d'expérience</div>
+          <div class="text-sm font-medium text-gray-mid mt-2" data-lang="en">year of experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════ -->
+  <section id="services" class="py-24 bg-mist">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16 reveal">
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Ce qu'on fait</span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">What we do</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+          <span data-lang="fr">NOS SERVICES</span>
+          <span data-lang="en">OUR SERVICES</span>
+        </h2>
+      </div>
+
+      <!-- Main service — highlighted -->
+      <div class="reveal mb-6 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #0A0F2E 0%, #1A3FCC 100%);">
+        <div class="p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div class="flex-1">
+            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/30 px-3 py-1.5 rounded-full mb-4" data-lang="fr">Service principal</span>
+            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-royal-light bg-royal/30 px-3 py-1.5 rounded-full mb-4" data-lang="en">Core service</span>
+            <h3 class="font-display font-black text-white text-5xl md:text-6xl leading-none mb-4" data-lang="fr">CONTENU<br>SHORT-FORM<br>ORGANIQUE</h3>
+            <h3 class="font-display font-black text-white text-5xl md:text-6xl leading-none mb-4" data-lang="en">ORGANIC<br>SHORT-FORM<br>CONTENT</h3>
+            <p class="text-gray-300 text-base max-w-lg" data-lang="fr">Stratégie, tournage, montage et publication de vidéos short-form pour Instagram, TikTok, YouTube. On gère tout — vous, vous vivez votre business.</p>
+            <p class="text-gray-300 text-base max-w-lg" data-lang="en">Strategy, shooting, editing and publishing short-form videos for Instagram, TikTok, YouTube. We handle everything — you focus on your business.</p>
+          </div>
+          <div class="flex flex-col gap-3 text-white/80 text-sm font-medium min-w-[200px]">
+            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Stratégie de contenu</span><span data-lang="en">Content strategy</span></div>
+            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Tournage & production</span><span data-lang="en">Shooting & production</span></div>
+            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Montage & édition</span><span data-lang="en">Editing & post</span></div>
+            <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-royal-light flex items-center justify-center text-white text-xs font-bold">✓</div> <span data-lang="fr">Publication & gestion</span><span data-lang="en">Publishing & management</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other services grid -->
+      <div class="grid md:grid-cols-3 gap-4 reveal">
+        <div class="service-card bg-white rounded-2xl p-8">
+          <div class="text-3xl mb-4">📢</div>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">PUBLICITÉS PAYANTES</h4>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">PAID ADS</h4>
+          <p class="text-gray-mid text-sm" data-lang="fr">Gestion de campagnes Meta Ads et publicités vidéo pour amplifier votre reach.</p>
+          <p class="text-gray-mid text-sm" data-lang="en">Meta Ads campaigns and video ads to amplify your reach.</p>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+        </div>
+        <div class="service-card bg-white rounded-2xl p-8">
+          <div class="text-3xl mb-4">🎬</div>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">BRAND FILMS</h4>
+          <p class="text-gray-mid text-sm" data-lang="fr">Productions long-form pour présenter votre équipe, vos valeurs, votre histoire.</p>
+          <p class="text-gray-mid text-sm" data-lang="en">Long-form productions to showcase your team, values, and story.</p>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+        </div>
+        <div class="service-card bg-white rounded-2xl p-8">
+          <div class="text-3xl mb-4">🎨</div>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="fr">DESIGN & PHOTO</h4>
+          <h4 class="font-display font-bold text-2xl text-ink mb-2" data-lang="en">DESIGN & PHOTO</h4>
+          <p class="text-gray-mid text-sm" data-lang="fr">Design graphique, photographie professionnelle et identité visuelle.</p>
+          <p class="text-gray-mid text-sm" data-lang="en">Graphic design, professional photography and visual identity.</p>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="fr">Bientôt disponible</span>
+          <span class="inline-block mt-4 text-xs text-royal font-semibold uppercase tracking-wider" data-lang="en">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CLIENTS
+  ═══════════════════════════════════════════ -->
+  <section id="clients" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16 reveal">
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Avec qui on travaille</span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">Who we work with</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+          <span data-lang="fr">NOS CLIENTS</span>
+          <span data-lang="en">OUR CLIENTS</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 reveal">
+        <!-- Spark -->
+        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%); min-height: 320px;">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: linear-gradient(135deg, #1A3FCC22, #0A0F2E88);"></div>
+          <div class="relative z-10 p-10 h-full flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-4">⚡</div>
+              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">SPARK<br>ENERGY DRINK</h3>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque québécoise de boissons énergisantes. Pionnière dans le MMA au Québec. 16 vidéos/mois.</p>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec energy drink brand. MMA pioneer in Québec. 16 videos/month.</p>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">YouTube</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fit Cook -->
+        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #1A1008 0%, #2D1A0A 100%); min-height: 320px;">
+          <div class="relative z-10 p-10 h-full flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-4">🌶️</div>
+              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">FIT COOK<br>FOODZ</h3>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque food lifestyle québécoise. Application de recettes santé. Sauces artisanales. 8 vidéos/mois.</p>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec food lifestyle brand. Healthy recipe app. Artisan sauces. 8 videos/month.</p>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marc -->
+        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #0A1020 0%, #1A3FCC22 100%); border: 1px solid #1A3FCC40; min-height: 280px;">
+          <div class="relative z-10 p-10 h-full flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-4">🦸</div>
+              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">MARC<br>OUELLETTE</h3>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Personal brand. Champion DMCC 2025. Entrepreneur, fondateur Nova Pharma & Spark. 8 vidéos/mois.</p>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Personal brand. DMCC Champion 2025. Entrepreneur, co-founder Nova Pharma & Spark. 8 videos/month.</p>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">TikTok</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nova Pharma -->
+        <div class="group rounded-3xl overflow-hidden relative" style="background: linear-gradient(135deg, #0A1A10 0%, #0D2B18 100%); min-height: 280px;">
+          <div class="relative z-10 p-10 h-full flex flex-col justify-between">
+            <div>
+              <div class="text-4xl mb-4">💊</div>
+              <h3 class="font-display font-black text-white text-4xl leading-none mb-3">NOVA<br>PHARMA</h3>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="fr">Marque de suppléments et produits de santé naturelle québécois. Nutrition sportive & wellness. 4 vidéos/mois.</p>
+              <p class="text-gray-400 text-sm max-w-xs" data-lang="en">Québec natural health supplements brand. Sports nutrition & wellness. 4 videos/month.</p>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <span class="text-xs font-medium text-white/60 bg-white/10 px-3 py-1.5 rounded-full">Instagram</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       APPROCHE
+  ═══════════════════════════════════════════ -->
+  <section id="approche" class="py-24 bg-ink text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="fr">Notre philosophie</span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="en">Our philosophy</span>
+          <h2 class="font-display font-black leading-none mt-3 mb-8" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+            <span data-lang="fr">L'AUTHENTICITÉ<br><span class="text-royal-light">AVANT TOUT</span></span>
+            <span data-lang="en">AUTHENTICITY<br><span class="text-royal-light">FIRST</span></span>
+          </h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6" data-lang="fr">
+            On ne croit pas au contenu scripté et fake. On croit aux histoires vraies — celles qui montrent les personnes derrière les marques, leurs moments réels, leurs victoires, leurs coulisses.
+          </p>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6" data-lang="en">
+            We don't believe in scripted, fake content. We believe in real stories — the ones that show the people behind the brands, their real moments, their wins, their behind-the-scenes.
+          </p>
+          <p class="text-gray-300 text-lg leading-relaxed" data-lang="fr">
+            Chaque contenu qu'on crée a un but : <strong class="text-white">connecter</strong> votre audience à votre marque de façon humaine et mémorable.
+          </p>
+          <p class="text-gray-300 text-lg leading-relaxed" data-lang="en">
+            Every piece of content we create has one purpose: <strong class="text-white">connecting</strong> your audience to your brand in a human and memorable way.
+          </p>
+        </div>
+
+        <!-- Pillars -->
+        <div class="grid gap-4 reveal">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
+            <div class="font-display font-black text-royal-light text-3xl mb-2">01</div>
+            <h4 class="font-bold text-lg mb-2" data-lang="fr">Stratégie d'abord</h4>
+            <h4 class="font-bold text-lg mb-2" data-lang="en">Strategy first</h4>
+            <p class="text-gray-400 text-sm" data-lang="fr">Chaque projet commence par comprendre votre audience, vos objectifs et votre identité.</p>
+            <p class="text-gray-400 text-sm" data-lang="en">Every project starts with understanding your audience, your goals, and your identity.</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
+            <div class="font-display font-black text-royal-light text-3xl mb-2">02</div>
+            <h4 class="font-bold text-lg mb-2" data-lang="fr">Histoires humaines</h4>
+            <h4 class="font-bold text-lg mb-2" data-lang="en">Human stories</h4>
+            <p class="text-gray-400 text-sm" data-lang="fr">On met en valeur les personnes et les moments vrais. L'émotion vend mieux que le pitch.</p>
+            <p class="text-gray-400 text-sm" data-lang="en">We highlight real people and genuine moments. Emotion sells better than a pitch.</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-royal-light transition-all">
+            <div class="font-display font-black text-royal-light text-3xl mb-2">03</div>
+            <h4 class="font-bold text-lg mb-2" data-lang="fr">Consistance & volume</h4>
+            <h4 class="font-bold text-lg mb-2" data-lang="en">Consistency & volume</h4>
+            <p class="text-gray-400 text-sm" data-lang="fr">Les algorithmes récompensent la régularité. On livre à la semaine, chaque semaine.</p>
+            <p class="text-gray-400 text-sm" data-lang="en">Algorithms reward consistency. We deliver weekly, every week.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       RÉSULTATS / PORTFOLIO
+  ═══════════════════════════════════════════ -->
+  <section id="resultats" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16 reveal">
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="fr">Ce qu'on a accompli</span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-royal" data-lang="en">What we've accomplished</span>
+        <h2 class="font-display font-black text-ink mt-3 leading-none" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+          <span data-lang="fr">RÉSULTATS<br>& PORTFOLIO</span>
+          <span data-lang="en">RESULTS<br>& PORTFOLIO</span>
+        </h2>
+      </div>
+
+      <!-- Portfolio placeholder cards -->
+      <div class="grid md:grid-cols-3 gap-6 reveal">
+        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #0A0F2E, #1A3FCC);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6">
+            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">⚡ Spark Energy</div>
+            <div class="text-white">
+              <div class="font-display font-black text-2xl leading-tight mb-2">23h la veille<br>du match</div>
+              <div class="text-white/60 text-sm" data-lang="fr">Storytelling athlète · Lewis vs Primeau</div>
+              <div class="text-white/60 text-sm" data-lang="en">Athlete storytelling · Lewis vs Primeau</div>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-royal-light"></div>
+                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
+                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #1A0808, #CC3300);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6">
+            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">🌶️ Fit Cook</div>
+            <div class="text-white">
+              <div class="font-display font-black text-2xl leading-tight mb-2">Lancement<br>Sauce Sriracha</div>
+              <div class="text-white/60 text-sm" data-lang="fr">Lifestyle produit · Tournage Montréal</div>
+              <div class="text-white/60 text-sm" data-lang="en">Product lifestyle · Montreal shoot</div>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-orange-400"></div>
+                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
+                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card rounded-2xl overflow-hidden" style="background: linear-gradient(160deg, #0A1020, #1A3FCC);">
+          <div class="aspect-[9/16] flex flex-col justify-between p-6">
+            <div class="text-white/60 text-xs font-semibold uppercase tracking-wider">🦸 Marc Ouellette</div>
+            <div class="text-white">
+              <div class="font-display font-black text-2xl leading-tight mb-2">Champion<br>DMCC 2025</div>
+              <div class="text-white/60 text-sm" data-lang="fr">Personal brand · Événement drift</div>
+              <div class="text-white/60 text-sm" data-lang="en">Personal brand · Drift event</div>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-royal-light"></div>
+                <span class="text-xs text-white/50" data-lang="fr">Résultats disponibles sur demande</span>
+                <span class="text-xs text-white/50" data-lang="en">Results available on request</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-gray-mid text-sm mt-8 reveal" data-lang="fr">
+        Du contenu réel est disponible sur demande — contactez-nous pour accéder à notre portfolio complet.
+      </p>
+      <p class="text-center text-gray-mid text-sm mt-8 reveal" data-lang="en">
+        Real content available on request — contact us to access our full portfolio.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CTA / CONTACT
+  ═══════════════════════════════════════════ -->
+  <section id="contact" class="py-24 relative overflow-hidden noise" style="background: linear-gradient(135deg, #0A0F2E 0%, #1A3FCC 100%);">
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 64px 64px;"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
+      <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="fr">Prêt à démarrer ?</span>
+      <span class="text-xs font-semibold uppercase tracking-widest text-royal-light" data-lang="en">Ready to start?</span>
+      <h2 class="font-display font-black text-white leading-none mt-4 mb-8" style="font-size: clamp(3rem, 8vw, 6.5rem);">
+        <span data-lang="fr">PARLONS<br>DE VOTRE<br>PROJET</span>
+        <span data-lang="en">LET'S TALK<br>ABOUT YOUR<br>PROJECT</span>
+      </h2>
+      <p class="text-gray-300 text-lg mb-12 max-w-xl mx-auto" data-lang="fr">
+        Que vous soyez une marque établie ou en pleine croissance, on trouve la formule qui vous correspond.
+      </p>
+      <p class="text-gray-300 text-lg mb-12 max-w-xl mx-auto" data-lang="en">
+        Whether you're an established brand or scaling fast, we find the formula that works for you.
+      </p>
+
+      <form class="max-w-xl mx-auto" onsubmit="handleSubmit(event)">
+        <div class="grid gap-4 mb-6">
+          <input type="text" placeholder="Nom / Name" required
+            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors" />
+          <input type="email" placeholder="Courriel / Email" required
+            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors" />
+          <textarea rows="4" placeholder="Votre projet... / Your project..."
+            class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 text-white placeholder-white/40 focus:outline-none focus:border-royal-light transition-colors resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full bg-white text-royal font-bold py-5 rounded-xl text-base">
+          <span data-lang="fr">Envoyer le message →</span>
+          <span data-lang="en">Send message →</span>
+        </button>
+        <p id="form-success" class="hidden text-green-300 text-sm mt-4 font-medium" data-lang="fr">✓ Message envoyé ! On vous répond sous 24h.</p>
+        <p id="form-success-en" class="hidden text-green-300 text-sm mt-4 font-medium" data-lang="en">✓ Message sent! We'll reply within 24h.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="bg-ink-soft text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <div class="font-display font-black text-2xl tracking-tight mb-1">ALTA<span class="text-royal-light">MEDIA</span></div>
+        <p class="text-gray-500 text-sm" data-lang="fr">Agence de contenu short-form · Montréal, QC</p>
+        <p class="text-gray-500 text-sm" data-lang="en">Short-form content agency · Montréal, QC</p>
+      </div>
+      <div class="text-gray-600 text-xs">
+        © 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       JS
+  ═══════════════════════════════════════════ -->
+  <script>
+    // Lang toggle
+    const langBtn = document.getElementById('langToggle');
+    langBtn.addEventListener('click', () => {
+      document.body.classList.toggle('en');
+      document.documentElement.lang = document.body.classList.contains('en') ? 'en' : 'fr';
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('form-success').classList.remove('hidden');
+      document.getElementById('form-success-en').classList.remove('hidden');
+      e.target.reset();
+    }
+
+    // Navbar scroll shadow
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('shadow-lg', window.scrollY > 20);
+    });
+  </script>
+</body>
+</html>
