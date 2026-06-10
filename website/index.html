@@ -143,6 +143,61 @@
     #marquee-track { will-change: transform; }
 
 
+    /* ─── Nav dropdown ─── */
+    .nav-dropdown-wrap { }
+    .nav-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 14px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+      min-width: 230px;
+      padding: 8px;
+      z-index: 100;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 50%;
+      transform: translateX(-50%);
+      width: 12px; height: 12px;
+      background: #fff;
+      border-left: 1px solid #E5E7EB;
+      border-top: 1px solid #E5E7EB;
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .nav-dropdown-wrap:hover .nav-dropdown { display: block; }
+    .nav-dropdown-item {
+      display: block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+      text-decoration: none;
+      transition: background 150ms ease, color 150ms ease;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover { background: #EEF2FF; color: #1A3FCC; }
+
+    /* ─── Service tabs ─── */
+    .tab-btn {
+      background: #E5E7EB;
+      color: #374151;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    .tab-btn:hover { background: #D1D5DB; }
+    .tab-btn.active-tab {
+      background: #111111;
+      color: #ffffff;
+    }
+
     /* ─── Cards ─── */
     .video-card {
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
@@ -259,19 +314,37 @@
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid transparent;">
     <div class="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
 
-      <a href="#" class="flex items-center gap-2 group">
-        <span class="font-display font-black text-[1.6rem] tracking-tight leading-none text-ink group-hover:opacity-90 transition-opacity">ALTA<span class="text-royal">MEDIA</span></span>
+      <a href="#" class="flex items-center group" style="text-decoration:none;">
+        <div class="flex flex-col items-center leading-none group-hover:opacity-85 transition-opacity" style="gap:2px;">
+          <span class="font-display font-black text-ink" style="font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
+          <span class="font-display font-black text-royal" style="font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
+        </div>
       </a>
 
       <div class="hidden md:flex items-center gap-8 text-[13px] font-medium">
-        <a href="#services" class="nav-link" data-lang="fr">Services</a>
-        <a href="#services" class="nav-link" data-lang="en">Services</a>
-        <a href="#clients"  class="nav-link" data-lang="fr">Clients</a>
-        <a href="#clients"  class="nav-link" data-lang="en">Clients</a>
-        <a href="#approche" class="nav-link" data-lang="fr">Approche</a>
-        <a href="#approche" class="nav-link" data-lang="en">Approach</a>
-        <a href="#resultats" class="nav-link" data-lang="fr">Résultats</a>
-        <a href="#resultats" class="nav-link" data-lang="en">Results</a>
+        <!-- Dropdown Services -->
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-services">Services
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="pro.html"        class="nav-dropdown-item" data-i18n="nav-pro">Professionnel &amp; Expert</a>
+            <a href="marques.html"    class="nav-dropdown-item" data-i18n="nav-marques">Marques &amp; Entrepreneurs</a>
+            <a href="createurs.html"  class="nav-dropdown-item" data-i18n="nav-createurs">Créateurs &amp; Personnalités</a>
+          </div>
+        </div>
+        <!-- Dropdown Clients -->
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-clients">Clients
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="#clients"        class="nav-dropdown-item" data-i18n="nav-partenaires">Nos partenaires de confiance</a>
+            <a href="temoignages.html" class="nav-dropdown-item" data-i18n="nav-temoignages">Témoignages</a>
+          </div>
+        </div>
+        <a href="#approche"  class="nav-link" data-i18n="nav-approche">Approche</a>
+        <a href="#resultats" class="nav-link" data-i18n="nav-resultats">Résultats</a>
       </div>
 
       <div class="flex items-center gap-3">
@@ -303,6 +376,30 @@
     <!-- Ambient glows -->
     <div class="absolute top-1/3 right-1/3 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] pointer-events-none" style="background: #1A3FCC;"></div>
     <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-8 blur-[100px] pointer-events-none" style="background: #2F57E8;"></div>
+
+    <!-- Icônes réseaux sociaux -->
+    <div class="absolute top-[88px] right-6 flex flex-row gap-3 z-20">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/altamedia.ca/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="white" stroke="none"/>
+        </svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" aria-label="TikTok" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/people/ALTA-MEDIA/61587805296637/" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-[1fr_420px] gap-20 items-center w-full">
 
@@ -360,20 +457,38 @@
   <div style="background: #1A3FCC; height: 170px; overflow: hidden; display: flex; align-items: center;">
     <div id="marquee-track" style="display: flex; align-items: center;">
       <!-- Set 1 -->
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;margin:0 40px;">✦</span>
       <!-- Set 2 identique -->
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
-      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;">✦</span>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;margin:0 40px;">✦</span>
     </div>
   </div>
 
+
+  <!-- ── Bouton Témoignages ── -->
+  <div class="py-10 text-center" style="background:#F7F8FF;">
+    <a href="temoignages.html" class="btn-primary inline-flex items-center gap-2 bg-royal text-white font-semibold px-8 py-4 rounded-full text-base">
+      <span data-lang="fr">Témoignages →</span>
+      <span data-lang="en">Testimonials →</span>
+    </a>
+  </div>
 
   <!-- ══════════════════════════════════════
        SERVICES
@@ -392,86 +507,125 @@
         </h2>
       </div>
 
-      <!-- Hero service card -->
-      <div class="reveal mb-5 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
-        <div class="p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-10 items-center">
-          <div>
-            <span class="tag-chip text-royal-light border border-royal/30 mb-5 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="fr">Service principal</span>
-            <span class="tag-chip text-royal-light border border-royal/30 mb-5 inline-flex" style="background: rgba(26,63,204,0.2);" data-lang="en">Core service</span>
-            <h3 class="font-display font-black text-white leading-[0.9] mb-5" style="font-size: clamp(2.8rem,6vw,5rem); letter-spacing:-0.01em;" data-lang="fr">CONTENU<br>SHORT-FORM<br><span style="color:#5B82FF;">ORGANIQUE</span></h3>
-            <h3 class="font-display font-black text-white leading-[0.9] mb-5" style="font-size: clamp(2.8rem,6vw,5rem); letter-spacing:-0.01em;" data-lang="en">ORGANIC<br>SHORT-FORM<br><span style="color:#5B82FF;">CONTENT</span></h3>
-            <p class="text-white/60 text-base leading-[1.7] max-w-md font-light" data-lang="fr">Stratégie, tournage, montage et publication de vidéos short-form pour Instagram, TikTok, YouTube. On gère tout — vous, vous vivez votre business.</p>
-            <p class="text-white/60 text-base leading-[1.7] max-w-md font-light" data-lang="en">Strategy, shooting, editing and publishing short-form videos for Instagram, TikTok, YouTube. We handle everything — you focus on your business.</p>
-          </div>
-          <div class="flex flex-col gap-3 min-w-[220px]">
-            <div class="flex items-center gap-3 text-white/75 text-sm">
-              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
-                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span data-lang="fr">Stratégie de contenu</span><span data-lang="en">Content strategy</span>
-            </div>
-            <div class="flex items-center gap-3 text-white/75 text-sm">
-              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
-                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span data-lang="fr">Tournage & production</span><span data-lang="en">Shooting & production</span>
-            </div>
-            <div class="flex items-center gap-3 text-white/75 text-sm">
-              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
-                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span data-lang="fr">Montage & édition</span><span data-lang="en">Editing & post</span>
-            </div>
-            <div class="flex items-center gap-3 text-white/75 text-sm">
-              <div class="w-5 h-5 rounded-full bg-royal-light flex-shrink-0 flex items-center justify-center">
-                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <span data-lang="fr">Publication & gestion</span><span data-lang="en">Publishing & management</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- ── Onglets catégories ── -->
+      <div class="reveal">
 
-      <!-- Secondary services grid -->
-      <div class="grid md:grid-cols-3 gap-4 reveal">
-
-        <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">PUBLICITÉS PAYANTES</h4>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">PAID ADS</h4>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Gestion de campagnes Meta Ads et publicités vidéo pour amplifier votre reach organique.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Meta Ads campaigns and video ads to amplify your organic reach.</p>
-          <div class="mt-5 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
-          </div>
+        <!-- Boutons -->
+        <div class="flex gap-3 mb-10 flex-wrap">
+          <button id="tab-btn-pro"        onclick="switchTab('pro')"        class="tab-btn active-tab font-display font-black text-lg px-8 py-3 rounded-full transition-all duration-200">
+            <span data-lang="fr">Professionnel & Expert</span><span data-lang="en">Professional & Expert</span>
+          </button>
+          <button id="tab-btn-marques"    onclick="switchTab('marques')"    class="tab-btn font-display font-black text-lg px-8 py-3 rounded-full transition-all duration-200">
+            <span data-lang="fr">Marques & Entrepreneurs</span><span data-lang="en">Brands & Entrepreneurs</span>
+          </button>
+          <button id="tab-btn-createurs"  onclick="switchTab('createurs')"  class="tab-btn font-display font-black text-lg px-8 py-3 rounded-full transition-all duration-200">
+            <span data-lang="fr">Créateurs & Personnalités</span><span data-lang="en">Creators & Personalities</span>
+          </button>
         </div>
 
-        <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND FILMS</h4>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Productions long-form pour présenter votre équipe, vos valeurs et votre histoire.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Long-form productions to showcase your team, values, and story.</p>
-          <div class="mt-5 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
+        <!-- ── Panneau : Professionnel & Expert ── -->
+        <div id="tab-pro" class="tab-panel grid md:grid-cols-3 gap-5">
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#1A3FCC" stroke-width="1.8"/><path d="M10 9.5l4 2.5-4 2.5V9.5z" fill="#1A3FCC"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS SHORT-FORM</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">SHORT-FORM VIDEOS</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Création de vidéos courtes pour Instagram Reels, TikTok et YouTube Shorts. Format adapté à chaque plateforme.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Short video creation for Instagram Reels, TikTok and YouTube Shorts. Format tailored to each platform.</p>
           </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">PERSONAL BRANDING</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">PERSONAL BRANDING</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Contenu centré sur le fondateur ou l'entrepreneur pour bâtir une audience personnelle authentique.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Founder-focused content to build an authentic personal audience.</p>
+          </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CONTENU DE MARQUE</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND CONTENT</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Vidéos qui reflètent l'identité visuelle et les valeurs de ta marque. Consistance et authenticité.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Videos that reflect your brand's visual identity and values. Consistency and authenticity.</p>
+          </div>
+
         </div>
 
-        <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">DESIGN & PHOTO</h4>
-          <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">DESIGN & PHOTO</h4>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Design graphique, photographie professionnelle et identité visuelle complète.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Graphic design, professional photography and complete visual identity.</p>
-          <div class="mt-5 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-royal/40"></span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="fr">Bientôt disponible</span>
-            <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-royal" data-lang="en">Coming soon</span>
+        <!-- ── Panneau : Marques & Entrepreneurs ── -->
+        <div id="tab-marques" class="tab-panel grid md:grid-cols-3 gap-5" style="display:none;">
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">TOURNAGE</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">SHOOTING</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Sessions de tournage en studio ou sur place. Équipe professionnelle, éclairage et son inclus.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Studio or on-location shooting sessions. Professional crew, lighting and sound included.</p>
           </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#1A3FCC" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">MONTAGE & POST</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">EDITING & POST</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Montage vidéo professionnel, étalonnage colorimétrique, sous-titres et effets visuels.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Professional video editing, color grading, subtitles and visual effects.</p>
+          </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND FILMS</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Productions longue durée pour présenter ton équipe, tes valeurs et ton histoire de marque.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Long-form productions to showcase your team, values and brand story.</p>
+          </div>
+
+        </div>
+
+        <!-- ── Panneau : Créateurs & Personnalités ── -->
+        <div id="tab-createurs" class="tab-panel grid md:grid-cols-3 gap-5" style="display:none;">
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-6 4 4" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">AUDIT DE CONTENU</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">CONTENT AUDIT</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Analyse complète de ta présence en ligne et de tes performances actuelles sur les réseaux sociaux.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Full analysis of your online presence and current social media performance.</p>
+          </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">STRATÉGIE DE MARQUE</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND STRATEGY</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Définition du positionnement, du ton de voix et du plan de contenu sur 90 jours pour ta marque.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Define your positioning, tone of voice and 90-day content plan for your brand.</p>
+          </div>
+
+          <div class="service-card bg-white rounded-2xl p-8">
+            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#1A3FCC" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </div>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CONSULTATION</h4>
+            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">CONSULTING</h4>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Sessions one-on-one pour optimiser ta stratégie, comprendre les algorithmes et accélérer ta croissance.</p>
+            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">One-on-one sessions to optimize your strategy, understand algorithms and accelerate your growth.</p>
+          </div>
+
         </div>
 
       </div>
@@ -957,13 +1111,53 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
         <div>
-          <div class="font-display font-black text-2xl tracking-tight leading-none mb-2">ALTA<span class="text-royal-light">MEDIA</span></div>
+          <div class="flex flex-col items-center leading-none mb-2" style="gap:2px;">
+            <span class="font-display font-black" style="color:#ffffff;font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
+            <span class="font-display font-black" style="color:#ffffff;font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
+          </div>
           <p class="text-gray-600 text-sm" data-lang="fr">Agence de contenu short-form · Montréal, QC</p>
           <p class="text-gray-600 text-sm" data-lang="en">Short-form content agency · Montréal, QC</p>
         </div>
-        <div class="flex flex-col md:items-end gap-2">
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-i18n="cta-project"></button>
-          <p class="text-gray-700 text-xs mt-1">© 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span></p>
+        <!-- Nous joindre -->
+        <div class="flex flex-col md:items-end gap-4">
+          <p class="text-white font-display font-black text-xl tracking-tight" data-lang="fr">Nous joindre !</p>
+          <p class="text-white font-display font-black text-xl tracking-tight" data-lang="en">Get in touch!</p>
+          <!-- Réseaux sociaux -->
+          <div class="flex items-center gap-3">
+            <a href="https://www.instagram.com/altamedia.ca/" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/20" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="white" stroke="none"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="TikTok" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/20" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.3 6.3 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/people/ALTA-MEDIA/61587805296637/" target="_blank" rel="noopener" aria-label="Facebook" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/20" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+          <!-- Courriel -->
+          <a href="mailto:info@alta-media.ca" class="flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors duration-200">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+            info@alta-media.ca
+          </a>
+          <!-- Téléphone -->
+          <a href="tel:+14388847970" class="flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors duration-200">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/>
+            </svg>
+            +1 (438) 884-7970
+          </a>
+          <p class="text-gray-600 text-xs">© 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span></p>
         </div>
       </div>
     </div>
@@ -981,7 +1175,7 @@
       // Wait one more frame so images are laid out and scrollWidth is accurate
       requestAnimationFrame(() => {
         const setWidth = track.scrollWidth / 2; // Set 1 == Set 2, so exactly half
-        const pixelsPerFrame = 3.84; // ~10s to traverse one set at 60fps
+        const pixelsPerFrame = 2.88; // 0.75x speed (~13s to traverse one set at 60fps)
         let pos = 0;
 
         function step() {
@@ -995,13 +1189,30 @@
       });
     });
 
+    // ── Service tabs ────────────────────────
+    function switchTab(cat) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+      document.getElementById('tab-' + cat).style.display = 'grid';
+      document.getElementById('tab-btn-' + cat).classList.add('active-tab');
+    }
+
     // ── Lang toggle ──────────────────────────
     const i18n = {
-      'cta-main':     { fr: 'Parlons-en →',           en: "Let's talk →" },
-      'cta-results':  { fr: 'Voir nos résultats',     en: 'See our results' },
-      'cta-approche': { fr: 'Démarrer maintenant →',  en: 'Start now →' },
-      'cta-project':  { fr: 'Démarrer un projet →',   en: 'Start a project →' },
-      'chip-hero':    { fr: 'Partenaire de croissance', en: 'Growth Partner' },
+      'cta-main':      { fr: 'Parlons-en →',              en: "Let's talk →" },
+      'cta-results':   { fr: 'Voir nos résultats',        en: 'See our results' },
+      'cta-approche':  { fr: 'Démarrer maintenant →',     en: 'Start now →' },
+      'cta-project':   { fr: 'Démarrer un projet →',      en: 'Start a project →' },
+      'chip-hero':     { fr: 'Partenaire de croissance',  en: 'Growth Partner' },
+      'nav-services':  { fr: 'Services',                  en: 'Services' },
+      'nav-pro':       { fr: 'Professionnel & Expert',    en: 'Professional & Expert' },
+      'nav-marques':   { fr: 'Marques & Entrepreneurs',   en: 'Brands & Entrepreneurs' },
+      'nav-createurs': { fr: 'Créateurs & Personnalités', en: 'Creators & Personalities' },
+      'nav-clients':      { fr: 'Clients',                        en: 'Clients' },
+      'nav-partenaires':  { fr: 'Nos partenaires de confiance',  en: 'Our Trusted Partners' },
+      'nav-temoignages':  { fr: 'Témoignages',                   en: 'Testimonials' },
+      'nav-approche':  { fr: 'Approche',                  en: 'Approach' },
+      'nav-resultats': { fr: 'Résultats',                 en: 'Results' },
     };
 
     function setLang(lang) {

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créateurs & Personnalités — AltaMedia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { royal: '#1A3FCC', ink: '#111111', 'gray-mid': '#6B7280' }, fontFamily: { display: ['Barlow Condensed','sans-serif'], body: ['Inter','sans-serif'] } } }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="fr"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+    .service-card { border: 1.5px solid #E5E7EB; border-radius: 20px; padding: 36px; background: #fff; transition: border-color 200ms, transform 250ms, box-shadow 250ms; }
+    .service-card:hover { border-color: #1A3FCC; transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,63,204,0.10); }
+  </style>
+</head>
+<body style="background:#F7F8FF;">
+
+  <!-- Navbar -->
+  <nav style="background:#fff; border-bottom:1px solid #E5E7EB;" class="sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-ink hover:opacity-70 transition-opacity">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="#1A3FCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="font-body font-semibold text-sm" data-lang="fr">Retour</span>
+        <span class="font-body font-semibold text-sm" data-lang="en">Back</span>
+      </a>
+      <a href="index.html" style="text-decoration:none;">
+        <div class="flex flex-col items-center leading-none" style="gap:2px;">
+          <span class="font-display font-black text-ink" style="font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
+          <span class="font-display font-black" style="color:#1A3FCC;font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-2">
+        <button onclick="setLang('fr')" id="btn-fr" class="text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all">FR</button>
+        <button onclick="setLang('en')" id="btn-en" class="text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="py-20 text-center px-6">
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="fr">Nos services</p>
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="en">Our services</p>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:-0.01em;" data-lang="fr">CRÉATEURS<br>&amp; PERSONNALITÉS</h1>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:-0.01em;" data-lang="en">CREATORS<br>&amp; PERSONALITIES</h1>
+    <p class="text-white/60 text-base mt-5 max-w-lg mx-auto font-light" data-lang="fr">Du contenu qui capture ton énergie, ton authenticité et ta personnalité unique pour faire grandir ta communauté.</p>
+    <p class="text-white/60 text-base mt-5 max-w-lg mx-auto font-light" data-lang="en">Content that captures your energy, authenticity and unique personality to grow your community.</p>
+  </div>
+
+  <!-- Contenu -->
+  <main class="max-w-5xl mx-auto px-6 py-20">
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="service-card">
+        <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CONTENU AUTHENTIQUE</h3>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">AUTHENTIC CONTENT</h3>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Des vidéos qui te ressemblent vraiment — sans script fake, sans filtre. Juste toi, amplifié.</p>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Videos that truly look like you — no fake scripts, no filters. Just you, amplified.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#1A3FCC" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CROISSANCE COMMUNAUTÉ</h3>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">COMMUNITY GROWTH</h3>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Stratégie de contenu pensée pour créer de l'engagement et fidéliser une communauté autour de ta personnalité.</p>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Content strategy designed to create engagement and build a loyal community around your personality.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#1A3FCC" stroke-width="1.8"/><path d="M10 9.5l4 2.5-4 2.5V9.5z" fill="#1A3FCC"/></svg>
+        </div>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">MULTI-PLATEFORMES</h3>
+        <h3 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">MULTI-PLATFORM</h3>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Production et adaptation de contenu pour Instagram, TikTok et YouTube — optimisé pour chaque algorithme.</p>
+        <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Content production and adaptation for Instagram, TikTok and YouTube — optimized for each algorithm.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-20">
+      <a href="index.html#contact" class="inline-flex items-center gap-2 font-body font-semibold text-sm text-white px-8 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5" style="background:#1A3FCC;box-shadow:0 8px 24px rgba(26,63,204,0.3);">
+        <span data-lang="fr">Parlons-en →</span>
+        <span data-lang="en">Let's talk →</span>
+      </a>
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid #E5E7EB;" class="py-8 text-center bg-white">
+    <p class="text-gray-400 text-xs">© 2025 AltaMedia.</p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.body.classList.toggle('en', lang === 'en');
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').className = lang === 'fr' ? 'text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all' : 'text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all';
+      document.getElementById('btn-en').className = lang === 'en' ? 'text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all' : 'text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all';
+    }
+    setLang('fr');
+  </script>
+</body>
+</html>

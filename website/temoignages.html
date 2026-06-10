@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Témoignages — AltaMedia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: '#1A3FCC',
+            'royal-dark': '#1230A8',
+            'royal-light': '#2F57E8',
+            ink: '#111111',
+            'gray-mid': '#6B7280',
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
+
+    /* Lang toggle */
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="fr"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+
+    .star { color: #1A3FCC; }
+
+    .temoignage-card {
+      background: #fff;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 24px;
+      padding: 40px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .temoignage-card:hover {
+      box-shadow: 0 16px 48px rgba(26,63,204,0.1);
+      transform: translateY(-4px);
+    }
+
+    .quote-mark {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 80px;
+      font-weight: 900;
+      color: #EEF2FF;
+      line-height: 0.7;
+      user-select: none;
+    }
+  </style>
+</head>
+<body style="background: #F7F8FF;">
+
+  <!-- ── Navbar ── -->
+  <nav style="background:#fff; border-bottom: 1px solid #E5E7EB;" class="sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-ink hover:opacity-70 transition-opacity">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path d="M19 12H5M12 5l-7 7 7 7" stroke="#1A3FCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-body font-semibold text-sm" data-lang="fr">Retour au site</span>
+        <span class="font-body font-semibold text-sm" data-lang="en">Back to site</span>
+      </a>
+      <div class="flex flex-col items-center leading-none" style="gap:2px;">
+        <span class="font-display font-black text-ink" style="font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
+        <span class="font-display font-black" style="color:#1A3FCC;font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="setLang('fr')" id="btn-fr" class="text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-150 bg-ink text-white">FR</button>
+        <button onclick="setLang('en')" id="btn-en" class="text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-150 text-gray-400 hover:text-ink">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <div style="background: linear-gradient(135deg, #080D28 0%, #1A3FCC 100%);" class="py-20 text-center px-6">
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="fr">Ce qu'ils disent</p>
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="en">What they say</p>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -0.01em;" data-lang="fr">TÉMOIGNAGES</h1>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -0.01em;" data-lang="en">TESTIMONIALS</h1>
+    <p class="text-white/60 text-base mt-5 max-w-md mx-auto font-light" data-lang="fr">Des vraies personnes. De vrais résultats. Voici ce que nos clients disent d'Alta Media.</p>
+    <p class="text-white/60 text-base mt-5 max-w-md mx-auto font-light" data-lang="en">Real people. Real results. Here's what our clients say about Alta Media.</p>
+  </div>
+
+  <!-- ── Témoignages ── -->
+  <main class="max-w-5xl mx-auto px-6 py-20">
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Leila Beaudoin -->
+      <div class="temoignage-card">
+        <div class="quote-mark mb-2">"</div>
+        <p class="text-ink text-[15px] leading-[1.8] mb-6 font-body" data-lang="fr">
+          Travailler avec Alta Media a complètement transformé ma présence en ligne. Leur équipe comprend vraiment mon univers et mon authenticité — chaque vidéo me ressemble à 100 %. En quelques mois, j'ai vu une croissance réelle sur mes plateformes.
+        </p>
+        <p class="text-ink text-[15px] leading-[1.8] mb-6 font-body" data-lang="en">
+          Working with Alta Media completely transformed my online presence. Their team truly understands my world and my authenticity — every video is 100% me. Within a few months, I saw real growth across my platforms.
+        </p>
+        <div class="flex items-center gap-1 mb-5">
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+        </div>
+        <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center font-display font-black text-white text-lg" style="background: linear-gradient(135deg, #1A3FCC, #2F57E8);">L</div>
+          <div>
+            <p class="font-body font-bold text-ink text-sm">Leila Beaudoin</p>
+            <p class="font-body text-gray-mid text-xs" data-lang="fr">Créatrice de contenu & personnalité</p>
+            <p class="font-body text-gray-mid text-xs" data-lang="en">Content creator & personality</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prinzy Groulx -->
+      <div class="temoignage-card">
+        <div class="quote-mark mb-2">"</div>
+        <p class="text-ink text-[15px] leading-[1.8] mb-6 font-body" data-lang="fr">
+          Alta Media, c'est plus qu'une agence — c'est un vrai partenaire de croissance. Ils ont su capturer mon énergie et la traduire en contenu qui performe. Le niveau de qualité et de créativité est exceptionnel, et l'équipe est toujours disponible et à l'écoute.
+        </p>
+        <p class="text-ink text-[15px] leading-[1.8] mb-6 font-body" data-lang="en">
+          Alta Media is more than an agency — they're a true growth partner. They captured my energy and translated it into content that performs. The level of quality and creativity is exceptional, and the team is always available and attentive.
+        </p>
+        <div class="flex items-center gap-1 mb-5">
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+          <span class="star text-lg">★</span>
+        </div>
+        <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center font-display font-black text-white text-lg" style="background: linear-gradient(135deg, #1A3FCC, #2F57E8);">P</div>
+          <div>
+            <p class="font-body font-bold text-ink text-sm">Prinzy Groulx</p>
+            <p class="font-body text-gray-mid text-xs" data-lang="fr">Créateur de contenu & personnalité</p>
+            <p class="font-body text-gray-mid text-xs" data-lang="en">Content creator & personality</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-20">
+      <p class="text-gray-mid text-sm mb-5" data-lang="fr">Tu veux toi aussi des résultats comme ça ?</p>
+      <p class="text-gray-mid text-sm mb-5" data-lang="en">Want results like these too?</p>
+      <a href="index.html#contact" class="inline-flex items-center gap-2 font-body font-semibold text-sm text-white px-8 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5" style="background:#1A3FCC; box-shadow: 0 8px 24px rgba(26,63,204,0.3);">
+        <span data-lang="fr">Parlons-en →</span>
+        <span data-lang="en">Let's talk →</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer style="border-top: 1px solid #E5E7EB;" class="py-8 text-center bg-white">
+    <p class="text-gray-400 text-xs">© 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span></p>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      if (lang === 'en') {
+        document.body.classList.add('en');
+        document.documentElement.lang = 'en';
+        document.getElementById('btn-en').classList.add('bg-ink','text-white');
+        document.getElementById('btn-en').classList.remove('text-gray-400');
+        document.getElementById('btn-fr').classList.remove('bg-ink','text-white');
+        document.getElementById('btn-fr').classList.add('text-gray-400');
+      } else {
+        document.body.classList.remove('en');
+        document.documentElement.lang = 'fr';
+        document.getElementById('btn-fr').classList.add('bg-ink','text-white');
+        document.getElementById('btn-fr').classList.remove('text-gray-400');
+        document.getElementById('btn-en').classList.remove('bg-ink','text-white');
+        document.getElementById('btn-en').classList.add('text-gray-400');
+      }
+    }
+    setLang('fr');
+  </script>
+
+</body>
+</html>
