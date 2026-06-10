@@ -140,7 +140,8 @@
     }
 
     /* ─── Marquee ─── */
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    #marquee-track { will-change: transform; }
+
 
     /* ─── Cards ─── */
     .video-card {
@@ -309,13 +310,9 @@
       <div>
         <!-- Badge -->
         <div class="animate-fade-up">
-          <span class="tag-chip text-royal-light border border-royal/30" style="background: rgba(26,63,204,0.15);" data-lang="fr">
+          <span class="tag-chip text-royal-light border border-royal/30" style="background: rgba(26,63,204,0.15);">
             <span style="width:6px;height:6px;border-radius:50%;background:#2F57E8;display:inline-block;"></span>
-            Agence de contenu short-form
-          </span>
-          <span class="tag-chip text-royal-light border border-royal/30" style="background: rgba(26,63,204,0.15);" data-lang="en">
-            <span style="width:6px;height:6px;border-radius:50%;background:#2F57E8;display:inline-block;"></span>
-            Short-form content agency
+            <span data-i18n="chip-hero">Partenaire de croissance</span>
           </span>
         </div>
 
@@ -357,27 +354,23 @@
        MARQUEE
   ═══════════════════════════════════════ -->
   <div style="background: #1A3FCC;" class="pt-6 pb-2 text-center">
-    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
-    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
+    <p class="text-white/70 text-[15px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
+    <p class="text-white/70 text-[15px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
   </div>
-  <div style="background: #1A3FCC; height: 120px; overflow: hidden; display: flex; align-items: center;">
-    <div style="display: flex; width: max-content; animation: marquee 11s linear infinite;">
+  <div style="background: #1A3FCC; height: 170px; overflow: hidden; display: flex; align-items: center;">
+    <div id="marquee-track" style="display: flex; align-items: center;">
       <!-- Set 1 -->
-      <div style="display: flex; align-items: center; gap: 64px; padding-right: 64px;">
-        <img src="logos/spark.png"      alt="Spark"                   style="height: 200px; width: auto;">
-        <img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/novapharma.png" alt="Nova Pharma"             style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/shopsante.png"  alt="Shop Santé"              style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-      </div>
-      <!-- Set 2 (identique pour loop continu) -->
-      <div style="display: flex; align-items: center; gap: 64px; padding-right: 64px;">
-        <img src="logos/spark.png"      alt="Spark"                   style="height: 200px; width: auto;">
-        <img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/novapharma.png" alt="Nova Pharma"             style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/shopsante.png"  alt="Shop Santé"              style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-        <img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="height: 200px; width: auto; filter: brightness(0) invert(1);">
-      </div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <!-- Set 2 identique -->
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/novapharma.png" alt="Nova Pharma"             style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/shopsante.png"  alt="Shop Santé"              style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
+      <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 80px;"><img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="max-width:100%;max-height:100%;object-fit:contain;filter:brightness(0) invert(1);"></div>
     </div>
   </div>
 
@@ -980,12 +973,35 @@
        JS
   ═══════════════════════════════════════ -->
   <script>
+    // ── Marquee seamless (requestAnimationFrame — zero jump) ─────────────
+    window.addEventListener('load', () => {
+      const track = document.getElementById('marquee-track');
+      if (!track) return;
+
+      // Wait one more frame so images are laid out and scrollWidth is accurate
+      requestAnimationFrame(() => {
+        const setWidth = track.scrollWidth / 2; // Set 1 == Set 2, so exactly half
+        const pixelsPerFrame = 3.84; // ~10s to traverse one set at 60fps
+        let pos = 0;
+
+        function step() {
+          pos += pixelsPerFrame;
+          if (pos >= setWidth) pos -= setWidth; // seamless: same content restarts
+          track.style.transform = `translateX(-${pos}px)`;
+          requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      });
+    });
+
     // ── Lang toggle ──────────────────────────
     const i18n = {
-      'cta-main':     { fr: 'Parlons-en →',        en: "Let's talk →" },
-      'cta-results':  { fr: 'Voir nos résultats',  en: 'See our results' },
-      'cta-approche': { fr: 'Démarrer maintenant →', en: 'Start now →' },
-      'cta-project':  { fr: 'Démarrer un projet →', en: 'Start a project →' },
+      'cta-main':     { fr: 'Parlons-en →',           en: "Let's talk →" },
+      'cta-results':  { fr: 'Voir nos résultats',     en: 'See our results' },
+      'cta-approche': { fr: 'Démarrer maintenant →',  en: 'Start now →' },
+      'cta-project':  { fr: 'Démarrer un projet →',   en: 'Start a project →' },
+      'chip-hero':    { fr: 'Partenaire de croissance', en: 'Growth Partner' },
     };
 
     function setLang(lang) {
