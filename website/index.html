@@ -141,8 +141,6 @@
 
     /* ─── Marquee ─── */
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 22s linear infinite; }
-    .marquee-track:hover { animation-play-state: paused; }
 
     /* ─── Cards ─── */
     .video-card {
@@ -276,16 +274,20 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <button id="langToggle" class="text-[11px] font-bold tracking-widest px-3.5 py-1.5 rounded-full border border-gray-200 hover:border-royal hover:text-royal text-gray-500 transition-all duration-150">
-          <span data-lang="fr">EN</span>
-          <span data-lang="en">FR</span>
-        </button>
-        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-lang="fr">
-          Parlons-en <span class="opacity-70">→</span>
-        </button>
-        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-lang="en">
-          Let's talk <span class="opacity-70">→</span>
-        </button>
+        <a href="#" title="Portail client" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 hover:border-royal hover:text-royal text-gray-400 transition-all duration-150" aria-label="Portail client">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            <circle cx="18" cy="18" r="4" fill="white" stroke="currentColor"/>
+            <path d="M18 16v4M16 18h4" stroke-width="1.8"/>
+          </svg>
+        </a>
+        <div class="flex items-center rounded-full border border-gray-200 overflow-hidden text-[11px] font-bold tracking-widest">
+          <button id="langFR" onclick="setLang('fr')" class="px-3.5 py-1.5 transition-all duration-150">FR</button>
+          <span class="text-gray-200">|</span>
+          <button id="langEN" onclick="setLang('en')" class="px-3.5 py-1.5 transition-all duration-150">EN</button>
+        </div>
+        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-i18n="cta-main"></button>
       </div>
     </div>
   </nav>
@@ -333,62 +335,12 @@
 
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 animate-fade-up d-300">
-          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="fr">Démarrer un projet →</button>
-          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-lang="en">Start a project →</button>
-          <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" data-lang="fr">Voir nos résultats</a>
-          <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" data-lang="en">See our results</a>
+          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" id="cta-primary" data-fr="Parlons-en →" data-en="Let's talk →">Parlons-en →</button>
+          <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" id="cta-secondary" data-fr="Voir nos résultats" data-en="See our results">Voir nos résultats</a>
         </div>
 
-        <!-- Social proof strip -->
-        <div class="flex items-center gap-6 mt-12 animate-fade-up d-400">
-          <div class="flex -space-x-2">
-            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #1A3FCC;">⚡</div>
-            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #2D1A0A;">🌶️</div>
-            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #0A1020;">🦸</div>
-            <div class="w-9 h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-xs" style="background: #0A1A10;">💊</div>
-          </div>
-          <p class="text-white/50 text-sm" data-lang="fr">4 marques nous font confiance · 36 vidéos/mois</p>
-          <p class="text-white/50 text-sm" data-lang="en">4 brands trust us · 36 videos/month</p>
-        </div>
       </div>
 
-      <!-- Right — Video mosaic -->
-      <div class="hidden md:flex flex-col gap-3 animate-fade-up d-300">
-        <!-- Tall card -->
-        <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #0D1540 0%, #1A3FCC 100%); height: 240px;">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div class="absolute top-4 left-4">
-            <span class="tag-chip text-white/80" style="background: rgba(255,255,255,0.12); font-size: 0.65rem;">⚡ Spark Energy</span>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-            <div class="font-display font-black text-xl leading-tight mb-1">23h la veille du match</div>
-            <div class="text-white/55 text-xs">Storytelling athlète · Lewis vs Primeau</div>
-          </div>
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-              <span class="text-white text-lg ml-0.5">▶</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Two small cards -->
-        <div class="grid grid-cols-2 gap-3">
-          <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #1A0808, #8B1A00); height: 160px;">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <div class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-1">🌶️ Fit Cook</div>
-              <div class="font-display font-bold text-sm leading-tight">Lancement Sriracha</div>
-            </div>
-          </div>
-          <div class="video-card rounded-2xl overflow-hidden cursor-pointer relative group" style="background: linear-gradient(160deg, #0A1020, #1A3FCC88); height: 160px;">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-              <div class="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-1">🦸 Marc Ouellette</div>
-              <div class="font-display font-bold text-sm leading-tight">Champion DMCC 2025</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Scroll indicator -->
@@ -404,63 +356,31 @@
   <!-- ══════════════════════════════════════
        MARQUEE
   ═══════════════════════════════════════ -->
-  <div style="background: #1A3FCC;" class="py-4 overflow-hidden">
-    <div class="flex">
-      <div class="marquee-track flex gap-14 items-center whitespace-nowrap">
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">⚡ SPARK ENERGY DRINK</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">💊 NOVA PHARMA</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🌶️ FIT COOK FOODZ</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🦸 MARC OUELLETTE</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">⚡ SPARK ENERGY DRINK</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">💊 NOVA PHARMA</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🌶️ FIT COOK FOODZ</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
-        <span class="font-display font-black text-lg tracking-[0.15em] text-white">🦸 MARC OUELLETTE</span>
-        <span class="text-white/30 text-xl font-thin">✦</span>
+  <div style="background: #1A3FCC;" class="pt-6 pb-2 text-center">
+    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
+    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
+  </div>
+  <div style="background: #1A3FCC; height: 120px; overflow: hidden; display: flex; align-items: center;">
+    <div style="display: flex; width: max-content; animation: marquee 11s linear infinite;">
+      <!-- Set 1 -->
+      <div style="display: flex; align-items: center; gap: 64px; padding-right: 64px;">
+        <img src="logos/spark.png"      alt="Spark"                   style="height: 200px; width: auto;">
+        <img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/novapharma.png" alt="Nova Pharma"             style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/shopsante.png"  alt="Shop Santé"              style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+      </div>
+      <!-- Set 2 (identique pour loop continu) -->
+      <div style="display: flex; align-items: center; gap: 64px; padding-right: 64px;">
+        <img src="logos/spark.png"      alt="Spark"                   style="height: 200px; width: auto;">
+        <img src="logos/fitcook.png"    alt="Fit Cook Foodz"          style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/novapharma.png" alt="Nova Pharma"             style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/shopsante.png"  alt="Shop Santé"              style="height: 200px; width: auto; filter: brightness(0) invert(1);">
+        <img src="logos/redlite.png"    alt="Red Lite Hockey Academy" style="height: 200px; width: auto; filter: brightness(0) invert(1);">
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       STATS
-  ═══════════════════════════════════════ -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
-
-        <div class="stat-card rounded-2xl p-8 text-center bg-white">
-          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">36</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">vidéos / mois</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">videos / month</div>
-        </div>
-
-        <div class="stat-card rounded-2xl p-8 text-center bg-white">
-          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">4</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">comptes actifs</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">active accounts</div>
-        </div>
-
-        <div class="stat-card rounded-2xl p-8 text-center bg-white">
-          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">3</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">tournages / mois</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">shoots / month</div>
-        </div>
-
-        <div class="stat-card rounded-2xl p-8 text-center bg-white">
-          <div class="font-display font-black leading-none text-royal mb-2" style="font-size: clamp(3rem,7vw,5rem);">1+</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="fr">an d'expérience</div>
-          <div class="text-[13px] font-medium text-gray-mid" data-lang="en">year of experience</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ══════════════════════════════════════
        SERVICES
@@ -523,7 +443,7 @@
       <div class="grid md:grid-cols-3 gap-4 reveal">
 
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl bg-royal/8 flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">📢</div>
+          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">PUBLICITÉS PAYANTES</h4>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">PAID ADS</h4>
           <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Gestion de campagnes Meta Ads et publicités vidéo pour amplifier votre reach organique.</p>
@@ -536,7 +456,7 @@
         </div>
 
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">🎬</div>
+          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND FILMS</h4>
           <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Productions long-form pour présenter votre équipe, vos valeurs et votre histoire.</p>
@@ -549,7 +469,7 @@
         </div>
 
         <div class="service-card bg-white rounded-2xl p-8">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5" style="background: #EEF2FF;">🎨</div>
+          <div class="w-12 h-12 rounded-xl mb-5" style="background: #EEF2FF;"></div>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">DESIGN & PHOTO</h4>
           <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">DESIGN & PHOTO</h4>
           <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Design graphique, photographie professionnelle et identité visuelle complète.</p>
@@ -589,7 +509,7 @@
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
               <div class="flex items-start justify-between mb-5">
-                <div class="text-4xl">⚡</div>
+                <div></div>
                 <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">16 vidéos/mois</span>
               </div>
               <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">SPARK<br>ENERGY DRINK</h3>
@@ -610,7 +530,7 @@
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
               <div class="flex items-start justify-between mb-5">
-                <div class="text-4xl">🌶️</div>
+                <div></div>
                 <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">8 vidéos/mois</span>
               </div>
               <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">FIT COOK<br>FOODZ</h3>
@@ -630,7 +550,7 @@
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
               <div class="flex items-start justify-between mb-5">
-                <div class="text-4xl">🦸</div>
+                <div></div>
                 <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">8 vidéos/mois</span>
               </div>
               <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">MARC<br>OUELLETTE</h3>
@@ -650,7 +570,7 @@
           <div class="relative z-10 p-10 h-full flex flex-col justify-between">
             <div>
               <div class="flex items-start justify-between mb-5">
-                <div class="text-4xl">💊</div>
+                <div></div>
                 <span class="tag-chip text-white/50" style="background: rgba(255,255,255,0.08); font-size: 0.65rem;">4 vidéos/mois</span>
               </div>
               <h3 class="font-display font-black text-white leading-[0.9] mb-3" style="font-size: clamp(2rem,4vw,2.8rem);">NOVA<br>PHARMA</h3>
@@ -696,8 +616,7 @@
             Every piece of content we create has one purpose: <strong class="text-white font-semibold">connecting</strong> your audience to your brand in a human and memorable way.
           </p>
 
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-lang="fr">Démarrer maintenant →</button>
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-lang="en">Start now →</button>
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-i18n="cta-approche"></button>
         </div>
 
         <!-- Right — Pillars -->
@@ -762,7 +681,7 @@
         <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #080D28 0%, #1A3FCC 100%);">
           <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
             <div class="flex items-center justify-between">
-              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">⚡ Spark Energy</span>
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">Spark Energy</span>
               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span class="text-white text-xs ml-0.5">▶</span>
               </div>
@@ -783,7 +702,7 @@
         <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #180806 0%, #8B1A00 100%);">
           <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
             <div class="flex items-center justify-between">
-              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">🌶️ Fit Cook</span>
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">Fit Cook</span>
               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span class="text-white text-xs ml-0.5">▶</span>
               </div>
@@ -804,7 +723,7 @@
         <div class="video-card rounded-3xl overflow-hidden group cursor-pointer" style="background: linear-gradient(160deg, #080E20 0%, #162260 100%);">
           <div class="aspect-[9/16] flex flex-col justify-between p-6 relative">
             <div class="flex items-center justify-between">
-              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">🦸 Marc Ouellette</span>
+              <span class="text-white/60 text-[10px] font-semibold uppercase tracking-wider">Marc Ouellette</span>
               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span class="text-white text-xs ml-0.5">▶</span>
               </div>
@@ -862,10 +781,7 @@
         Whether you're an established brand or scaling fast, we find the formula that works for you.
       </p>
 
-      <button onclick="openWizard()" class="btn-primary bg-white text-royal font-bold px-14 py-5 rounded-full text-lg">
-        <span data-lang="fr">Démarrer un projet →</span>
-        <span data-lang="en">Start a project →</span>
-      </button>
+      <button onclick="openWizard()" class="btn-primary bg-white text-royal font-bold px-14 py-5 rounded-full text-lg" data-i18n="cta-project"></button>
 
       <p class="text-white/30 text-sm mt-5" data-lang="fr">Réponse en moins de 24h · Aucun engagement</p>
       <p class="text-white/30 text-sm mt-5" data-lang="en">Response within 24h · No commitment</p>
@@ -898,22 +814,18 @@
           <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">Tell us which category fits you best.</p>
           <div class="grid grid-cols-2 gap-3">
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="marque">
-              <div class="text-2xl mb-2">🏢</div>
               <div class="font-semibold text-sm text-ink" data-lang="fr">Marque / Entreprise</div>
               <div class="font-semibold text-sm text-ink" data-lang="en">Brand / Business</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="personal">
-              <div class="text-2xl mb-2">🙋</div>
               <div class="font-semibold text-sm text-ink" data-lang="fr">Personal brand</div>
               <div class="font-semibold text-sm text-ink" data-lang="en">Personal brand</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="evenement">
-              <div class="text-2xl mb-2">🎤</div>
               <div class="font-semibold text-sm text-ink" data-lang="fr">Événement / Tournage</div>
               <div class="font-semibold text-sm text-ink" data-lang="en">Event / Shoot</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="autre">
-              <div class="text-2xl mb-2">💡</div>
               <div class="font-semibold text-sm text-ink" data-lang="fr">Autre</div>
               <div class="font-semibold text-sm text-ink" data-lang="en">Other</div>
             </button>
@@ -945,7 +857,6 @@
               <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="unknown" data-qualified="maybe">
-              <div class="text-2xl mb-1">🤷</div>
               <div class="text-sm text-gray-mid" data-lang="fr">Je ne sais pas encore</div>
               <div class="text-sm text-gray-mid" data-lang="en">Not sure yet</div>
             </button>
@@ -977,7 +888,6 @@
               <div class="text-sm text-gray-mid" data-lang="en">per month</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="discuss" data-qualified="true">
-              <div class="text-2xl mb-1">💬</div>
               <div class="text-sm text-gray-mid" data-lang="fr">À discuter</div>
               <div class="text-sm text-gray-mid" data-lang="en">Let's discuss</div>
             </button>
@@ -986,7 +896,7 @@
 
         <!-- STEP 4 — Contact form -->
         <div class="wizard-step hidden" data-step="4">
-          <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-600 mb-2">✓ <span data-lang="fr">Vous êtes qualifié !</span><span data-lang="en">You're a great fit!</span></div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-600 mb-2"><span data-lang="fr">Vous êtes qualifié !</span><span data-lang="en">You're a great fit!</span></div>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">LET'S GET IN TOUCH</h3>
           <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On vous contacte dans les 24h pour planifier un appel.</p>
@@ -1010,7 +920,6 @@
         <!-- STEP 5 — Non qualifié -->
         <div class="wizard-step hidden" data-step="5">
           <div class="text-center py-4">
-            <div class="text-5xl mb-5">🙏</div>
             <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="fr">MERCI DE VOTRE INTÉRÊT !</h3>
             <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="en">THANKS FOR YOUR INTEREST!</h3>
             <p class="text-gray-mid text-sm leading-[1.7] mb-4 max-w-sm mx-auto" data-lang="fr">
@@ -1030,7 +939,6 @@
         <!-- STEP 6 — Confirmation -->
         <div class="wizard-step hidden" data-step="6">
           <div class="text-center py-4">
-            <div class="text-5xl mb-5">🚀</div>
             <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="fr">C'EST PARTI !</h3>
             <h3 class="font-display font-black text-ink leading-tight mb-4" style="font-size: clamp(1.6rem,4vw,2rem);" data-lang="en">YOU'RE IN!</h3>
             <p class="text-gray-mid text-sm leading-[1.7] mb-6 max-w-sm mx-auto" data-lang="fr">
@@ -1061,8 +969,7 @@
           <p class="text-gray-600 text-sm" data-lang="en">Short-form content agency · Montréal, QC</p>
         </div>
         <div class="flex flex-col md:items-end gap-2">
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-lang="fr">Démarrer un projet →</button>
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-lang="en">Start a project →</button>
+          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white text-sm font-semibold px-6 py-3 rounded-full" data-i18n="cta-project"></button>
           <p class="text-gray-700 text-xs mt-1">© 2025 AltaMedia. <span data-lang="fr">Tous droits réservés.</span><span data-lang="en">All rights reserved.</span></p>
         </div>
       </div>
@@ -1074,10 +981,38 @@
   ═══════════════════════════════════════ -->
   <script>
     // ── Lang toggle ──────────────────────────
-    document.getElementById('langToggle').addEventListener('click', () => {
-      document.body.classList.toggle('en');
-      document.documentElement.lang = document.body.classList.contains('en') ? 'en' : 'fr';
-    });
+    const i18n = {
+      'cta-main':     { fr: 'Parlons-en →',        en: "Let's talk →" },
+      'cta-results':  { fr: 'Voir nos résultats',  en: 'See our results' },
+      'cta-approche': { fr: 'Démarrer maintenant →', en: 'Start now →' },
+      'cta-project':  { fr: 'Démarrer un projet →', en: 'Start a project →' },
+    };
+
+    function setLang(lang) {
+      if (lang === 'en') {
+        document.body.classList.add('en');
+        document.documentElement.lang = 'en';
+      } else {
+        document.body.classList.remove('en');
+        document.documentElement.lang = 'fr';
+      }
+      // Boutons uniques via data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[key]) el.textContent = i18n[key][lang];
+      });
+      // Boutons hero via data-fr / data-en
+      document.querySelectorAll('[data-fr]').forEach(el => {
+        el.textContent = lang === 'en' ? el.dataset.en : el.dataset.fr;
+      });
+      // Indicateur FR/EN actif
+      document.getElementById('langFR').style.color      = lang === 'fr' ? '#1A3FCC' : '#9CA3AF';
+      document.getElementById('langEN').style.color      = lang === 'en' ? '#1A3FCC' : '#9CA3AF';
+      document.getElementById('langFR').style.background = lang === 'fr' ? '#EEF2FF' : '';
+      document.getElementById('langEN').style.background = lang === 'en' ? '#EEF2FF' : '';
+    }
+    // Init — FR actif par défaut
+    setLang('fr');
 
     // ── Navbar scroll effect ─────────────────
     const navbar = document.getElementById('navbar');
