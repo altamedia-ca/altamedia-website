@@ -571,34 +571,137 @@
         <!-- ── Panneau : Professionnel & Expert ── -->
         <div id="tab-pro" class="tab-panel grid md:grid-cols-3 gap-5">
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke="#1A3FCC" stroke-width="1.8"/><path d="M10 9.5l4 2.5-4 2.5V9.5z" fill="#1A3FCC"/></svg>
+          <!-- Le Professionnel — 1 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 1</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 1</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE PROFESSIONNEL</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE PROFESSIONAL</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS SHORT-FORM</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">SHORT-FORM VIDEOS</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Création de vidéos courtes pour Instagram Reels, TikTok et YouTube Shorts. Format adapté à chaque plateforme.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Short video creation for Instagram Reels, TikTok and YouTube Shorts. Format tailored to each platform.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">1 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">4 vidéos short-form / mois</span><span data-lang="en">4 short-form videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">1 plateforme (Instagram ou TikTok)</span><span data-lang="en">1 platform (Instagram or TikTok)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage inclus (1 session/mois)</span><span data-lang="en">Shooting included (1 session/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Montage & sous-titres</span><span data-lang="en">Editing & subtitles</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport mensuel de performance</span><span data-lang="en">Monthly performance report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <!-- Le Spécialiste — 2 000 $ -->
+          <div class="rounded-2xl p-8 flex flex-col" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);border:none;position:relative;overflow:hidden;">
+            <div class="absolute top-4 right-4">
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="fr">Populaire</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="en">Popular</span>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">PERSONAL BRANDING</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">PERSONAL BRANDING</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Contenu centré sur le fondateur ou l'entrepreneur pour bâtir une audience personnelle authentique.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Founder-focused content to build an authentic personal audience.</p>
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="fr">Niveau 2</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="en">Level 2</span>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE SPÉCIALISTE</h4>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE SPECIALIST</h4>
+            </div>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid rgba(255,255,255,0.15);">
+              <span class="font-display font-black text-white" style="font-size:2.4rem;">2 000$</span>
+              <span class="text-white/60 text-sm" data-lang="fr">/mois</span>
+              <span class="text-white/60 text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">8 vidéos short-form / mois</span><span data-lang="en">8 short-form videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">2 plateformes (Instagram + TikTok)</span><span data-lang="en">2 platforms (Instagram + TikTok)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage inclus (2 sessions/mois)</span><span data-lang="en">Shooting included (2 sessions/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie de contenu mensuelle</span><span data-lang="en">Monthly content strategy</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion des comptes</span><span data-lang="en">Publishing & account management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport bi-mensuel de performance</span><span data-lang="en">Bi-weekly performance report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <!-- L'Expert — 3 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 3</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 3</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">L'EXPERT</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE EXPERT</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CONTENU DE MARQUE</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND CONTENT</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Vidéos qui reflètent l'identité visuelle et les valeurs de ta marque. Consistance et authenticité.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Videos that reflect your brand's visual identity and values. Consistency and authenticity.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">3 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">16 vidéos short-form / mois</span><span data-lang="en">16 short-form videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">3 plateformes (Instagram, TikTok, YouTube)</span><span data-lang="en">3 platforms (Instagram, TikTok, YouTube)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage illimité</span><span data-lang="en">Unlimited shooting</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie complète + audit mensuel</span><span data-lang="en">Full strategy + monthly audit</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion prioritaire</span><span data-lang="en">Priority publishing & management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Accès direct à l'équipe (Slack)</span><span data-lang="en">Direct team access (Slack)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport hebdomadaire de performance</span><span data-lang="en">Weekly performance report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
         </div>
@@ -606,34 +709,137 @@
         <!-- ── Panneau : Marques & Entrepreneurs ── -->
         <div id="tab-marques" class="tab-panel grid md:grid-cols-3 gap-5" style="display:none;">
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <!-- Le Nouveau Venu — 1 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 1</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 1</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE NOUVEAU VENU</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE NEWCOMER</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">TOURNAGE</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">SHOOTING</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Sessions de tournage en studio ou sur place. Équipe professionnelle, éclairage et son inclus.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Studio or on-location shooting sessions. Professional crew, lighting and sound included.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">1 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">4 vidéos de marque / mois</span><span data-lang="en">4 brand videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">1 plateforme au choix</span><span data-lang="en">1 platform of your choice</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage (1 session/mois)</span><span data-lang="en">Shooting (1 session/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Montage & sous-titres</span><span data-lang="en">Editing & subtitles</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport mensuel</span><span data-lang="en">Monthly report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#1A3FCC" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <!-- Le Joueur — 2 000 $ -->
+          <div class="rounded-2xl p-8 flex flex-col" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);border:none;position:relative;overflow:hidden;">
+            <div class="absolute top-4 right-4">
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="fr">Populaire</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="en">Popular</span>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">MONTAGE & POST</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">EDITING & POST</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Montage vidéo professionnel, étalonnage colorimétrique, sous-titres et effets visuels.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Professional video editing, color grading, subtitles and visual effects.</p>
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="fr">Niveau 2</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="en">Level 2</span>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE JOUEUR</h4>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE PLAYER</h4>
+            </div>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid rgba(255,255,255,0.15);">
+              <span class="font-display font-black text-white" style="font-size:2.4rem;">2 000$</span>
+              <span class="text-white/60 text-sm" data-lang="fr">/mois</span>
+              <span class="text-white/60 text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">8 vidéos de marque / mois</span><span data-lang="en">8 brand videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">2 plateformes (Instagram + TikTok)</span><span data-lang="en">2 platforms (Instagram + TikTok)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage (2 sessions/mois)</span><span data-lang="en">Shooting (2 sessions/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie de contenu mensuelle</span><span data-lang="en">Monthly content strategy</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion des comptes</span><span data-lang="en">Publishing & account management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport bi-mensuel</span><span data-lang="en">Bi-weekly report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <!-- Le Chef de File — 3 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 3</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 3</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE CHEF DE FILE</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE INDUSTRY LEADER</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">VIDÉOS D'ENTREPRISE</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND FILMS</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Productions longue durée pour présenter ton équipe, tes valeurs et ton histoire de marque.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Long-form productions to showcase your team, values and brand story.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">3 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">16 vidéos de marque / mois</span><span data-lang="en">16 brand videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">3 plateformes (Instagram, TikTok, YouTube)</span><span data-lang="en">3 platforms (Instagram, TikTok, YouTube)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage illimité</span><span data-lang="en">Unlimited shooting</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie complète + audit mensuel</span><span data-lang="en">Full strategy + monthly audit</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion prioritaire</span><span data-lang="en">Priority publishing & management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Accès direct à l'équipe (Slack)</span><span data-lang="en">Direct team access (Slack)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport hebdomadaire + appel stratégique</span><span data-lang="en">Weekly report + strategy call</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
         </div>
@@ -641,34 +847,137 @@
         <!-- ── Panneau : Créateurs & Personnalités ── -->
         <div id="tab-createurs" class="tab-panel grid md:grid-cols-3 gap-5" style="display:none;">
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-6 4 4" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <!-- Le Connue — 1 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 1</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 1</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE CONNUE</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE KNOWN</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">AUDIT DE CONTENU</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">CONTENT AUDIT</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Analyse complète de ta présence en ligne et de tes performances actuelles sur les réseaux sociaux.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Full analysis of your online presence and current social media performance.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">1 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">4 vidéos authentiques / mois</span><span data-lang="en">4 authentic videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">1 plateforme au choix</span><span data-lang="en">1 platform of your choice</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage (1 session/mois)</span><span data-lang="en">Shooting (1 session/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Montage & sous-titres</span><span data-lang="en">Editing & subtitles</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport mensuel de performance</span><span data-lang="en">Monthly performance report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <!-- Le Populaire — 2 000 $ -->
+          <div class="rounded-2xl p-8 flex flex-col" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);border:none;position:relative;overflow:hidden;">
+            <div class="absolute top-4 right-4">
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="fr">Populaire</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="en">Popular</span>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">STRATÉGIE DE MARQUE</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">BRAND STRATEGY</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Définition du positionnement, du ton de voix et du plan de contenu sur 90 jours pour ta marque.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Define your positioning, tone of voice and 90-day content plan for your brand.</p>
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="fr">Niveau 2</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60" data-lang="en">Level 2</span>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LE POPULAIRE</h4>
+              <h4 class="font-display font-black text-white leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE POPULAR</h4>
+            </div>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid rgba(255,255,255,0.15);">
+              <span class="font-display font-black text-white" style="font-size:2.4rem;">2 000$</span>
+              <span class="text-white/60 text-sm" data-lang="fr">/mois</span>
+              <span class="text-white/60 text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">8 vidéos authentiques / mois</span><span data-lang="en">8 authentic videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">2 plateformes (Instagram + TikTok)</span><span data-lang="en">2 platforms (Instagram + TikTok)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage (2 sessions/mois)</span><span data-lang="en">Shooting (2 sessions/month)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie de contenu mensuelle</span><span data-lang="en">Monthly content strategy</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion des comptes</span><span data-lang="en">Publishing & account management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-white/80">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(255,255,255,0.15)"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport bi-mensuel</span><span data-lang="en">Bi-weekly report</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-white text-royal font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
-          <div class="service-card bg-white rounded-2xl p-8">
-            <div class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#1A3FCC" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <!-- La Célébrité — 3 000 $ -->
+          <div class="service-card bg-white rounded-2xl p-8 flex flex-col">
+            <div class="mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Niveau 3</span>
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Level 3</span>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="fr">LA CÉLÉBRITÉ</h4>
+              <h4 class="font-display font-black text-ink leading-tight mt-1" style="font-size:1.6rem;" data-lang="en">THE CELEBRITY</h4>
             </div>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="fr">CONSULTATION</h4>
-            <h4 class="font-display font-black text-ink text-2xl leading-tight mb-3" data-lang="en">CONSULTING</h4>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Sessions one-on-one pour optimiser ta stratégie, comprendre les algorithmes et accélérer ta croissance.</p>
-            <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">One-on-one sessions to optimize your strategy, understand algorithms and accelerate your growth.</p>
+            <div class="mb-6 pb-6" style="border-bottom:1.5px solid #E5E7EB;">
+              <span class="font-display font-black text-ink" style="font-size:2.4rem;">3 000$</span>
+              <span class="text-gray-mid text-sm" data-lang="fr">/mois</span>
+              <span class="text-gray-mid text-sm" data-lang="en">/month</span>
+            </div>
+            <ul class="flex flex-col gap-3 flex-1">
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">16 vidéos authentiques / mois</span><span data-lang="en">16 authentic videos / month</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">3 plateformes (Instagram, TikTok, YouTube)</span><span data-lang="en">3 platforms (Instagram, TikTok, YouTube)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Tournage illimité</span><span data-lang="en">Unlimited shooting</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Stratégie complète + audit mensuel</span><span data-lang="en">Full strategy + monthly audit</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Publication & gestion prioritaire</span><span data-lang="en">Priority publishing & management</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Accès direct à l'équipe (Slack)</span><span data-lang="en">Direct team access (Slack)</span>
+              </li>
+              <li class="flex items-start gap-3 text-[13px] text-gray-mid">
+                <svg class="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#EEF2FF"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#1A3FCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span data-lang="fr">Rapport hebdomadaire + appel stratégique</span><span data-lang="en">Weekly report + strategy call</span>
+              </li>
+            </ul>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="fr">Démarrer →</button>
+            <button onclick="openWizard()" class="btn-primary mt-8 w-full text-center bg-royal text-white font-semibold py-3 rounded-full text-sm" data-lang="en">Get started →</button>
           </div>
 
         </div>
