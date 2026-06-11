@@ -1368,35 +1368,55 @@
           </div>
         </div>
 
-        <!-- STEP 3 -->
+        <!-- STEP 3 — Multi-select content type -->
         <div class="wizard-step hidden" data-step="3">
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 3 sur 3</div>
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 3 of 3</div>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">QUEL EST VOTRE BUDGET MENSUEL ?</h3>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">WHAT'S YOUR MONTHLY BUDGET?</h3>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Soyez honnête — ça nous aide à proposer la bonne formule.</p>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">Be honest — it helps us recommend the right package.</p>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">QUEL TYPE DE CONTENU ?</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">WHAT TYPE OF CONTENT?</h3>
+          <p class="text-gray-mid text-sm mb-5 leading-[1.6]" data-lang="fr">Sélectionnez tout ce qui s'applique.</p>
+          <p class="text-gray-mid text-sm mb-5 leading-[1.6]" data-lang="en">Select all that apply.</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="<500" data-qualified="false">
-              <div class="font-display font-black text-xl text-royal mb-1">-500$</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="organique" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Contenu organique</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Organic content</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="500-1500" data-qualified="maybe">
-              <div class="font-display font-black text-xl text-royal mb-1">500–1 500$</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="pub-meta" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Contenu publicitaire Meta</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Meta advertising content</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="1500+" data-qualified="true">
-              <div class="font-display font-black text-xl text-royal mb-1">1 500$+</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">par mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">per month</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="creation-site" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Création de site web</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Website creation</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="discuss" data-qualified="true">
-              <div class="text-sm text-gray-mid" data-lang="fr">À discuter</div>
-              <div class="text-sm text-gray-mid" data-lang="en">Let's discuss</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="amelioration-site" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Amélioration site web</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Website improvement</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="entretien-site" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Entretien de site web</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Website maintenance</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="photos" data-multi="true">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Photos</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Photos</div>
+            </button>
+            <button class="wizard-choice text-left p-4 rounded-2xl col-span-2" data-value="autre" data-multi="true" id="step3-autre-btn">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Autre : spécifier</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Other: specify</div>
             </button>
           </div>
+          <!-- Champ texte libre pour "Autre" Q3 -->
+          <div id="step3-autre-field" class="hidden mt-3">
+            <input type="text" id="step3-autre-input"
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium"
+              placeholder="Précisez… / Specify…" />
+          </div>
+          <!-- Bouton continuer — apparaît dès qu'une sélection est faite -->
+          <button onclick="continueFromStep3()" id="step3-continue" class="btn-primary mt-4 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm hidden">
+            <span data-lang="fr">Continuer →</span>
+            <span data-lang="en">Continue →</span>
+          </button>
         </div>
 
         <!-- STEP 4 — Contact form -->
@@ -1773,6 +1793,10 @@
       document.getElementById('autre-input').value = '';
       document.getElementById('step2-autre-field').classList.add('hidden');
       document.getElementById('step2-autre-input').value = '';
+      document.querySelectorAll('.wizard-step[data-step="3"] .wizard-choice').forEach(b => b.classList.remove('selected'));
+      document.getElementById('step3-autre-field').classList.add('hidden');
+      document.getElementById('step3-autre-input').value = '';
+      document.getElementById('step3-continue').classList.add('hidden');
       showStep(1);
       overlay.classList.remove('hidden');
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -1841,10 +1865,23 @@
             showStep(3);
           }
         } else if (step === 3) {
-          wizardData.budget = val;
-          wizardData.budgetQualified = qual;
-          const qualified = qual === 'true' || qual === 'maybe';
-          showStep(qualified ? 4 : 5);
+          // Multi-select: toggle, don't auto-advance
+          btn.classList.toggle('selected');
+          // Toggle "Autre" text field
+          if (val === 'autre') {
+            const f = document.getElementById('step3-autre-field');
+            if (btn.classList.contains('selected')) {
+              f.classList.remove('hidden');
+              document.getElementById('step3-autre-input').focus();
+            } else {
+              f.classList.add('hidden');
+              document.getElementById('step3-autre-input').value = '';
+            }
+          }
+          // Show/hide Continuer button
+          const anySelected = !!document.querySelector('.wizard-step[data-step="3"] .wizard-choice.selected');
+          document.getElementById('step3-continue').classList.toggle('hidden', !anySelected);
+          return; // Don't fall through to setTimeout auto-advance
         }
       }, 200);
     });
@@ -1860,6 +1897,19 @@
       const val = document.getElementById('step2-autre-input').value.trim();
       wizardData.domain = val ? 'autre: ' + val : 'autre';
       showStep(3);
+    }
+
+    function continueFromStep3() {
+      const selected = [...document.querySelectorAll('.wizard-step[data-step="3"] .wizard-choice.selected')]
+        .map(b => {
+          if (b.dataset.value === 'autre') {
+            const txt = document.getElementById('step3-autre-input').value.trim();
+            return txt ? 'autre: ' + txt : 'autre';
+          }
+          return b.dataset.value;
+        });
+      wizardData.contentTypes = selected;
+      showStep(4);
     }
 
     function submitContact(e) {
