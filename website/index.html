@@ -1347,8 +1347,14 @@
 
         <!-- STEP 2 (dynamic based on Q1 answer) -->
         <div class="wizard-step hidden" data-step="2">
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 2 sur 4</div>
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 2 of 4</div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Étape 2 sur 4</div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Step 2 of 4</div>
+            <button onclick="showStep(1)" class="flex items-center gap-1 text-[11px] font-semibold text-gray-400 hover:text-royal transition-colors">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-lang="fr">Retour</span><span data-lang="en">Back</span>
+            </button>
+          </div>
           <h3 id="step2-title-fr" class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">VOTRE DOMAINE ?</h3>
           <h3 id="step2-title-en" class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOUR FIELD?</h3>
           <p id="step2-sub-fr" class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Dans quel domaine vous situez-vous ?</p>
@@ -1370,8 +1376,14 @@
 
         <!-- STEP 3 — Multi-select content type -->
         <div class="wizard-step hidden" data-step="3">
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 3 sur 4</div>
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 3 of 4</div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Étape 3 sur 4</div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Step 3 of 4</div>
+            <button onclick="showStep(2)" class="flex items-center gap-1 text-[11px] font-semibold text-gray-400 hover:text-royal transition-colors">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-lang="fr">Retour</span><span data-lang="en">Back</span>
+            </button>
+          </div>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.4rem,3.5vw,1.9rem);" data-lang="fr">QUEL TYPE DE CONTENU VOUS SEMBLE LE PLUS PERTINENT ?</h3>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.4rem,3.5vw,1.9rem);" data-lang="en">WHAT TYPE OF CONTENT SEEMS MOST RELEVANT TO YOU?</h3>
           <p class="text-gray-mid text-sm mb-5 leading-[1.6]" data-lang="fr">À partir de cette question, nous allons analyser vos besoins afin de mieux vous accompagner.</p>
@@ -1413,8 +1425,14 @@
 
         <!-- STEP 4 — Contact form (dynamic fields based on Q1) -->
         <div class="wizard-step hidden" data-step="4">
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 4 sur 4</div>
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 4 of 4</div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Étape 4 sur 4</div>
+            <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">Step 4 of 4</div>
+            <button onclick="showStep(3)" class="flex items-center gap-1 text-[11px] font-semibold text-gray-400 hover:text-royal transition-colors">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-lang="fr">Retour</span><span data-lang="en">Back</span>
+            </button>
+          </div>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">LET'S GET IN TOUCH</h3>
           <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On vous contacte dans un délai de 3 jours ouvrables.</p>
