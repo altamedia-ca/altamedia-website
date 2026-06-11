@@ -160,17 +160,17 @@
         <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="fr">Pense à l'objectif principal de ta présence en ligne.</p>
         <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="en">Think about the main goal of your online presence.</p>
         <div class="flex flex-col gap-3">
-          <button class="quiz-btn" onclick="goStep2('moi')">
-            <p class="font-bold text-ink text-sm" data-lang="fr">🙋 Moi-même — ma personne, mon image, mon expertise</p>
-            <p class="font-bold text-ink text-sm" data-lang="en">🙋 Myself — my person, my image, my expertise</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu es la marque</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="en">You are the brand</p>
+          <button class="quiz-btn" onclick="showResult('createurs')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">Moi seul(e) — ma personne, mon image, ma personnalité</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">Myself — my person, my image, my personality</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Je suis la marque</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">I am the brand</p>
           </button>
-          <button class="quiz-btn" onclick="showResult('marques')">
-            <p class="font-bold text-ink text-sm" data-lang="fr">🏢 Mon entreprise — ma marque, mes produits, mes services</p>
-            <p class="font-bold text-ink text-sm" data-lang="en">🏢 My business — my brand, my products, my services</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu as une structure à promouvoir</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="en">You have a business to promote</p>
+          <button class="quiz-btn" onclick="goStep2()">
+            <p class="font-bold text-ink text-sm" data-lang="fr">Mon entreprise — une structure avec des produits ou services</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">My business — a structure with products or services</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">J'ai une organisation à promouvoir</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">I have an organization to promote</p>
           </button>
         </div>
       </div>
@@ -187,22 +187,22 @@
             <span data-lang="fr">Retour</span><span data-lang="en">Back</span>
           </button>
         </div>
-        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="fr">TU TE DÉCRIS PLUTÔT COMME…</h2>
-        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOU WOULD DESCRIBE YOURSELF AS…</h2>
-        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="fr">Quelle étiquette te rejoint le plus ?</p>
-        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="en">Which label fits you best?</p>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="fr">TON ENTREPRISE VEND…</h2>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOUR BUSINESS SELLS…</h2>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="fr">Comment génères-tu tes revenus principalement ?</p>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="en">What is your main source of revenue?</p>
         <div class="flex flex-col gap-3">
           <button class="quiz-btn" onclick="showResult('pro')">
-            <p class="font-bold text-ink text-sm" data-lang="fr">🎓 Un expert ou professionnel — consultant, coach, médecin, avocat, comptable, courtier…</p>
-            <p class="font-bold text-ink text-sm" data-lang="en">🎓 An expert or professional — consultant, coach, doctor, lawyer, accountant, broker…</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu veux bâtir ton autorité grâce à ton savoir</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="en">You want to build authority through your knowledge</p>
+            <p class="font-bold text-ink text-sm" data-lang="fr">Des services — tu vends du temps, de l'expertise ou un accompagnement</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">Services — you sell time, expertise or coaching</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Agence, cabinet, firme, studio, consultation…</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">Agency, firm, studio, consulting…</p>
           </button>
-          <button class="quiz-btn" onclick="showResult('createurs')">
-            <p class="font-bold text-ink text-sm" data-lang="fr">🎤 Un créateur ou une personnalité — influenceur, artiste, athlète, humoriste, personnage public…</p>
-            <p class="font-bold text-ink text-sm" data-lang="en">🎤 A creator or personality — influencer, artist, athlete, comedian, public figure…</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu veux bâtir une communauté autour de ta personnalité</p>
-            <p class="text-gray-mid text-xs mt-1" data-lang="en">You want to build a community around your personality</p>
+          <button class="quiz-btn" onclick="showResult('marques')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">Des produits ou du détail — tu as une marque, une boutique ou un catalogue</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">Products or retail — you have a brand, a store or a catalogue</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Boutique, restaurant, e-commerce, marque de produits…</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">Store, restaurant, e-commerce, product brand…</p>
           </button>
         </div>
       </div>
@@ -397,8 +397,9 @@
       document.getElementById('quiz-step-1').classList.remove('active');
       document.getElementById('quiz-intro-cta').style.display = 'none';
       const step2 = document.getElementById('quiz-step-2');
+      step2.classList.remove('fade-up');
+      void step2.offsetWidth; /* force reflow to restart animation */
       step2.classList.add('active');
-      step2.style.animation = 'none';
       step2.classList.add('fade-up');
     }
 
