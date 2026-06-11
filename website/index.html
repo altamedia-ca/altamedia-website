@@ -1305,6 +1305,33 @@
 
       <div id="wizard-steps" class="p-8 md:p-10">
 
+        <!-- STEP 0 — Consentement -->
+        <div class="wizard-step" data-step="0">
+          <div class="flex justify-center mb-5">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:#EEF2FF;">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6l-8-4z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <h3 class="font-display font-black text-ink leading-tight mb-4 text-center" style="font-size: clamp(1.4rem,4vw,1.8rem);" data-lang="fr">AVANT DE COMMENCER</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-4 text-center" style="font-size: clamp(1.4rem,4vw,1.8rem);" data-lang="en">BEFORE WE BEGIN</h3>
+          <p class="text-gray-mid text-sm leading-[1.8] mb-7" data-lang="fr">
+            Ce formulaire nous permet de mieux vous connaître avant notre première conversation. Les informations que vous partagez restent entre nous — elles sont utilisées uniquement pour vous préparer une offre personnalisée et sont protégées en tout temps conformément à la Loi 25. Vous êtes entre bonnes mains.
+          </p>
+          <p class="text-gray-mid text-sm leading-[1.8] mb-7" data-lang="en">
+            This form helps us get to know you before our first conversation. The information you share stays between us — it is used solely to prepare a personalized offer and is protected at all times in accordance with Law 25. You're in good hands.
+          </p>
+          <div class="flex flex-col gap-3">
+            <button onclick="showStep(1)" class="btn-primary w-full bg-royal text-white font-bold py-3.5 rounded-xl text-sm">
+              <span data-lang="fr">Oui, j'accepte →</span>
+              <span data-lang="en">Yes, I accept →</span>
+            </button>
+            <button onclick="closeWizard()" class="w-full border-2 border-gray-200 text-gray-400 hover:border-gray-300 hover:text-gray-500 font-semibold py-3 rounded-xl text-sm transition-all">
+              <span data-lang="fr">Non, je préfère pas</span>
+              <span data-lang="en">No, I'd rather not</span>
+            </button>
+          </div>
+        </div>
+
         <!-- STEP 1 -->
         <div class="wizard-step" data-step="1">
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 1 sur 4</div>
@@ -1813,7 +1840,7 @@
       document.getElementById('step3-autre-field').classList.add('hidden');
       document.getElementById('step3-autre-input').value = '';
       document.getElementById('step3-continue').classList.add('hidden');
-      showStep(1);
+      showStep(0);
       overlay.classList.remove('hidden');
       requestAnimationFrame(() => requestAnimationFrame(() => {
         box.style.transform = 'scale(1) translateY(0)';
@@ -1844,7 +1871,7 @@
         target.classList.remove('hidden');
         target.style.animation = 'fadeUp 0.32s cubic-bezier(0.16,1,0.3,1) forwards';
       }
-      const pct = { 1: 10, 2: 40, 3: 70, 4: 90, 5: 100, 6: 100 };
+      const pct = { 0: 0, 1: 10, 2: 40, 3: 70, 4: 90, 5: 100, 6: 100 };
       progress.style.width = (pct[n] || 0) + '%';
     }
 
