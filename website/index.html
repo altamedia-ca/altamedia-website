@@ -1309,57 +1309,61 @@
         <div class="wizard-step" data-step="1">
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 1 sur 3</div>
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 1 of 3</div>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">QUEL TYPE DE PROJET ?</h3>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">WHAT TYPE OF PROJECT?</h3>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Dites-nous dans quelle catégorie vous vous situez.</p>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">Tell us which category fits you best.</p>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">VOTRE INDUSTRIE ?</h3>
+          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOUR INDUSTRY?</h3>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Dans quelle industrie faites-vous partie ?</p>
+          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">What industry are you in?</p>
           <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="marque">
-              <div class="font-semibold text-sm text-ink" data-lang="fr">Marque / Entreprise</div>
-              <div class="font-semibold text-sm text-ink" data-lang="en">Brand / Business</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="services">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Services</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Services</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="personal">
-              <div class="font-semibold text-sm text-ink" data-lang="fr">Personal brand</div>
-              <div class="font-semibold text-sm text-ink" data-lang="en">Personal brand</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="retail">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Vente au détail</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Retail</div>
             </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="evenement">
-              <div class="font-semibold text-sm text-ink" data-lang="fr">Événement / Tournage</div>
-              <div class="font-semibold text-sm text-ink" data-lang="en">Event / Shoot</div>
+            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="celebrity">
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Célébrité & Personnalité</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Celebrity & Personality</div>
             </button>
             <button class="wizard-choice text-left p-4 rounded-2xl" data-value="autre">
-              <div class="font-semibold text-sm text-ink" data-lang="fr">Autre</div>
-              <div class="font-semibold text-sm text-ink" data-lang="en">Other</div>
+              <div class="font-semibold text-sm text-ink" data-lang="fr">Autre : spécifier</div>
+              <div class="font-semibold text-sm text-ink" data-lang="en">Other: specify</div>
+            </button>
+          </div>
+          <!-- Champ texte libre pour "Autre" -->
+          <div id="autre-field" class="hidden mt-4">
+            <input type="text" id="autre-input"
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium"
+              data-placeholder-fr="Précisez votre industrie…"
+              data-placeholder-en="Specify your industry…"
+              placeholder="Précisez votre industrie…" />
+            <button onclick="continueFromAutre()" class="btn-primary mt-3 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm">
+              <span data-lang="fr">Continuer →</span>
+              <span data-lang="en">Continue →</span>
             </button>
           </div>
         </div>
 
-        <!-- STEP 2 -->
+        <!-- STEP 2 (dynamic based on Q1 answer) -->
         <div class="wizard-step hidden" data-step="2">
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="fr">Étape 2 sur 3</div>
           <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-royal mb-2" data-lang="en">Step 2 of 3</div>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">COMBIEN DE VIDÉOS PAR MOIS ?</h3>
-          <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">HOW MANY VIDEOS PER MONTH?</h3>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On veut s'assurer de pouvoir bien vous servir.</p>
-          <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">We want to make sure we can serve you well.</p>
-          <div class="grid grid-cols-2 gap-3">
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="1-3" data-qualified="false">
-              <div class="font-display font-black text-3xl text-royal mb-1">1–3</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
-            </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="4-8" data-qualified="maybe">
-              <div class="font-display font-black text-3xl text-royal mb-1">4–8</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
-            </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="8+" data-qualified="true">
-              <div class="font-display font-black text-3xl text-royal mb-1">8+</div>
-              <div class="text-sm text-gray-mid" data-lang="fr">vidéos / mois</div>
-              <div class="text-sm text-gray-mid" data-lang="en">videos / month</div>
-            </button>
-            <button class="wizard-choice text-left p-4 rounded-2xl" data-value="unknown" data-qualified="maybe">
-              <div class="text-sm text-gray-mid" data-lang="fr">Je ne sais pas encore</div>
-              <div class="text-sm text-gray-mid" data-lang="en">Not sure yet</div>
+          <h3 id="step2-title-fr" class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">VOTRE DOMAINE ?</h3>
+          <h3 id="step2-title-en" class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOUR FIELD?</h3>
+          <p id="step2-sub-fr" class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">Dans quel domaine vous situez-vous ?</p>
+          <p id="step2-sub-en" class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="en">What field are you in?</p>
+          <div id="step2-choices" class="grid grid-cols-2 gap-3">
+            <!-- populated dynamically by setupStep2() -->
+          </div>
+          <!-- Champ texte libre pour "Autre" en Q2 -->
+          <div id="step2-autre-field" class="hidden mt-4">
+            <input type="text" id="step2-autre-input"
+              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium"
+              placeholder="Précisez votre domaine… / Specify your field…" />
+            <button onclick="continueFromStep2Autre()" class="btn-primary mt-3 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm">
+              <span data-lang="fr">Continuer →</span>
+              <span data-lang="en">Continue →</span>
             </button>
           </div>
         </div>
@@ -1680,8 +1684,95 @@
     let wizardData = {};
     let currentStep = 1;
 
+    /* ── Step 2 dynamic data ── */
+    const step2Config = {
+      services: {
+        fr: { title: 'VOTRE DOMAINE ?',   sub: 'Dans quel domaine vous situez-vous ?' },
+        en: { title: 'YOUR FIELD?',        sub: 'What field are you in?' },
+        choices: [
+          { value: 'construction', fr: 'Construction & Entretien',  en: 'Construction & Maintenance' },
+          { value: 'immobilier',   fr: 'Immobilier & Finance',      en: 'Real Estate & Finance' },
+          { value: 'droit',        fr: 'Droit & Notariat',          en: 'Law & Notary' },
+          { value: 'sante',        fr: 'Santé & Bien-être',         en: 'Health & Wellness' },
+          { value: 'autre',        fr: 'Autre',                     en: 'Other', hasInput: true },
+        ]
+      },
+      retail: {
+        fr: { title: 'VOTRE DOMAINE ?',   sub: 'Dans quel domaine vous situez-vous ?' },
+        en: { title: 'YOUR FIELD?',        sub: 'What field are you in?' },
+        choices: [
+          { value: 'alimentation', fr: 'Alimentation & Boissons',   en: 'Food & Beverages' },
+          { value: 'vetements',    fr: 'Vêtements & Mode',          en: 'Clothing & Fashion' },
+          { value: 'maison',       fr: 'Maison & Décoration',       en: 'Home & Décor' },
+          { value: 'beaute',       fr: 'Beauté & Soins',            en: 'Beauty & Care' },
+          { value: 'autre',        fr: 'Autre',                     en: 'Other', hasInput: true },
+        ]
+      },
+      celebrity: {
+        fr: { title: 'VOTRE DOMAINE ?',   sub: 'Dans quel domaine vous situez-vous ?' },
+        en: { title: 'YOUR FIELD?',        sub: 'What field are you in?' },
+        choices: [
+          { value: 'sport',    fr: 'Sport & Athlétisme',         en: 'Sports & Athletics' },
+          { value: 'musique',  fr: 'Musique',                    en: 'Music' },
+          { value: 'humour',   fr: 'Humour & Divertissement',    en: 'Comedy & Entertainment' },
+          { value: 'medias',   fr: 'Médias & Journalisme',       en: 'Media & Journalism' },
+          { value: 'autre',    fr: 'Autre',                      en: 'Other', hasInput: true },
+        ]
+      },
+      autre: {
+        fr: { title: 'SEUL OU EN ÉQUIPE ?', sub: 'Opérez-vous seuls ou en équipe ?' },
+        en: { title: 'SOLO OR TEAM?',        sub: 'Do you operate alone or as a team?' },
+        choices: [
+          { value: 'seul',    fr: 'Seul',   en: 'Solo' },
+          { value: 'equipe',  fr: 'Équipe', en: 'Team' },
+        ]
+      }
+    };
+
+    function setupStep2(industryKey) {
+      // Normalize key (strip free-text prefix if "autre: ...")
+      const key = industryKey.startsWith('autre') ? 'autre' : industryKey;
+      const cfg = step2Config[key] || step2Config.autre;
+
+      // Update titles & subtitles
+      document.getElementById('step2-title-fr').textContent = cfg.fr.title;
+      document.getElementById('step2-title-en').textContent = cfg.en.title;
+      document.getElementById('step2-sub-fr').textContent   = cfg.fr.sub;
+      document.getElementById('step2-sub-en').textContent   = cfg.en.sub;
+
+      // Reset autre field
+      document.getElementById('step2-autre-field').classList.add('hidden');
+      document.getElementById('step2-autre-input').value = '';
+
+      // Build choices grid
+      const grid = document.getElementById('step2-choices');
+      grid.innerHTML = '';
+      // 2 columns for 4–5 items, 1 column for 2 items
+      grid.style.gridTemplateColumns = cfg.choices.length <= 2 ? '1fr 1fr' : 'repeat(2,1fr)';
+
+      cfg.choices.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'wizard-choice text-left p-4 rounded-2xl';
+        btn.dataset.value = c.value;
+        if (c.hasInput) btn.dataset.hasInput = 'true';
+        btn.innerHTML =
+          `<div class="font-semibold text-sm text-ink" data-lang="fr">${c.fr}</div>` +
+          `<div class="font-semibold text-sm text-ink" data-lang="en">${c.en}</div>`;
+        // Apply current lang visibility so CSS rule works on dynamic elements
+        const isEn = document.body.classList.contains('en');
+        btn.querySelectorAll('[data-lang]').forEach(el => {
+          el.style.display = (isEn ? el.dataset.lang === 'fr' : el.dataset.lang === 'en') ? 'none' : '';
+        });
+        grid.appendChild(btn);
+      });
+    }
+
     function openWizard() {
       wizardData = {};
+      document.getElementById('autre-field').classList.add('hidden');
+      document.getElementById('autre-input').value = '';
+      document.getElementById('step2-autre-field').classList.add('hidden');
+      document.getElementById('step2-autre-input').value = '';
       showStep(1);
       overlay.classList.remove('hidden');
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -1729,24 +1820,47 @@
 
       setTimeout(() => {
         if (step === 1) {
-          wizardData.type = val;
-          showStep(2);
+          if (val === 'autre') {
+            // Show open text field, don't auto-advance
+            document.getElementById('autre-field').classList.remove('hidden');
+            document.getElementById('autre-input').focus();
+          } else {
+            document.getElementById('autre-field').classList.add('hidden');
+            wizardData.industry = val;
+            setupStep2(val);
+            showStep(2);
+          }
         } else if (step === 2) {
-          wizardData.volume = val;
-          wizardData.volumeQualified = qual;
-          showStep(3);
+          if (btn.dataset.hasInput === 'true') {
+            // Show text field, don't auto-advance
+            document.getElementById('step2-autre-field').classList.remove('hidden');
+            document.getElementById('step2-autre-input').focus();
+          } else {
+            document.getElementById('step2-autre-field').classList.add('hidden');
+            wizardData.domain = val;
+            showStep(3);
+          }
         } else if (step === 3) {
           wizardData.budget = val;
           wizardData.budgetQualified = qual;
-          const vq = wizardData.volumeQualified;
-          const bq = wizardData.budgetQualified;
-          const qualified =
-            ((vq === 'true' || vq === 'maybe') && bq === 'true') ||
-            (vq === 'true' && bq === 'maybe');
+          const qualified = qual === 'true' || qual === 'maybe';
           showStep(qualified ? 4 : 5);
         }
       }, 200);
     });
+
+    function continueFromAutre() {
+      const val = document.getElementById('autre-input').value.trim();
+      wizardData.industry = val ? 'autre: ' + val : 'autre';
+      setupStep2('autre');
+      showStep(2);
+    }
+
+    function continueFromStep2Autre() {
+      const val = document.getElementById('step2-autre-input').value.trim();
+      wizardData.domain = val ? 'autre: ' + val : 'autre';
+      showStep(3);
+    }
 
     function submitContact(e) {
       e.preventDefault();
