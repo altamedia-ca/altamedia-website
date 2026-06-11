@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quel profil suis-je ? — AltaMedia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { royal: '#1A3FCC', ink: '#111111', 'gray-mid': '#6B7280' }, fontFamily: { display: ['Barlow Condensed','sans-serif'], body: ['Inter','sans-serif'] } } }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; font-family: 'Inter', sans-serif; }
+
+    /* Lang toggle */
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="fr"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+
+    /* Navbar */
+    .nav-link { color: #374151; transition: color 150ms ease; text-decoration: none; }
+    .nav-link:hover { color: #1A3FCC; }
+    .nav-dropdown { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); min-width: 260px; padding-top: 14px; z-index: 100; }
+    .nav-dropdown-inner { background: #fff; border: 1px solid #E5E7EB; border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.10); padding: 8px; }
+    .nav-dropdown-wrap:hover .nav-dropdown { display: block; }
+    .nav-dropdown-item { display: block; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; color: #374151; text-decoration: none; transition: background 150ms ease, color 150ms ease; white-space: nowrap; }
+    .nav-dropdown-item:hover { background: #EEF2FF; color: #1A3FCC; }
+
+    /* Profile cards */
+    .profile-card {
+      border: 2px solid #E5E7EB;
+      border-radius: 24px;
+      padding: 40px 36px;
+      background: #fff;
+      transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+      cursor: default;
+    }
+    .profile-card:hover {
+      border-color: #1A3FCC;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(26,63,204,0.12);
+    }
+    .profile-card.featured {
+      background: linear-gradient(135deg, #080D28 0%, #1A3FCC 100%);
+      border-color: transparent;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    /* Quiz */
+    .quiz-btn {
+      border: 2px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 16px 20px;
+      background: #fff;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 150ms ease, background 150ms ease, transform 120ms ease;
+      width: 100%;
+    }
+    .quiz-btn:hover {
+      border-color: #1A3FCC;
+      background: #EEF2FF;
+      transform: translateY(-2px);
+    }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+
+    /* Result */
+    .result-card {
+      border: 2px solid #1A3FCC;
+      border-radius: 24px;
+      padding: 40px;
+      background: #EEF2FF;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.45s cubic-bezier(0.16,1,0.3,1) forwards; }
+  </style>
+</head>
+<body style="background:#F7F8FF;">
+
+  <!-- ── Navbar ── -->
+  <nav style="background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #E5E7EB;" class="sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+      <a href="index.html" class="flex items-center group" style="text-decoration:none;">
+        <div class="flex flex-col items-center leading-none group-hover:opacity-85 transition-opacity" style="gap:2px;">
+          <span class="font-display font-black text-ink" style="font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
+          <span class="font-display font-black" style="color:#1A3FCC;font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
+        </div>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-[13px] font-medium">
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-services">Services
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown"><div class="nav-dropdown-inner">
+            <a href="pro.html"         class="nav-dropdown-item" data-i18n="nav-pro">Professionnel &amp; Expert</a>
+            <a href="marques.html"     class="nav-dropdown-item" data-i18n="nav-marques">Marques &amp; Entrepreneurs</a>
+            <a href="createurs.html"   class="nav-dropdown-item" data-i18n="nav-createurs">Créateurs &amp; Personnalités</a>
+            <div style="border-top:1px solid #F3F4F6;margin:6px 0;"></div>
+            <a href="quel-profil.html" class="nav-dropdown-item" style="color:#1A3FCC;font-weight:600;" data-i18n="nav-profil">Quel profil suis-je ?</a>
+          </div></div>
+        </div>
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-apropos">À propos
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown"><div class="nav-dropdown-inner">
+            <a href="notre-histoire.html" class="nav-dropdown-item" data-i18n="nav-histoire">Notre histoire</a>
+          </div></div>
+        </div>
+        <a href="index.html#resultats" class="nav-link" data-i18n="nav-resultats">Résultats</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center rounded-full border border-gray-200 overflow-hidden text-[11px] font-bold tracking-widest">
+          <button id="btn-fr" onclick="setLang('fr')" class="px-3.5 py-1.5 transition-all duration-150">FR</button>
+          <span class="text-gray-200">|</span>
+          <button id="btn-en" onclick="setLang('en')" class="px-3.5 py-1.5 transition-all duration-150">EN</button>
+        </div>
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition-all hover:-translate-y-0.5" style="text-decoration:none;" data-i18n="cta-main">Parlons-en →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <div style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="py-20 text-center px-6">
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="fr">Trouve ton profil</p>
+    <p class="text-white/50 text-[11px] font-bold uppercase tracking-[0.22em] mb-4" data-lang="en">Find your profile</p>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:-0.01em;" data-lang="fr">QUEL PROFIL<br>SUIS-JE ?</h1>
+    <h1 class="font-display font-black text-white leading-[0.9]" style="font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:-0.01em;" data-lang="en">WHICH PROFILE<br>AM I?</h1>
+    <p class="text-white/60 text-base mt-5 max-w-lg mx-auto font-light" data-lang="fr">Réponds à 2 questions et découvre quelle formule Alta Media est faite pour toi.</p>
+    <p class="text-white/60 text-base mt-5 max-w-lg mx-auto font-light" data-lang="en">Answer 2 questions and find out which Alta Media plan is made for you.</p>
+  </div>
+
+  <!-- ── Quiz ── -->
+  <main class="max-w-2xl mx-auto px-6 py-16">
+
+    <!-- Step 1 -->
+    <div id="quiz-step-1" class="quiz-step active">
+      <div class="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm">
+        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-royal mb-3" data-lang="fr">Question 1 sur 2</p>
+        <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-royal mb-3" data-lang="en">Question 1 of 2</p>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="fr">TU CRÉES DU CONTENU POUR…</h2>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOU'RE CREATING CONTENT FOR…</h2>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="fr">Pense à l'objectif principal de ta présence en ligne.</p>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="en">Think about the main goal of your online presence.</p>
+        <div class="flex flex-col gap-3">
+          <button class="quiz-btn" onclick="goStep2('moi')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">🙋 Moi-même — ma personne, mon image, mon expertise</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">🙋 Myself — my person, my image, my expertise</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu es la marque</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">You are the brand</p>
+          </button>
+          <button class="quiz-btn" onclick="showResult('marques')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">🏢 Mon entreprise — ma marque, mes produits, mes services</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">🏢 My business — my brand, my products, my services</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu as une structure à promouvoir</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">You have a business to promote</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="quiz-step-2" class="quiz-step">
+      <div class="bg-white rounded-3xl p-10 border border-gray-100 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-royal" data-lang="fr">Question 2 sur 2</p>
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-royal" data-lang="en">Question 2 of 2</p>
+          <button onclick="goStep1()" class="flex items-center gap-1 text-[11px] font-semibold text-gray-400 hover:text-royal transition-colors">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-lang="fr">Retour</span><span data-lang="en">Back</span>
+          </button>
+        </div>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="fr">TU TE DÉCRIS PLUTÔT COMME…</h2>
+        <h2 class="font-display font-black text-ink leading-tight mb-2" style="font-size:clamp(1.6rem,4vw,2.2rem);" data-lang="en">YOU WOULD DESCRIBE YOURSELF AS…</h2>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="fr">Quelle étiquette te rejoint le plus ?</p>
+        <p class="text-gray-mid text-sm mb-8 leading-[1.6]" data-lang="en">Which label fits you best?</p>
+        <div class="flex flex-col gap-3">
+          <button class="quiz-btn" onclick="showResult('pro')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">🎓 Un expert ou professionnel — consultant, coach, médecin, avocat, comptable, courtier…</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">🎓 An expert or professional — consultant, coach, doctor, lawyer, accountant, broker…</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu veux bâtir ton autorité grâce à ton savoir</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">You want to build authority through your knowledge</p>
+          </button>
+          <button class="quiz-btn" onclick="showResult('createurs')">
+            <p class="font-bold text-ink text-sm" data-lang="fr">🎤 Un créateur ou une personnalité — influenceur, artiste, athlète, humoriste, personnage public…</p>
+            <p class="font-bold text-ink text-sm" data-lang="en">🎤 A creator or personality — influencer, artist, athlete, comedian, public figure…</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="fr">Tu veux bâtir une communauté autour de ta personnalité</p>
+            <p class="text-gray-mid text-xs mt-1" data-lang="en">You want to build a community around your personality</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="quiz-result" class="quiz-step">
+      <!-- Content injected by JS -->
+    </div>
+
+    <!-- Ou préfères-tu voir les 3 profils ? -->
+    <div id="quiz-intro-cta" class="text-center mt-8">
+      <p class="text-gray-mid text-sm mb-3" data-lang="fr">Tu préfères comparer les 3 profils directement ?</p>
+      <p class="text-gray-mid text-sm mb-3" data-lang="en">Prefer to compare all 3 profiles directly?</p>
+      <button onclick="showAllProfiles()" class="text-royal font-semibold text-sm hover:underline" data-lang="fr">Voir tous les profils ↓</button>
+      <button onclick="showAllProfiles()" class="text-royal font-semibold text-sm hover:underline" data-lang="en">See all profiles ↓</button>
+    </div>
+
+  </main>
+
+  <!-- ── Tous les profils (section dépliable) ── -->
+  <section id="all-profiles" style="display:none;" class="pb-24 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-14">
+        <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-royal mb-3" data-lang="fr">Comparaison complète</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-royal mb-3" data-lang="en">Full comparison</p>
+        <h2 class="font-display font-black text-ink leading-[0.92]" style="font-size:clamp(2.2rem,5vw,4rem);letter-spacing:-0.01em;" data-lang="fr">LES 3 PROFILS<br>ALTA MEDIA</h2>
+        <h2 class="font-display font-black text-ink leading-[0.92]" style="font-size:clamp(2.2rem,5vw,4rem);letter-spacing:-0.01em;" data-lang="en">THE 3 ALTA MEDIA<br>PROFILES</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Professionnel & Expert -->
+        <div class="profile-card">
+          <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-display font-black text-ink text-2xl leading-tight mb-1" data-lang="fr">PROFESSIONNEL<br>& EXPERT</h3>
+          <h3 class="font-display font-black text-ink text-2xl leading-tight mb-1" data-lang="en">PROFESSIONAL<br>& EXPERT</h3>
+          <p class="text-royal text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="fr">Tu es la marque</p>
+          <p class="text-royal text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="en">You are the brand</p>
+
+          <div data-lang="fr">
+            <p class="text-gray-mid text-xs font-bold uppercase tracking-wider mb-3">✓ Tu es ce profil si :</p>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu es consultant, coach, médecin, avocat, comptable, courtier ou expert dans ton domaine</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu veux que les gens te fassent confiance grâce à ton expertise</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu opères seul ou en petite équipe</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tes clients achètent TON savoir, pas juste un service générique</p></div>
+          </div>
+          <div data-lang="en">
+            <p class="text-gray-mid text-xs font-bold uppercase tracking-wider mb-3">✓ This is your profile if:</p>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You're a consultant, coach, doctor, lawyer, accountant, broker or expert in your field</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You want people to trust you because of your expertise</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You operate alone or in a small team</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Clients buy YOUR knowledge, not just a generic service</p></div>
+          </div>
+
+          <a href="pro.html" class="mt-6 w-full inline-flex justify-center items-center gap-2 border-2 border-royal text-royal font-semibold py-3 rounded-xl text-sm transition-all hover:bg-royal hover:text-white" style="text-decoration:none;">
+            <span data-lang="fr">Voir ce forfait →</span>
+            <span data-lang="en">See this plan →</span>
+          </a>
+        </div>
+
+        <!-- Marques & Entrepreneurs — featured -->
+        <div class="profile-card featured" style="position:relative;">
+          <div class="absolute top-4 right-4">
+            <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="fr">Le plus populaire</span>
+            <span class="text-[10px] font-bold uppercase tracking-widest bg-white/20 text-white px-3 py-1 rounded-full" data-lang="en">Most popular</span>
+          </div>
+          <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(255,255,255,0.15);">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display font-black text-white text-2xl leading-tight mb-1" data-lang="fr">MARQUES<br>& ENTREPRENEURS</h3>
+          <h3 class="font-display font-black text-white text-2xl leading-tight mb-1" data-lang="en">BRANDS<br>& ENTREPRENEURS</h3>
+          <p class="text-white/60 text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="fr">Ta business est la marque</p>
+          <p class="text-white/60 text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="en">Your business is the brand</p>
+
+          <div data-lang="fr">
+            <p class="text-white/60 text-xs font-bold uppercase tracking-wider mb-3">✓ Tu es ce profil si :</p>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">Tu as une entreprise — boutique, restaurant, marque de produits, service B2B, etc.</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">Tu veux attirer plus de clients grâce à une présence en ligne forte</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">Tu vends des produits ou services avec une image de marque à construire</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">Tu veux de la croissance organique sans tout gérer toi-même</p></div>
+          </div>
+          <div data-lang="en">
+            <p class="text-white/60 text-xs font-bold uppercase tracking-wider mb-3">✓ This is your profile if:</p>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">You have a business — store, restaurant, product brand, B2B service, etc.</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">You want to attract more clients through a strong online presence</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">You sell products or services with a brand image to build</p></div>
+            <div class="check-item"><span style="color:white;font-size:14px;flex-shrink:0;">✓</span><p class="text-white/75 text-[13px] leading-[1.6]">You want organic growth without managing everything yourself</p></div>
+          </div>
+
+          <a href="marques.html" class="mt-6 w-full inline-flex justify-center items-center gap-2 bg-white text-royal font-semibold py-3 rounded-xl text-sm transition-all hover:bg-gray-50" style="text-decoration:none;">
+            <span data-lang="fr">Voir ce forfait →</span>
+            <span data-lang="en">See this plan →</span>
+          </a>
+        </div>
+
+        <!-- Créateurs & Personnalités -->
+        <div class="profile-card">
+          <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:#EEF2FF;">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-display font-black text-ink text-2xl leading-tight mb-1" data-lang="fr">CRÉATEURS<br>& PERSONNALITÉS</h3>
+          <h3 class="font-display font-black text-ink text-2xl leading-tight mb-1" data-lang="en">CREATORS<br>& PERSONALITIES</h3>
+          <p class="text-royal text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="fr">Toi, amplifié(e)</p>
+          <p class="text-royal text-[11px] font-bold uppercase tracking-widest mb-5" data-lang="en">You, amplified</p>
+
+          <div data-lang="fr">
+            <p class="text-gray-mid text-xs font-bold uppercase tracking-wider mb-3">✓ Tu es ce profil si :</p>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu es influenceur, artiste, athlète, humoriste, personnage public ou en voie de le devenir</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Ta personnalité EST ta marque — les gens te suivent pour toi</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu veux bâtir une communauté fidèle et engagée</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Tu veux monétiser ton audience ou décrocher des collaborations de marques</p></div>
+          </div>
+          <div data-lang="en">
+            <p class="text-gray-mid text-xs font-bold uppercase tracking-wider mb-3">✓ This is your profile if:</p>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You're an influencer, artist, athlete, comedian, public figure or on your way to becoming one</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">Your personality IS your brand — people follow you for you</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You want to build a loyal, engaged community</p></div>
+            <div class="check-item"><span style="color:#1A3FCC;font-size:14px;flex-shrink:0;">✓</span><p class="text-gray-mid text-[13px] leading-[1.6]">You want to monetize your audience or land brand deals</p></div>
+          </div>
+
+          <a href="createurs.html" class="mt-6 w-full inline-flex justify-center items-center gap-2 border-2 border-royal text-royal font-semibold py-3 rounded-xl text-sm transition-all hover:bg-royal hover:text-white" style="text-decoration:none;">
+            <span data-lang="fr">Voir ce forfait →</span>
+            <span data-lang="en">See this plan →</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA final ── -->
+  <section class="py-20 text-center px-6 bg-white">
+    <p class="text-gray-mid text-sm mb-5" data-lang="fr">Encore hésitant(e) ? On peut t'aider à choisir en direct.</p>
+    <p class="text-gray-mid text-sm mb-5" data-lang="en">Still unsure? We can help you choose directly.</p>
+    <a href="index.html#contact" class="inline-flex items-center gap-2 font-body font-semibold text-sm text-white px-8 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5" style="background:#1A3FCC;box-shadow:0 8px 24px rgba(26,63,204,0.3);text-decoration:none;">
+      <span data-lang="fr">Parlons-en →</span>
+      <span data-lang="en">Let's talk →</span>
+    </a>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer style="border-top:1px solid #E5E7EB;" class="py-8 text-center bg-white">
+    <p class="text-gray-400 text-xs">© 2025 AltaMedia.</p>
+  </footer>
+
+  <script>
+    /* ── Quiz logic ── */
+    const results = {
+      pro: {
+        icon: `<svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="#1A3FCC" stroke-width="1.8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+        labelFr: 'Ton profil :',
+        labelEn: 'Your profile:',
+        nameFr: 'PROFESSIONNEL & EXPERT',
+        nameEn: 'PROFESSIONAL & EXPERT',
+        descFr: 'Tu as une expertise unique à mettre en valeur. Alta Media va t\'aider à bâtir ton autorité en ligne avec du contenu authentique qui attire les bons clients.',
+        descEn: 'You have a unique expertise worth showcasing. Alta Media will help you build your online authority with authentic content that attracts the right clients.',
+        url: 'pro.html',
+        btnFr: 'Voir le forfait Professionnel →',
+        btnEn: 'See the Professional plan →',
+      },
+      marques: {
+        icon: `<svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+        labelFr: 'Ton profil :',
+        labelEn: 'Your profile:',
+        nameFr: 'MARQUES & ENTREPRENEURS',
+        nameEn: 'BRANDS & ENTREPRENEURS',
+        descFr: 'Ta business a besoin d\'une présence forte en ligne. Alta Media crée du contenu stratégique qui reflète ton identité de marque et attire tes clients idéaux.',
+        descEn: 'Your business needs a strong online presence. Alta Media creates strategic content that reflects your brand identity and attracts your ideal clients.',
+        url: 'marques.html',
+        btnFr: 'Voir le forfait Marques →',
+        btnEn: 'See the Brands plan →',
+      },
+      createurs: {
+        icon: `<svg width="28" height="28" fill="none" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="#1A3FCC" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
+        labelFr: 'Ton profil :',
+        labelEn: 'Your profile:',
+        nameFr: 'CRÉATEURS & PERSONNALITÉS',
+        nameEn: 'CREATORS & PERSONALITIES',
+        descFr: 'Tu es ta marque. Alta Media capture ton énergie, ton authenticité et ta personnalité unique pour faire grandir ta communauté sur toutes les plateformes.',
+        descEn: 'You are your brand. Alta Media captures your energy, authenticity and unique personality to grow your community across all platforms.',
+        url: 'createurs.html',
+        btnFr: 'Voir le forfait Créateurs →',
+        btnEn: 'See the Creators plan →',
+      }
+    };
+
+    function goStep2() {
+      document.getElementById('quiz-step-1').classList.remove('active');
+      document.getElementById('quiz-intro-cta').style.display = 'none';
+      const step2 = document.getElementById('quiz-step-2');
+      step2.classList.add('active');
+      step2.style.animation = 'none';
+      step2.classList.add('fade-up');
+    }
+
+    function goStep1() {
+      document.getElementById('quiz-step-2').classList.remove('active');
+      document.getElementById('quiz-result').classList.remove('active');
+      document.getElementById('quiz-intro-cta').style.display = '';
+      const step1 = document.getElementById('quiz-step-1');
+      step1.classList.add('active');
+    }
+
+    function showResult(profile) {
+      document.getElementById('quiz-step-1').classList.remove('active');
+      document.getElementById('quiz-step-2').classList.remove('active');
+      document.getElementById('quiz-intro-cta').style.display = 'none';
+
+      const r = results[profile];
+      const isEn = document.body.classList.contains('en');
+      const resultEl = document.getElementById('quiz-result');
+
+      resultEl.innerHTML = `
+        <div class="result-card fade-up">
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-royal mb-4">${isEn ? r.labelEn : r.labelFr}</p>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:#EEF2FF;">${r.icon}</div>
+            <h2 class="font-display font-black text-ink leading-tight" style="font-size:clamp(1.4rem,4vw,2rem);">${isEn ? r.nameEn : r.nameFr}</h2>
+          </div>
+          <p class="text-gray-mid text-[14px] leading-[1.8] mb-8">${isEn ? r.descEn : r.descFr}</p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="${r.url}" class="flex-1 inline-flex justify-center items-center gap-2 bg-royal text-white font-semibold py-3.5 rounded-xl text-sm transition-all hover:-translate-y-0.5" style="text-decoration:none;">${isEn ? r.btnEn : r.btnFr}</a>
+            <a href="index.html#contact" class="flex-1 inline-flex justify-center items-center gap-2 border-2 border-royal text-royal font-semibold py-3.5 rounded-xl text-sm transition-all hover:bg-royal hover:text-white" style="text-decoration:none;">${isEn ? "Let's talk →" : "Parlons-en →"}</a>
+          </div>
+          <button onclick="restart()" class="mt-5 w-full text-gray-400 text-xs hover:text-royal transition-colors">${isEn ? '← Restart the quiz' : '← Recommencer le quiz'}</button>
+        </div>`;
+
+      resultEl.classList.add('active');
+    }
+
+    function restart() {
+      document.getElementById('quiz-result').classList.remove('active');
+      document.getElementById('quiz-result').innerHTML = '';
+      document.getElementById('quiz-intro-cta').style.display = '';
+      document.getElementById('quiz-step-1').classList.add('active');
+    }
+
+    function showAllProfiles() {
+      const section = document.getElementById('all-profiles');
+      section.style.display = 'block';
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('quiz-intro-cta').style.display = 'none';
+    }
+
+    /* ── i18n ── */
+    const i18n = {
+      'cta-main':      { fr: 'Parlons-en →',             en: "Let's talk →" },
+      'nav-services':  { fr: 'Services',                  en: 'Services' },
+      'nav-pro':       { fr: 'Professionnel & Expert',    en: 'Professional & Expert' },
+      'nav-marques':   { fr: 'Marques & Entrepreneurs',   en: 'Brands & Entrepreneurs' },
+      'nav-createurs': { fr: 'Créateurs & Personnalités', en: 'Creators & Personalities' },
+      'nav-profil':    { fr: 'Quel profil suis-je ?',     en: 'Which profile am I?' },
+      'nav-apropos':   { fr: 'À propos',                  en: 'About' },
+      'nav-histoire':  { fr: 'Notre histoire',            en: 'Our story' },
+      'nav-resultats': { fr: 'Résultats',                 en: 'Results' },
+    };
+    function applyI18n(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[key]) el.textContent = i18n[key][lang];
+      });
+    }
+    function setLang(lang) {
+      document.body.classList.toggle('en', lang === 'en');
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').className = lang === 'fr' ? 'px-3.5 py-1.5 transition-all duration-150 font-bold text-ink' : 'px-3.5 py-1.5 transition-all duration-150 text-gray-400 hover:text-ink';
+      document.getElementById('btn-en').className = lang === 'en' ? 'px-3.5 py-1.5 transition-all duration-150 font-bold text-ink' : 'px-3.5 py-1.5 transition-all duration-150 text-gray-400 hover:text-ink';
+      applyI18n(lang);
+      // Re-render result if visible (language change)
+      const resultEl = document.getElementById('quiz-result');
+      if (resultEl.classList.contains('active') && resultEl.dataset.profile) {
+        showResult(resultEl.dataset.profile);
+      }
+    }
+    setLang('fr');
+  </script>
+
+</body>
+</html>
