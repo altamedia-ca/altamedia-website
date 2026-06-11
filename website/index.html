@@ -143,6 +143,21 @@
     #marquee-track { will-change: transform; }
 
 
+    /* ─── Search overlay ─── */
+    .search-result-item {
+      display: block;
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      text-decoration: none;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+    .search-result-item:hover { background: #EEF2FF; transform: translateX(4px); }
+    .search-result-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1rem; color: #111; }
+    .search-result-desc { font-size: 12px; color: #6B7280; margin-top: 2px; }
+    .search-no-result { color: rgba(255,255,255,0.5); text-align: center; font-size: 14px; margin-top: 24px; }
+
     /* ─── Nav dropdown ─── */
     .nav-dropdown-wrap { }
     .nav-dropdown {
@@ -360,9 +375,34 @@
           <button id="langEN" onclick="setLang('en')" class="px-3.5 py-1.5 transition-all duration-150">EN</button>
         </div>
         <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-i18n="cta-main"></button>
+        <!-- Bouton recherche -->
+        <button onclick="openSearch()" aria-label="Recherche" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:border-royal hover:text-royal transition-all duration-150">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- ══════════════════════════════════════
+       OVERLAY RECHERCHE
+  ═══════════════════════════════════════ -->
+  <div id="search-overlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(10,14,40,0.85);backdrop-filter:blur(8px);" onclick="closeSearchOnBg(event)">
+    <div class="max-w-2xl mx-auto px-6 pt-28">
+      <!-- Champ de recherche -->
+      <div class="relative">
+        <svg style="position:absolute;left:18px;top:50%;transform:translateY(-50%);" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input id="search-input" type="text" placeholder="Rechercher..." oninput="runSearch(this.value)"
+          style="width:100%;background:#fff;border:none;border-radius:16px;padding:18px 18px 18px 52px;font-size:17px;font-family:'Inter',sans-serif;outline:none;box-shadow:0 20px 60px rgba(0,0,0,0.3);" />
+        <button onclick="closeSearch()" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9CA3AF;font-size:22px;line-height:1;">✕</button>
+      </div>
+      <!-- Résultats -->
+      <div id="search-results" class="mt-4"></div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════
        HERO
@@ -1171,6 +1211,55 @@
        JS
   ═══════════════════════════════════════ -->
   <script>
+    // ── Recherche ────────────────────────────
+    const searchIndex = [
+      { title: 'Accueil',                    desc: 'Page principale — Alta Media, partenaire de croissance',       url: 'index.html' },
+      { title: 'Services — Contenu',         desc: 'Vidéos short-form, personal branding, contenu de marque',     url: 'index.html#services' },
+      { title: 'Services — Production',      desc: 'Tournage, montage, vidéos d\'entreprise',                     url: 'index.html#services' },
+      { title: 'Services — Stratégie',       desc: 'Audit de contenu, stratégie de marque, consultation',         url: 'index.html#services' },
+      { title: 'Professionnel & Expert',     desc: 'Personal branding, autorité en ligne, vidéos short-form',     url: 'pro.html' },
+      { title: 'Marques & Entrepreneurs',    desc: 'Contenu de marque, croissance organique, gestion complète',   url: 'marques.html' },
+      { title: 'Créateurs & Personnalités',  desc: 'Contenu authentique, croissance communauté, multi-plateformes', url: 'createurs.html' },
+      { title: 'Témoignages',               desc: 'Ce que nos clients disent — Leila Beaudoin, Prinzy Groulx',   url: 'temoignages.html' },
+      { title: 'Notre histoire',             desc: 'Qui sommes-nous, notre mission et nos valeurs',               url: 'notre-histoire.html' },
+      { title: 'Politique de confidentialité', desc: 'Comment nous protégeons vos données personnelles',          url: 'politique.html' },
+      { title: 'Termes et conditions',       desc: 'Conditions d\'utilisation de nos services',                   url: 'termes.html' },
+      { title: 'Clients',                    desc: 'Spark, Fit Cook Foodz, Nova Pharma, Shop Santé, Red Lite',    url: 'index.html#clients' },
+      { title: 'Contact',                    desc: 'Démarrer un projet, nous joindre, info@alta-media.ca',        url: 'index.html#contact' },
+    ];
+
+    function openSearch() {
+      document.getElementById('search-overlay').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('search-input').focus(), 50);
+    }
+    function closeSearch() {
+      document.getElementById('search-overlay').style.display = 'none';
+      document.body.style.overflow = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-results').innerHTML = '';
+    }
+    function closeSearchOnBg(e) {
+      if (e.target === document.getElementById('search-overlay')) closeSearch();
+    }
+    function runSearch(query) {
+      const container = document.getElementById('search-results');
+      if (!query.trim()) { container.innerHTML = ''; return; }
+      const q = query.toLowerCase();
+      const hits = searchIndex.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      if (!hits.length) {
+        container.innerHTML = '<p class="search-no-result">Aucun résultat trouvé.</p>';
+        return;
+      }
+      container.innerHTML = hits.map(p => `
+        <a href="${p.url}" class="search-result-item">
+          <div class="search-result-title">${p.title}</div>
+          <div class="search-result-desc">${p.desc}</div>
+        </a>`).join('');
+    }
+    // Fermer avec Escape
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
     // ── Marquee seamless (requestAnimationFrame — zero jump) ─────────────
     window.addEventListener('load', () => {
       const track = document.getElementById('marquee-track');
