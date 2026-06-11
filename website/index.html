@@ -1419,9 +1419,11 @@
           </button>
         </div>
 
-        <!-- STEP 4 — Contact form -->
+        <!-- STEP 4 — Contact form (dynamic fields based on Q1) -->
         <div class="wizard-step hidden" data-step="4">
-          <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-600 mb-2"><span data-lang="fr">Vous êtes qualifié !</span><span data-lang="en">You're a great fit!</span></div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-600 mb-2">
+            <span data-lang="fr">Presque terminé !</span><span data-lang="en">Almost done!</span>
+          </div>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="fr">ON VEUT VOUS CONNAÎTRE</h3>
           <h3 class="font-display font-black text-ink leading-tight mb-2" style="font-size: clamp(1.6rem,4vw,2.2rem);" data-lang="en">LET'S GET IN TOUCH</h3>
           <p class="text-gray-mid text-sm mb-7 leading-[1.6]" data-lang="fr">On vous contacte dans les 24h pour planifier un appel.</p>
@@ -1429,9 +1431,12 @@
           <form id="contact-form" onsubmit="submitContact(event)" class="grid gap-3">
             <input type="text" id="c-name" placeholder="Nom complet / Full name" required
               class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
+            <!-- Champ Entreprise — visible seulement pour Services & Vente au détail -->
+            <div id="c-company-wrap">
+              <input type="text" id="c-company" placeholder="Entreprise / Company" required
+                class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
+            </div>
             <input type="email" id="c-email" placeholder="Courriel / Email" required
-              class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
-            <input type="tel" id="c-phone" placeholder="Téléphone / Phone (optionnel)"
               class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
             <button type="submit" class="btn-primary w-full bg-royal text-white font-bold py-4 rounded-xl text-base mt-1">
               <span data-lang="fr">Envoyer la demande →</span>
@@ -1909,7 +1914,19 @@
           return b.dataset.value;
         });
       wizardData.contentTypes = selected;
+      setupStep4(wizardData.industry || '');
       showStep(4);
+    }
+
+    function setupStep4(industryKey) {
+      // Services & retail → show company field
+      // Celebrity & autre → hide company field
+      const needsCompany = industryKey === 'services' || industryKey === 'retail';
+      const wrap    = document.getElementById('c-company-wrap');
+      const company = document.getElementById('c-company');
+      wrap.style.display    = needsCompany ? '' : 'none';
+      company.required      = needsCompany;
+      company.value         = '';
     }
 
     function submitContact(e) {
