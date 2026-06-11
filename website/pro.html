@@ -21,27 +21,54 @@
     body.en [data-lang="en"] { display: revert; }
     .service-card { border: 1.5px solid #E5E7EB; border-radius: 20px; padding: 36px; background: #fff; transition: border-color 200ms, transform 250ms, box-shadow 250ms; }
     .service-card:hover { border-color: #1A3FCC; transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,63,204,0.10); }
+    .nav-link { color: #374151; transition: color 150ms ease; text-decoration: none; }
+    .nav-link:hover { color: #1A3FCC; }
+    .nav-dropdown { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); min-width: 230px; padding-top: 14px; z-index: 100; }
+    .nav-dropdown-inner { background: #fff; border: 1px solid #E5E7EB; border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.10); padding: 8px; }
+    .nav-dropdown-wrap:hover .nav-dropdown { display: block; }
+    .nav-dropdown-item { display: block; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; color: #374151; text-decoration: none; transition: background 150ms ease, color 150ms ease; white-space: nowrap; }
+    .nav-dropdown-item:hover { background: #EEF2FF; color: #1A3FCC; }
   </style>
 </head>
 <body style="background:#F7F8FF;">
 
   <!-- Navbar -->
-  <nav style="background:#fff; border-bottom:1px solid #E5E7EB;" class="sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 text-ink hover:opacity-70 transition-opacity">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" stroke="#1A3FCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="font-body font-semibold text-sm" data-lang="fr">Retour</span>
-        <span class="font-body font-semibold text-sm" data-lang="en">Back</span>
-      </a>
-      <a href="index.html" style="text-decoration:none;">
-        <div class="flex flex-col items-center leading-none" style="gap:2px;">
+  <nav style="background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #E5E7EB;" class="sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+      <a href="index.html" class="flex items-center group" style="text-decoration:none;">
+        <div class="flex flex-col items-center leading-none group-hover:opacity-85 transition-opacity" style="gap:2px;">
           <span class="font-display font-black text-ink" style="font-size:1.75rem;font-style:italic;letter-spacing:-0.01em;line-height:1;">ALTA</span>
           <span class="font-display font-black" style="color:#1A3FCC;font-size:0.52rem;letter-spacing:0.45em;font-style:italic;">MEDIA</span>
         </div>
       </a>
-      <div class="flex items-center gap-2">
-        <button onclick="setLang('fr')" id="btn-fr" class="text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all">FR</button>
-        <button onclick="setLang('en')" id="btn-en" class="text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all">EN</button>
+      <div class="hidden md:flex items-center gap-8 text-[13px] font-medium">
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-services">Services
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown"><div class="nav-dropdown-inner">
+            <a href="pro.html" class="nav-dropdown-item" data-i18n="nav-pro">Professionnel &amp; Expert</a>
+            <a href="marques.html" class="nav-dropdown-item" data-i18n="nav-marques">Marques &amp; Entrepreneurs</a>
+            <a href="createurs.html" class="nav-dropdown-item" data-i18n="nav-createurs">Créateurs &amp; Personnalités</a>
+          </div></div>
+        </div>
+        <div class="nav-dropdown-wrap" style="position:relative;">
+          <button class="nav-link flex items-center gap-1 bg-transparent border-none cursor-pointer p-0 text-[13px] font-medium" data-i18n="nav-apropos">À propos
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div class="nav-dropdown"><div class="nav-dropdown-inner">
+            <a href="notre-histoire.html" class="nav-dropdown-item" data-i18n="nav-histoire">Notre histoire</a>
+          </div></div>
+        </div>
+        <a href="index.html#resultats" class="nav-link" data-i18n="nav-resultats">Résultats</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center rounded-full border border-gray-200 overflow-hidden text-[11px] font-bold tracking-widest">
+          <button id="btn-fr" onclick="setLang('fr')" class="px-3.5 py-1.5 transition-all duration-150">FR</button>
+          <span class="text-gray-200">|</span>
+          <button id="btn-en" onclick="setLang('en')" class="px-3.5 py-1.5 transition-all duration-150">EN</button>
+        </div>
+        <a href="index.html#contact" class="hidden md:inline-flex items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full transition-all hover:-translate-y-0.5" style="text-decoration:none;" data-i18n="cta-main">Parlons-en →</a>
       </div>
     </div>
   </nav>
@@ -106,11 +133,28 @@
   </footer>
 
   <script>
+    const i18n = {
+      'cta-main':      { fr: 'Parlons-en →',             en: "Let's talk →" },
+      'nav-services':  { fr: 'Services',                  en: 'Services' },
+      'nav-pro':       { fr: 'Professionnel & Expert',    en: 'Professional & Expert' },
+      'nav-marques':   { fr: 'Marques & Entrepreneurs',   en: 'Brands & Entrepreneurs' },
+      'nav-createurs': { fr: 'Créateurs & Personnalités', en: 'Creators & Personalities' },
+      'nav-apropos':   { fr: 'À propos',                  en: 'About' },
+      'nav-histoire':  { fr: 'Notre histoire',            en: 'Our story' },
+      'nav-resultats': { fr: 'Résultats',                 en: 'Results' },
+    };
+    function applyI18n(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (i18n[key]) el.textContent = i18n[key][lang];
+      });
+    }
     function setLang(lang) {
       document.body.classList.toggle('en', lang === 'en');
       document.documentElement.lang = lang;
-      document.getElementById('btn-fr').className = lang === 'fr' ? 'text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all' : 'text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all';
-      document.getElementById('btn-en').className = lang === 'en' ? 'text-xs font-bold px-3 py-1.5 rounded-full bg-ink text-white transition-all' : 'text-xs font-bold px-3 py-1.5 rounded-full text-gray-400 hover:text-ink transition-all';
+      document.getElementById('btn-fr').className = lang === 'fr' ? 'px-3.5 py-1.5 transition-all duration-150 font-bold text-ink' : 'px-3.5 py-1.5 transition-all duration-150 text-gray-400 hover:text-ink';
+      document.getElementById('btn-en').className = lang === 'en' ? 'px-3.5 py-1.5 transition-all duration-150 font-bold text-ink' : 'px-3.5 py-1.5 transition-all duration-150 text-gray-400 hover:text-ink';
+      applyI18n(lang);
     }
     setLang('fr');
   </script>
