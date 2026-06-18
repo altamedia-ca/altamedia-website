@@ -554,11 +554,11 @@
   <!-- ══════════════════════════════════════
        MARQUEE
   ═══════════════════════════════════════ -->
-  <div style="background: #1A3FCC;" class="pt-6 pb-2 text-center">
-    <p class="text-white/70 text-[15px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
-    <p class="text-white/70 text-[15px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
+  <div style="background: #1A3FCC;" class="pt-3 pb-1 text-center">
+    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
+    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
   </div>
-  <div style="background: #1A3FCC; height: 170px; overflow: hidden; display: flex; align-items: center;">
+  <div style="background: #1A3FCC; height: 100px; overflow: hidden; display: flex; align-items: center;">
     <div id="marquee-track" style="display: flex; align-items: center;">
       <!-- Set 1 -->
       <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
@@ -597,7 +597,7 @@
   <!-- ══════════════════════════════════════
        SERVICES
   ═══════════════════════════════════════ -->
-  <section id="services" class="pt-14 pb-28" style="background: #F7F8FF;">
+  <section id="services" class="pt-6 pb-14" style="background: #F7F8FF;">
     <div class="max-w-7xl mx-auto px-6">
 
       <!-- Header -->
@@ -1056,7 +1056,7 @@
   <!-- ══════════════════════════════════════
        COMMENT ÇA MARCHE
   ═══════════════════════════════════════ -->
-  <section class="py-24" style="background: #F7F8FF;">
+  <section class="py-14" style="background: #F7F8FF;">
     <div class="max-w-5xl mx-auto px-6 reveal">
       <div class="text-center mb-16">
         <div class="accent-line mx-auto"></div>
@@ -1214,7 +1214,7 @@
   <!-- ══════════════════════════════════════
        APPROCHE
   ═══════════════════════════════════════ -->
-  <section id="approche" class="py-28 bg-ink text-white">
+  <section id="approche" class="pt-28 pb-10 bg-ink text-white">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-[1fr_1fr] gap-20 items-start">
 
@@ -1280,16 +1280,53 @@
         </div>
 
       </div>
+
+      <!-- Cartes Succès / Échec -->
+      <div class="grid md:grid-cols-2 gap-6 mt-12 reveal">
+
+        <div class="rounded-2xl p-8" style="background:rgba(239,68,68,0.10);border:1px solid rgba(239,68,68,0.25);">
+          <p class="font-display font-black text-4xl mb-5" style="color:#EF4444;">ÉCHEC</p>
+          <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="fr">
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Poster sans stratégie ni direction</li>
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Zéro engagement, zéro croissance</li>
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Rester invisible pendant que tes concurrents avancent</li>
+          </ul>
+          <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="en">
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Posting without strategy or direction</li>
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Zero engagement, zero growth</li>
+            <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Staying invisible while your competitors move forward</li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl p-8" style="background:rgba(34,197,94,0.10);border:1px solid rgba(34,197,94,0.28);">
+          <p class="font-display font-black text-4xl mb-5" style="color:#22C55E;">SUCCÈS</p>
+          <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="fr">
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> Un contenu qui te représente et qui connecte</li>
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> Une audience qui grandit et qui t'achète</li>
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> Une présence en ligne à la hauteur de ce que tu offres</li>
+          </ul>
+          <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="en">
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> Content that represents you and connects</li>
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> An audience that grows and buys from you</li>
+            <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> An online presence that matches what you offer</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <p class="font-display font-black text-center mt-10 reveal" style="font-size:clamp(2.5rem,6vw,4.5rem);color:#5B82FF;letter-spacing:-0.01em;" data-lang="fr">À toi de choisir !</p>
+      <p class="font-display font-black text-center mt-10 reveal" style="font-size:clamp(2.5rem,6vw,4.5rem);color:#5B82FF;letter-spacing:-0.01em;" data-lang="en">The choice is yours!</p>
+
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
        RÉSULTATS / PORTFOLIO
   ═══════════════════════════════════════ -->
-  <section id="resultats" class="py-28 bg-white">
+  <section id="resultats" class="pt-10 pb-14 bg-white">
     <div class="max-w-7xl mx-auto px-6">
 
-      <div class="mb-20 reveal">
+      <div class="mb-10 reveal">
         <div class="accent-line"></div>
         <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="fr">Ce qu'on a accompli</span>
         <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal" data-lang="en">What we've accomplished</span>
@@ -1379,7 +1416,7 @@
   <!-- ══════════════════════════════════════
        CTA / CONTACT
   ═══════════════════════════════════════ -->
-  <section id="contact" class="py-32 relative overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
+  <section id="contact" class="py-20 relative overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
     <div class="absolute inset-0 hero-grid"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-[100px]" style="background: #2F57E8;"></div>
 
