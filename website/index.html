@@ -369,7 +369,7 @@
           <span class="text-gray-200">|</span>
           <button id="langEN" onclick="setLang('en')" class="px-3.5 py-1.5 transition-all duration-150">EN</button>
         </div>
-        <button onclick="openWizard()" class="hidden md:inline-flex btn-primary items-center gap-1.5 bg-royal text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-i18n="cta-main"></button>
+        <button onclick="openWizard()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="hidden md:inline-flex btn-primary items-center gap-1.5 text-white text-[13px] font-semibold px-5 py-2.5 rounded-full" data-i18n="cta-main"></button>
         <!-- Bouton recherche -->
         <button onclick="openSearch()" aria-label="Recherche" class="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:border-royal hover:text-royal transition-all duration-150">
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -404,7 +404,7 @@
   ═══════════════════════════════════════ -->
   <section class="relative min-h-screen flex items-center pt-[82px] overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1535 40%, #162260 75%, #1A3FCC 100%);">
 
-    <div class="absolute inset-0 hero-grid opacity-100"></div>
+    <canvas id="galaxy-canvas-hero" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
 
     <!-- Ambient glows -->
     <div class="absolute top-1/3 right-1/3 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] pointer-events-none" style="background: #1A3FCC;"></div>
@@ -451,14 +451,14 @@
           <span data-lang="fr">
             <span style="display:block;white-space:nowrap;">ALTA, C'EST PAS JUSTE</span>
             <span style="display:block;white-space:nowrap;">DES VUES.</span>
-            <span style="display:block;white-space:nowrap;color:#5B82FF;">C'EST UNE PRÉSENCE</span>
-            <span style="display:block;white-space:nowrap;color:#5B82FF;">QUI ÉLÈVE.</span>
+            <span style="display:block;white-space:nowrap;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#5B82FF;">C'EST UNE PRÉSENCE</span>
+            <span style="display:block;white-space:nowrap;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#5B82FF;">QUI ÉLÈVE.</span>
           </span>
           <span data-lang="en">
             <span style="display:block;white-space:nowrap;">ALTA ISN'T JUST</span>
             <span style="display:block;white-space:nowrap;">VIEWS.</span>
-            <span style="display:block;white-space:nowrap;color:#5B82FF;">IT'S A PRESENCE</span>
-            <span style="display:block;white-space:nowrap;color:#5B82FF;">THAT ELEVATES.</span>
+            <span style="display:block;white-space:nowrap;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#5B82FF;">IT'S A PRESENCE</span>
+            <span style="display:block;white-space:nowrap;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#5B82FF;">THAT ELEVATES.</span>
           </span>
         </h1>
 
@@ -472,7 +472,7 @@
 
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 animate-fade-up d-300">
-          <button onclick="openWizard()" class="btn-primary bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" id="cta-primary" data-fr="Parlons-en →" data-en="Let's talk →">Parlons-en →</button>
+          <button onclick="openWizard()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary text-white font-semibold px-8 py-4 rounded-full text-base" id="cta-primary" data-fr="Parlons-en →" data-en="Let's talk →">Parlons-en →</button>
           <a href="#resultats" class="btn-ghost flex items-center gap-2 text-white/80 font-medium px-6 py-4 rounded-full border border-white/20 text-base" id="cta-secondary" data-fr="Voir nos résultats" data-en="See our results">Voir nos résultats</a>
         </div>
 
@@ -540,11 +540,14 @@
   <!-- ══════════════════════════════════════
        MARQUEE
   ═══════════════════════════════════════ -->
-  <div style="background: #1A3FCC;" class="pt-3 pb-1 text-center">
-    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
-    <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
-  </div>
-  <div style="background: #1A3FCC; height: 100px; overflow: hidden; display: flex; align-items: center;">
+  <div style="background:linear-gradient(135deg,#080D28 0%,#0E1535 40%,#162260 75%,#1A3FCC 100%);position:relative;overflow:hidden;">
+    <canvas id="galaxy-canvas-marquee" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <div aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(91,130,255,0.12) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+    <div style="position:relative;z-index:1;" class="pt-3 pb-1 text-center">
+      <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="fr">Ils ont choisi Alta Media</p>
+      <p class="text-white/70 text-[11px] font-bold uppercase tracking-[0.22em]" data-lang="en">They chose Alta Media</p>
+    </div>
+  <div style="position:relative;z-index:1;height: 100px; overflow: hidden; display: flex; align-items: center;">
     <div id="marquee-track" style="display: flex; align-items: center;">
       <!-- Set 1 -->
       <div style="width:325px;height:225px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin:0 40px;"><img src="logos/spark.png"      alt="Spark"                   style="max-width:100%;max-height:100%;object-fit:contain;"></div>
@@ -570,11 +573,12 @@
       <span style="flex-shrink:0;color:rgba(255,255,255,0.4);font-size:18px;line-height:1;margin:0 40px;">✦</span>
     </div>
   </div>
+  </div>
 
 
   <!-- ── Bouton Témoignages ── -->
   <div class="py-5 text-center" style="background:#F7F8FF;">
-    <a href="temoignages.html" class="btn-primary inline-flex items-center gap-2 bg-royal text-white font-semibold px-8 py-4 rounded-full text-base">
+    <a href="temoignages.html" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-base">
       <span data-lang="fr">Témoignages →</span>
       <span data-lang="en">Testimonials →</span>
     </a>
@@ -679,13 +683,17 @@
   <!-- ══════════════════════════════════════
        COMMENT ÇA MARCHE
   ═══════════════════════════════════════ -->
-  <section class="py-14" style="background: #F7F8FF;">
-    <div class="max-w-5xl mx-auto px-6 reveal">
+  <section class="py-14" style="background:#080D28;position:relative;overflow:hidden;">
+    <!-- Galaxy effect -->
+    <canvas id="galaxy-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></canvas>
+    <div aria-hidden="true" style="position:absolute;top:-120px;right:-60px;width:520px;height:520px;background:radial-gradient(circle,rgba(91,130,255,0.07) 0%,transparent 68%);pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-100px;left:8%;width:420px;height:420px;background:radial-gradient(circle,rgba(26,63,204,0.06) 0%,transparent 68%);pointer-events:none;"></div>
+    <div class="max-w-5xl mx-auto px-6 reveal" style="position:relative;z-index:1;">
       <div class="text-center mb-16">
         <div class="accent-line mx-auto"></div>
-        <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal mt-4" data-lang="fr">Aussi simple que ça</p>
-        <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-royal mt-4" data-lang="en">Simple and clear</p>
-        <h2 class="font-display font-black text-ink mt-3 leading-[0.92]" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); letter-spacing: -0.01em;">
+        <p class="text-[11px] font-bold uppercase tracking-[0.18em] mt-4" style="color:#5B82FF;" data-lang="fr">Aussi simple que ça</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.18em] mt-4" style="color:#5B82FF;" data-lang="en">Simple and clear</p>
+        <h2 class="font-display font-black text-white mt-3 leading-[0.92]" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); letter-spacing: -0.01em;">
           <span data-lang="fr">COMMENT<br>ÇA MARCHE ?</span>
           <span data-lang="en">HOW IT<br>WORKS</span>
         </h2>
@@ -693,41 +701,41 @@
       <div class="grid md:grid-cols-3 gap-10 text-center">
 
         <div>
-          <div class="font-display font-black leading-none mb-4" style="font-size:5rem;color:rgba(26,63,204,0.18);">01</div>
-          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#EEF2FF;">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="mb-4" style="display:inline-block;filter:drop-shadow(0 0 10px rgba(91,130,255,0.7)) drop-shadow(0 0 28px rgba(91,130,255,0.35)) drop-shadow(0 0 60px rgba(91,130,255,0.15));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);"><span class="font-display font-black leading-none" style="font-size:5rem;display:block;color:#5B82FF;">01</span></div>
+          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(91,130,255,0.15);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="fr">ON EN DISCUTE</h3>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="en">WE TALK</h3>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Tu remplis le formulaire en 2 minutes. On te recontacte via courriel dans les 3 jours ouvrables suivant ta demande, pour céduler une rencontre sans pression.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">You fill out the form in 2 minutes. We call you back within 3 business days for a no-pressure chat.</p>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="fr">ON EN DISCUTE</h3>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="en">WE TALK</h3>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="fr">Tu remplis le formulaire en 2 minutes. On te recontacte via courriel dans les 3 jours ouvrables suivant ta demande, pour céduler une rencontre sans pression.</p>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="en">You fill out the form in 2 minutes. We call you back within 3 business days for a no-pressure chat.</p>
         </div>
 
         <div>
-          <div class="font-display font-black leading-none mb-4" style="font-size:5rem;color:rgba(26,63,204,0.18);">02</div>
-          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#EEF2FF;">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5" stroke="#1A3FCC" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="mb-4" style="display:inline-block;filter:drop-shadow(0 0 10px rgba(91,130,255,0.7)) drop-shadow(0 0 28px rgba(91,130,255,0.35)) drop-shadow(0 0 60px rgba(91,130,255,0.15));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);"><span class="font-display font-black leading-none" style="font-size:5rem;display:block;color:#5B82FF;">02</span></div>
+          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(91,130,255,0.15);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5" stroke="#5B82FF" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="fr">ON CRÉE POUR TOI</h3>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="en">WE CREATE FOR YOU</h3>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Stratégie, tournage, montage, publication. On gère tout pendant que tu te concentres sur ton entreprise.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Strategy, shooting, editing, publishing. We handle everything while you focus on your business.</p>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="fr">ON CRÉE POUR TOI</h3>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="en">WE CREATE FOR YOU</h3>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="fr">Stratégie, tournage, montage, publication. On gère tout pendant que tu te concentres sur ton entreprise.</p>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="en">Strategy, shooting, editing, publishing. We handle everything while you focus on your business.</p>
         </div>
 
         <div>
-          <div class="font-display font-black leading-none mb-4" style="font-size:5rem;color:rgba(26,63,204,0.18);">03</div>
-          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:#EEF2FF;">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" stroke="#1A3FCC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="mb-4" style="display:inline-block;filter:drop-shadow(0 0 10px rgba(91,130,255,0.7)) drop-shadow(0 0 28px rgba(91,130,255,0.35)) drop-shadow(0 0 60px rgba(91,130,255,0.15));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);"><span class="font-display font-black leading-none" style="font-size:5rem;display:block;color:#5B82FF;">03</span></div>
+          <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(91,130,255,0.15);">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" stroke="#5B82FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="fr">TU T'ÉLÈVES</h3>
-          <h3 class="font-display font-black text-ink text-2xl mb-3" data-lang="en">YOU RISE</h3>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="fr">Ta crédibilité monte. Tes clients te font confiance. Tu deviens la référence dans ton domaine.</p>
-          <p class="text-gray-mid text-[13px] leading-[1.7]" data-lang="en">Your audience rises with you. Trust builds. Your clients finally see you.</p>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="fr">TU T'ÉLÈVES</h3>
+          <h3 class="font-display font-black text-white text-2xl mb-3" data-lang="en">YOU RISE</h3>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="fr">Ta crédibilité monte. Tes clients te font confiance. Tu deviens la référence dans ton domaine.</p>
+          <p class="text-[13px] leading-[1.7]" style="color:rgba(255,255,255,0.55);" data-lang="en">Your audience rises with you. Trust builds. Your clients finally see you.</p>
         </div>
 
       </div>
       <div class="text-center mt-14">
-        <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 bg-royal text-white font-semibold px-8 py-4 rounded-full text-base" data-fr="Démarrer →" data-en="Get started →">Démarrer →</button>
+        <button onclick="openWizard()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-base" data-fr="Démarrer →" data-en="Get started →">Démarrer →</button>
       </div>
     </div>
   </section>
@@ -837,8 +845,11 @@
   <!-- ══════════════════════════════════════
        APPROCHE
   ═══════════════════════════════════════ -->
-  <section id="approche" class="pt-28 pb-10 bg-ink text-white">
-    <div class="max-w-7xl mx-auto px-6">
+  <section id="approche" class="pt-28 pb-10 text-white" style="background:#080D28;position:relative;overflow:hidden;">
+    <canvas id="galaxy-canvas-approche" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></canvas>
+    <div aria-hidden="true" style="position:absolute;top:-80px;left:-40px;width:500px;height:500px;background:radial-gradient(circle,rgba(91,130,255,0.07) 0%,transparent 68%);pointer-events:none;"></div>
+    <div aria-hidden="true" style="position:absolute;bottom:-60px;right:5%;width:420px;height:420px;background:radial-gradient(circle,rgba(26,63,204,0.06) 0%,transparent 68%);pointer-events:none;"></div>
+    <div class="max-w-7xl mx-auto px-6" style="position:relative;z-index:1;">
       <div class="grid md:grid-cols-[1fr_1fr] gap-20 items-start">
 
         <!-- Left -->
@@ -863,12 +874,12 @@
             We don't believe in fake, scripted content. We believe in real stories — the ones that <strong class="text-white font-semibold">connect</strong> and convert for real.
           </p>
 
-          <button onclick="openWizard()" class="btn-primary inline-flex items-center gap-2 mt-10 bg-royal text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-i18n="cta-approche"></button>
+          <button onclick="openWizard()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary inline-flex items-center gap-2 mt-10 text-white font-semibold px-7 py-3.5 rounded-full text-sm" data-i18n="cta-approche"></button>
         </div>
 
         <!-- Right — Pillars -->
         <div class="flex flex-col gap-4 reveal">
-          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+          <div class="pillar-card rounded-2xl p-7" style="background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);">
             <div class="flex items-center gap-4 mb-4">
               <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">01</div>
               <div class="flex-1 h-px bg-white/10"></div>
@@ -879,7 +890,7 @@
             <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="en">Every project starts with understanding your audience, your goals, and your unique identity.</p>
           </div>
 
-          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+          <div class="pillar-card rounded-2xl p-7" style="background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);">
             <div class="flex items-center gap-4 mb-4">
               <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">02</div>
               <div class="flex-1 h-px bg-white/10"></div>
@@ -890,7 +901,7 @@
             <p class="text-white/40 text-[13px] leading-[1.7]" data-lang="en">We highlight real people and genuine moments. Emotion sells better than any pitch.</p>
           </div>
 
-          <div class="pillar-card rounded-2xl p-7 bg-white/[0.03]">
+          <div class="pillar-card rounded-2xl p-7" style="background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.10);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.07);">
             <div class="flex items-center gap-4 mb-4">
               <div class="font-display font-black text-[#5B82FF] text-4xl leading-none">03</div>
               <div class="flex-1 h-px bg-white/10"></div>
@@ -907,7 +918,7 @@
       <!-- Cartes Succès / Échec -->
       <div class="grid md:grid-cols-2 gap-6 mt-12 reveal">
 
-        <div class="rounded-2xl p-8" style="background:rgba(239,68,68,0.10);border:1px solid rgba(239,68,68,0.25);">
+        <div class="rounded-2xl p-8" style="background:rgba(239,68,68,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(239,68,68,0.25);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.05);">
           <p class="font-display font-black text-4xl mb-5" style="color:#EF4444;">ÉCHEC</p>
           <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="fr">
             <li class="flex items-start gap-2"><span style="color:#EF4444;margin-top:2px;">✕</span> Poster sans stratégie ni direction</li>
@@ -921,7 +932,7 @@
           </ul>
         </div>
 
-        <div class="rounded-2xl p-8" style="background:rgba(34,197,94,0.10);border:1px solid rgba(34,197,94,0.28);">
+        <div class="rounded-2xl p-8" style="background:rgba(34,197,94,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(34,197,94,0.28);box-shadow:0 8px 32px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.05);">
           <p class="font-display font-black text-4xl mb-5" style="color:#22C55E;">SUCCÈS</p>
           <ul class="space-y-3 text-white/50 text-[14px] leading-[1.7]" data-lang="fr">
             <li class="flex items-start gap-2"><span style="color:#22C55E;margin-top:2px;">✓</span> Un contenu qui te représente et qui connecte</li>
@@ -1040,7 +1051,7 @@
        CTA / CONTACT
   ═══════════════════════════════════════ -->
   <section id="contact" class="py-20 relative overflow-hidden noise" style="background: linear-gradient(135deg, #080D28 0%, #0E1A50 50%, #1A3FCC 100%);">
-    <div class="absolute inset-0 hero-grid"></div>
+    <canvas id="galaxy-canvas-contact" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-[100px]" style="background: #2F57E8;"></div>
 
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center reveal">
@@ -1110,7 +1121,7 @@
             This form helps us get to know you before our first conversation. The information you share stays between us — it is used solely to prepare a personalized offer and is protected at all times in accordance with Law 25. You're in good hands.
           </p>
           <div class="flex flex-col gap-3">
-            <button onclick="showStep(1)" class="btn-primary w-full bg-royal text-white font-bold py-3.5 rounded-xl text-sm">
+            <button onclick="showStep(1)" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary w-full text-white font-bold py-3.5 rounded-xl text-sm">
               <span data-lang="fr">Oui, j'accepte →</span>
               <span data-lang="en">Yes, I accept →</span>
             </button>
@@ -1154,7 +1165,7 @@
               data-placeholder-fr="Précisez votre industrie…"
               data-placeholder-en="Specify your industry…"
               placeholder="Précisez votre industrie…" />
-            <button onclick="continueFromAutre()" class="btn-primary mt-3 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm">
+            <button onclick="continueFromAutre()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary mt-3 w-full text-white font-bold py-3 rounded-xl text-sm">
               <span data-lang="fr">Continuer →</span>
               <span data-lang="en">Continue →</span>
             </button>
@@ -1183,7 +1194,7 @@
             <input type="text" id="step2-autre-input"
               class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium"
               placeholder="Précisez votre domaine… / Specify your field…" />
-            <button onclick="continueFromStep2Autre()" class="btn-primary mt-3 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm">
+            <button onclick="continueFromStep2Autre()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary mt-3 w-full text-white font-bold py-3 rounded-xl text-sm">
               <span data-lang="fr">Continuer →</span>
               <span data-lang="en">Continue →</span>
             </button>
@@ -1233,7 +1244,7 @@
               placeholder="Précisez… / Specify…" />
           </div>
           <!-- Bouton continuer — apparaît dès qu'une sélection est faite -->
-          <button onclick="continueFromStep3()" id="step3-continue" class="btn-primary mt-4 w-full bg-royal text-white font-bold py-3 rounded-xl text-sm hidden">
+          <button onclick="continueFromStep3()" id="step3-continue" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary mt-4 w-full text-white font-bold py-3 rounded-xl text-sm hidden">
             <span data-lang="fr">Continuer →</span>
             <span data-lang="en">Continue →</span>
           </button>
@@ -1265,7 +1276,7 @@
               class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
             <input type="tel" id="c-phone" placeholder="Téléphone (optionnel) / Phone (optional)"
               class="w-full border-2 border-gray-100 bg-gray-50 rounded-xl px-4 py-3.5 text-ink placeholder-gray-400 focus:outline-none focus:border-royal focus:bg-white transition-all text-sm font-medium" />
-            <button type="submit" class="btn-primary w-full bg-royal text-white font-bold py-4 rounded-xl text-base mt-1">
+            <button type="submit" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary w-full text-white font-bold py-4 rounded-xl text-base mt-1">
               <span data-lang="fr">Envoyer la demande →</span>
               <span data-lang="en">Send request →</span>
             </button>
@@ -1304,7 +1315,7 @@
             <p class="text-gray-mid text-sm leading-[1.7] mb-6 max-w-sm mx-auto" data-lang="en">
               We received your info. Our team will reach out within 3 business days to schedule a call.
             </p>
-            <button onclick="closeWizard()" class="btn-primary bg-royal text-white font-bold px-8 py-3 rounded-full text-sm">
+            <button onclick="closeWizard()" style="background:linear-gradient(135deg,#080D28 0%,#1A3FCC 100%);" class="btn-primary text-white font-bold px-8 py-3 rounded-full text-sm">
               <span data-lang="fr">Parfait, merci !</span><span data-lang="en">Awesome, thanks!</span>
             </button>
           </div>
@@ -1759,6 +1770,122 @@
       e.preventDefault();
       showStep(6);
     }
+
+    // ── Galaxie "On a aidé" ──
+    (function(){
+      var c = document.getElementById('galaxy-canvas-approche');
+      if (!c) return;
+      var sec = c.parentElement;
+      c.width  = sec.offsetWidth  || 1200;
+      c.height = sec.offsetHeight || 700;
+      var ctx = c.getContext('2d');
+      var rng = function(min, max){ return min + Math.random() * (max - min); };
+      for (var i = 0; i < 120; i++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(0.2, 1.1), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.08, 0.55) + ')';
+        ctx.fill();
+      }
+      for (var j = 0; j < 14; j++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(1.1, 1.8), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.3, 0.65) + ')';
+        ctx.fill();
+      }
+    })();
+
+    // ── Galaxie "Comment ça marche" ──
+    (function(){
+      var c = document.getElementById('galaxy-canvas');
+      if (!c) return;
+      var sec = c.parentElement;
+      c.width  = sec.offsetWidth  || 1200;
+      c.height = sec.offsetHeight || 520;
+      var ctx = c.getContext('2d');
+      var rng = function(min, max){ return min + Math.random() * (max - min); };
+      for (var i = 0; i < 110; i++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(0.2, 1.1), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.08, 0.55) + ')';
+        ctx.fill();
+      }
+      // Quelques étoiles légèrement plus lumineuses
+      for (var j = 0; j < 12; j++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(1.1, 1.8), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.3, 0.65) + ')';
+        ctx.fill();
+      }
+    })();
+
+    // ── Galaxie "Marquee clients" ──
+    (function(){
+      var c = document.getElementById('galaxy-canvas-marquee');
+      if (!c) return;
+      var sec = c.parentElement;
+      c.width  = sec.offsetWidth  || 1440;
+      c.height = sec.offsetHeight || 140;
+      var ctx = c.getContext('2d');
+      var rng = function(min, max){ return min + Math.random() * (max - min); };
+      for (var i = 0; i < 80; i++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(0.2, 1.0), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.05, 0.45) + ')';
+        ctx.fill();
+      }
+      for (var j = 0; j < 8; j++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(1.0, 1.6), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.2, 0.55) + ')';
+        ctx.fill();
+      }
+    })();
+
+    // ── Galaxie "Hero" ──
+    (function(){
+      var c = document.getElementById('galaxy-canvas-hero');
+      if (!c) return;
+      var sec = c.parentElement;
+      c.width  = sec.offsetWidth  || 1440;
+      c.height = sec.offsetHeight || 900;
+      var ctx = c.getContext('2d');
+      var rng = function(min, max){ return min + Math.random() * (max - min); };
+      for (var i = 0; i < 200; i++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(0.2, 1.1), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.05, 0.5) + ')';
+        ctx.fill();
+      }
+      for (var j = 0; j < 22; j++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(1.1, 2.0), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.25, 0.65) + ')';
+        ctx.fill();
+      }
+    })();
+
+    // ── Galaxie "Parlons-en" ──
+    (function(){
+      var c = document.getElementById('galaxy-canvas-contact');
+      if (!c) return;
+      var sec = c.parentElement;
+      c.width  = sec.offsetWidth  || 1440;
+      c.height = sec.offsetHeight || 600;
+      var ctx = c.getContext('2d');
+      var rng = function(min, max){ return min + Math.random() * (max - min); };
+      for (var i = 0; i < 150; i++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(0.2, 1.1), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.05, 0.5) + ')';
+        ctx.fill();
+      }
+      for (var j = 0; j < 16; j++) {
+        ctx.beginPath();
+        ctx.arc(rng(0, c.width), rng(0, c.height), rng(1.1, 1.9), 0, 6.283);
+        ctx.fillStyle = 'rgba(255,255,255,' + rng(0.25, 0.65) + ')';
+        ctx.fill();
+      }
+    })();
   </script>
 </body>
 </html>
